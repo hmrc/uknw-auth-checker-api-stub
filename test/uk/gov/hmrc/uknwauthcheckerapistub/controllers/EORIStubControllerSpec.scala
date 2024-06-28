@@ -10,11 +10,11 @@ import uk.gov.hmrc.uknwauthcheckerapistub.tools.Helper
 
 class EORIStubControllerSpec extends AnyWordSpec with Matchers  with Helper{
 
-  private val fakeRequest = FakeRequest("GET", "/check-eori")
+  private val fakeRequest = FakeRequest("GET", "/authorisations")
   private val controller = new EORIStubController(Helpers.stubControllerComponents())
 
 
-  "GET /check-eori" should {
+  "GET /authorisations" should {
     "return 200" in {
 
       val result = controller.checkEORI()(fakeRequest)
