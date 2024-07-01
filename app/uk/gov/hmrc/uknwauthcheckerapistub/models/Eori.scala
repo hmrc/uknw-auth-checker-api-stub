@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.config
+package uk.gov.hmrc.uknwauthcheckerapistub.models
 
-import com.google.inject.AbstractModule
 
-class Module extends AbstractModule {
+import play.api.libs.json.{Format, Json}
 
-  override def configure(): Unit = {
+import java.time.LocalDate
 
-    bind(classOf[AppConfig]).asEagerSingleton()
-  }
+case class Eoris(date: LocalDate, eoris: List[String])
+
+object Eoris{
+  implicit val format: Format[Eoris] = Json.format[Eoris]
+
 }

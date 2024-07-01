@@ -1,3 +1,3 @@
 # microservice specific routes
 
-GET        /hello-world             uk.gov.hmrc.uknwauthcheckerapistub.controllers.MicroserviceHelloWorldController.hello
+POST        /authorisations             uk.gov.hmrc.uknwauthcheckerapistub.controllers.EisStubController.authorisations
