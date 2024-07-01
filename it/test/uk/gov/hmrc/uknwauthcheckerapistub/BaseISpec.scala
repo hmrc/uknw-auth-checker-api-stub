@@ -28,7 +28,6 @@ class BaseISpec extends PlaySpec with GuiceOneServerPerSuite {
   }
 
 
-
   def getJsonFile(fileName: String): JsValue = {
     val source = Source.fromFile(basePath ++ fileName)
     val lines = try Json.parse(source.mkString) finally source.close()

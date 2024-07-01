@@ -35,8 +35,4 @@ class BaseSpec extends  AnyWordSpec with Matchers {
     lines
   }
 
-
-
-
-
 }
