@@ -1,47 +1,47 @@
+/*
+ * Copyright 2024 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.uknwauthcheckerapistub.tools
 
 import play.api.libs.json.{JsValue, Json}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Eoris
 
 trait Helper {
 
-  val defaultEORI: JsValue = Json.parse(
-    """
-      |{
-      |  "processingDate": "2024-02-08T14:30:36.307Z",
-      |  "authType": "UKIM",
-      |  "results": [
-      |    {
-      |      "eori": "GB0000000001",
-      |      "valid": false,
-      |      "code": 1
-      |    },
-      |    {
-      |      "eori": "XI9999999999",
-      |      "valid": false,
-      |      "code": 1
-      |    }
-      |  ]
-      |}
-      |""".stripMargin)
+  def makeAJsonRes(eoris: Eoris):JsValue = {
 
-  val anotherEORI: JsValue = Json.parse(
-    """
-      |{
-      |  "processingDate": "2024-02-08T14:30:36.307Z",
-      |  "authType": "UKIM",
-      |  "results": [
-      |    {
-      |      "eori": "GB0000000001",
-      |      "valid": false,
-      |      "code": 1
-      |    },
-      |    {
-      |      "eori": "XI9999999999",
-      |      "valid": true,
-      |      "code": 1
-      |    }
-      |  ]
-      |}
-      |""".stripMargin)
+    val eoriResults: String = eoris.eoris.map{anEori =>
+      s"""{
+         |"eori": "$anEori",
+         |"valid": true,
+         |"code": 0
+         |},""".stripMargin
+
+    }.mkString.dropRight(1) //Drop is to get rid of the final comma
+
+    val eoriMap: JsValue =
+      Json.parse(
+        s"""{
+           |"processingDate": "${eoris.date.toString}",
+           | "authType": "UKNW",
+           | "results": [
+           |    $eoriResults
+           |  ]
+           |}""".stripMargin)
+    eoriMap
+  }
 
 }
