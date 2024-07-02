@@ -20,24 +20,22 @@ import play.api.http.Status
 import play.api.test.Helpers
 import play.api.test.Helpers._
 
-
 class EisStubControllerSpec extends BaseSpec {
 
-  private val fakeRequest_single = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
+  private val fakeRequest_single   = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
   private val fakeRequest_multiple = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
-  private val controller = new EisStubController(Helpers.stubControllerComponents())
-
+  private val controller           = new EisStubController(Helpers.stubControllerComponents())
 
   "POST /authorisations" should {
     "return 200 on a single Eori" in {
       val result = controller.authorisations()(fakeRequest_single)
-      status(result) shouldBe Status.OK
+      status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse200_valid_single.json")
     }
 
     "return 200 on a multiple Eoris" in {
       val result = controller.authorisations()(fakeRequest_multiple)
-      status(result) shouldBe Status.OK
+      status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse200_valid_multiple.json")
     }
   }
