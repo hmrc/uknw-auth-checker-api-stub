@@ -24,14 +24,16 @@ import play.api.test.Helpers.POST
 
 import scala.io.Source
 
-class BaseSpec extends  AnyWordSpec with Matchers {
+class BaseSpec extends AnyWordSpec with Matchers {
 
   private val basePath = "conf/resources/stubJsons/"
-  val fakePostReq = FakeRequest(POST, "/authorisations").withHeaders("Content-Type" -> "application/json")
+  val fakePostReq      = FakeRequest(POST, "/authorisations").withHeaders("Content-Type" -> "application/json")
 
   def getJsonFile(fileName: String): JsValue = {
     val source = Source.fromFile(basePath ++ fileName)
-    val lines = try Json.parse(source.mkString) finally source.close()
+    val lines =
+      try Json.parse(source.mkString)
+      finally source.close()
     lines
   }
 

@@ -16,14 +16,13 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.models
 
-
 import play.api.libs.json.{Format, Json}
 
 import java.time.LocalDate
 
 case class Eoris(date: LocalDate, eoris: List[String])
 
-object Eoris{
+object Eoris {
   implicit val format: Format[Eoris] = Json.format[Eoris]
 
 }

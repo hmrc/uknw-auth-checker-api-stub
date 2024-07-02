@@ -21,20 +21,22 @@ import uk.gov.hmrc.uknwauthcheckerapistub.models.Eoris
 
 trait Helper {
 
-  def makeAJsonRes(eoris: Eoris):JsValue = {
+  def makeAJsonRes(eoris: Eoris): JsValue = {
 
-    val eoriResults: String = eoris.eoris.map{anEori =>
-      s"""{
+    val eoriResults: String = eoris.eoris
+      .map { anEori =>
+        s"""{
          |"eori": "$anEori",
          |"valid": true,
          |"code": 0
          |},""".stripMargin
 
-    }.mkString.dropRight(1) //Drop is to get rid of the final comma
+      }
+      .mkString
+      .dropRight(1) // Drop is to get rid of the final comma
 
     val eoriMap: JsValue =
-      Json.parse(
-        s"""{
+      Json.parse(s"""{
            |"processingDate": "${eoris.date.toString}",
            | "authType": "UKNW",
            | "results": [
