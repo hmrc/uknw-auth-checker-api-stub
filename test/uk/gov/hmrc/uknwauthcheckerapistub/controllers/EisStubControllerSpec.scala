@@ -19,7 +19,6 @@ package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 import play.api.http.Status
 import play.api.test.Helpers
 import play.api.test.Helpers._
-import sttp.model.Header
 
 class EisStubControllerSpec extends BaseSpec {
 
@@ -41,8 +40,18 @@ class EisStubControllerSpec extends BaseSpec {
       contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse200_valid_multiple.json")
     }
 
+    "return 403 on a missing authorization Header" in {
+      val result = controller.authorisations()(fakePostReqForbiddenHeader1)
+      status(result) shouldBe Status.FORBIDDEN
+    }
+
     "return 403 on a wrong Header" in {
-      val result = controller.authorisations()(fakePostReqForbiddenHeader)
+      val result = controller.authorisations()(fakePostReqForbiddenHeader2)
+      status(result) shouldBe Status.FORBIDDEN
+    }
+
+    "return 403 on a missing Header" in {
+      val result = controller.authorisations()(fakeHeadlessPostReq)
       status(result) shouldBe Status.FORBIDDEN
     }
   }

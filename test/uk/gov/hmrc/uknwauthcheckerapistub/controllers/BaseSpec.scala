@@ -28,14 +28,21 @@ import scala.io.Source
 class BaseSpec extends AnyWordSpec with Matchers {
 
   private val basePath = "conf/resources/stubJsons/"
-  val validHeaders:   Seq[(String, String)] = Seq("authorization" -> "Bearer <YOUR_ACCESS_TOKEN>", "Content-Type" -> "application/json")
-  val invalidHeaders: Seq[(String, String)] = Seq("Content-Type" -> "application/json")
+  val validHeaders:    Seq[(String, String)] = Seq("authorization" -> "Bearer <VALID_TOKEN>", "Content-Type" -> "application/json")
+  val invalidHeaders1: Seq[(String, String)] = Seq("Content-Type" -> "application/json")
+  val invalidHeaders2: Seq[(String, String)] = Seq("authorization" -> "Bearer <FORBIDDEN>", "Content-Type" -> "application/json")
 
   val fakePostReq: FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(POST, "/authorisations").withHeaders(validHeaders: _*)
 
-  val fakePostReqForbiddenHeader: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders: _*)
+  val fakePostReqForbiddenHeader1: FakeRequest[AnyContentAsEmpty.type] =
+    FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders1: _*)
+
+  val fakePostReqForbiddenHeader2: FakeRequest[AnyContentAsEmpty.type] =
+    FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders2: _*)
+
+  val fakeHeadlessPostReq: FakeRequest[AnyContentAsEmpty.type] =
+    FakeRequest(POST, "/authorisations")
 
   def getJsonFile(fileName: String): JsValue = {
     val source = Source.fromFile(basePath ++ fileName)

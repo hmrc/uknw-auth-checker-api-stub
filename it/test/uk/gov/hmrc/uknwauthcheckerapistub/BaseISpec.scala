@@ -35,6 +35,11 @@ class BaseISpec extends PlaySpec with GuiceOneServerPerSuite {
   def injected[T](c: Class[T]): T                    = app.injector.instanceOf(c)
   def injected[T](implicit evidence: ClassTag[T]): T = app.injector.instanceOf[T]
 
+  val validHeaders:   Seq[(String, String)] = Seq("authorization" -> "Bearer <VALID_TOKEN>", "Content-Type" -> "application/json")
+  val invalidHeaders1: Seq[(String, String)] = Seq("Content-Type" -> "application/json")
+  val invalidHeaders2:   Seq[(String, String)] = Seq("authorization" -> "Bearer <FORBIDDEN>", "Content-Type" -> "application/json")
+
+
   def postRequestWithHeader(url: String, body: JsValue, headers: Seq[(String, String)]): WSResponse = {
     await(wsClient.url(url)
       .addHttpHeaders(
