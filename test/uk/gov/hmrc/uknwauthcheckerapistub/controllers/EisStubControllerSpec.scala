@@ -19,12 +19,14 @@ package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 import play.api.http.Status
 import play.api.test.Helpers
 import play.api.test.Helpers._
+import sttp.model.Header
 
 class EisStubControllerSpec extends BaseSpec {
 
-  private val fakeRequest_single   = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
-  private val fakeRequest_multiple = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
-  private val controller           = new EisStubController(Helpers.stubControllerComponents())
+  private val fakeRequest_single    = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
+  private val fakeRequest_multiple  = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
+  private val fakeRequest_badHeader = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
+  private val controller            = new EisStubController(Helpers.stubControllerComponents())
 
   "POST /authorisations" should {
     "return 200 on a single Eori" in {
@@ -37,6 +39,11 @@ class EisStubControllerSpec extends BaseSpec {
       val result = controller.authorisations()(fakeRequest_multiple)
       status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse200_valid_multiple.json")
+    }
+
+    "return 403 on a wrong Header" in {
+      val result = controller.authorisations()(fakeRequest_badHeader)
+      status(result) shouldBe Status.BAD_REQUEST
     }
   }
 }

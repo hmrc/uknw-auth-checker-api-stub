@@ -19,6 +19,7 @@ package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import play.api.libs.json.{JsValue, Json}
+import play.api.mvc.AnyContentAsEmpty
 import play.api.test.FakeRequest
 import play.api.test.Helpers.POST
 
@@ -27,7 +28,13 @@ import scala.io.Source
 class BaseSpec extends AnyWordSpec with Matchers {
 
   private val basePath = "conf/resources/stubJsons/"
-  val fakePostReq      = FakeRequest(POST, "/authorisations").withHeaders("Content-Type" -> "application/json")
+  val validHeaders: Seq[(String, String)] = Seq("authorization"-> "Bearer <YOUR_ACCESS_TOKEN>","Content-Type" -> "application/json")
+  val invalidHeaders: Seq[(String, String)] =Seq("Content-Type" -> "application/json")
+
+  val fakePostReq: FakeRequest[AnyContentAsEmpty.type] =
+    FakeRequest(POST, "/authorisations").withHeaders(validHeaders:_*)
+  val fakePostReqBadHeader: FakeRequest[AnyContentAsEmpty.type] =
+    FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders:_*)
 
   def getJsonFile(fileName: String): JsValue = {
     val source = Source.fromFile(basePath ++ fileName)

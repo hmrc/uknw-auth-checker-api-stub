@@ -26,6 +26,7 @@ import javax.inject.{Inject, Singleton}
 class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with Helper {
 
   def authorisations(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    val myHead = request.headers.headers
     val myBody = request.body.asJson
 
     myBody.get.validate[Eoris] match {
