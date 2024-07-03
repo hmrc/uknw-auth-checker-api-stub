@@ -20,6 +20,7 @@ import play.api.libs.json.{JsValue, Json}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.Eoris
 
 trait Helper {
+  val validToken = "Bearer <YOUR_ACCESS_TOKEN>"
 
   def makeAJsonRes(eoris: Eoris): JsValue = {
 
@@ -45,5 +46,8 @@ trait Helper {
            |}""".stripMargin)
     eoriMap
   }
+
+  def validateBearerToken(token: Seq[String]): Boolean =
+    if (token.exists(_ != validToken)) false else true
 
 }

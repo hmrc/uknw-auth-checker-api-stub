@@ -28,13 +28,14 @@ import scala.io.Source
 class BaseSpec extends AnyWordSpec with Matchers {
 
   private val basePath = "conf/resources/stubJsons/"
-  val validHeaders: Seq[(String, String)] = Seq("authorization"-> "Bearer <YOUR_ACCESS_TOKEN>","Content-Type" -> "application/json")
-  val invalidHeaders: Seq[(String, String)] =Seq("Content-Type" -> "application/json")
+  val validHeaders:   Seq[(String, String)] = Seq("authorization" -> "Bearer <YOUR_ACCESS_TOKEN>", "Content-Type" -> "application/json")
+  val invalidHeaders: Seq[(String, String)] = Seq("Content-Type" -> "application/json")
 
   val fakePostReq: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, "/authorisations").withHeaders(validHeaders:_*)
-  val fakePostReqBadHeader: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders:_*)
+    FakeRequest(POST, "/authorisations").withHeaders(validHeaders: _*)
+
+  val fakePostReqForbiddenHeader: FakeRequest[AnyContentAsEmpty.type] =
+    FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders: _*)
 
   def getJsonFile(fileName: String): JsValue = {
     val source = Source.fromFile(basePath ++ fileName)

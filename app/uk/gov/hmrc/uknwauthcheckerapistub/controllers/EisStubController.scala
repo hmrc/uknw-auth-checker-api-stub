@@ -29,10 +29,18 @@ class EisStubController @Inject() (cc: ControllerComponents) extends BackendCont
     val myHead = request.headers.headers
     val myBody = request.body.asJson
 
-    myBody.get.validate[Eoris] match {
-      case eoris => Ok(makeAJsonRes(eoris.get))
-      case _     => InternalServerError
+    val valid = myHead.filter(_._1.contains("authorization"))
+
+    if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) {
+      myBody.get.validate[Eoris] match {
+        case eoris => Ok(makeAJsonRes(eoris.get))
+        case _     => InternalServerError
+      }
+
+    } else {
+      Forbidden
     }
 
   }
+
 }

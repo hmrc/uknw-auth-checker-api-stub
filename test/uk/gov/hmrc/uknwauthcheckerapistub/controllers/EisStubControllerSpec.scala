@@ -23,10 +23,10 @@ import sttp.model.Header
 
 class EisStubControllerSpec extends BaseSpec {
 
-  private val fakeRequest_single    = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
-  private val fakeRequest_multiple  = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
-  private val fakeRequest_badHeader = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
-  private val controller            = new EisStubController(Helpers.stubControllerComponents())
+  private val fakeRequest_single   = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
+  private val fakeRequest_multiple = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
+
+  private val controller = new EisStubController(Helpers.stubControllerComponents())
 
   "POST /authorisations" should {
     "return 200 on a single Eori" in {
@@ -42,8 +42,8 @@ class EisStubControllerSpec extends BaseSpec {
     }
 
     "return 403 on a wrong Header" in {
-      val result = controller.authorisations()(fakeRequest_badHeader)
-      status(result) shouldBe Status.BAD_REQUEST
+      val result = controller.authorisations()(fakePostReqForbiddenHeader)
+      status(result) shouldBe Status.FORBIDDEN
     }
   }
 }
