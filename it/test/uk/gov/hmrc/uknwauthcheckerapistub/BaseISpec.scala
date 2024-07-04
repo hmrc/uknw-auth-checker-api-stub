@@ -30,7 +30,7 @@ import scala.reflect.ClassTag
 
 class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with TestDataUtils {
 
-  val authorisationUrl: String = s"http://localhost:$port/authorisations"
+  lazy val authorisationUrl: String = s"http://localhost:$port/authorisations"
 
   override lazy val app:     Application = GuiceApplicationBuilder().build()
   private lazy val wsClient: WSClient    = injected[WSClient]
