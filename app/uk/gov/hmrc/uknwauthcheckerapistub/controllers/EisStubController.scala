@@ -18,14 +18,14 @@ package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import play.api.mvc.{Action, AnyContent, ControllerComponents, Request}
-import uk.gov.hmrc.uknwauthcheckerapistub.tools.{Helper, Purifier}
-import uk.gov.hmrc.uknwauthcheckerapistub.models.Eori
+import uk.gov.hmrc.uknwauthcheckerapistub.tools.Sanitiser
+import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.HeadCheker
 
 import javax.inject.{Inject, Singleton}
 
 @Singleton()
-class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with Helper {
-  val myPurifier = new Purifier
+class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with HeadCheker {
+  private val myPurifier = new Sanitiser
 
   def authorisations(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val myBody = request.body.asJson
@@ -34,8 +34,8 @@ class EisStubController @Inject() (cc: ControllerComponents) extends BackendCont
 
       val res = myBody match {
         case eoris =>
-          myPurifier.purify(eoris.get) match {
-            case Right(value) => Ok(makeAJsonRes(value))
+          myPurifier.sanitise(eoris.get) match {
+            case Right(value) => Ok(value)
             case Left(value)  => BadRequest(value)
           }
         case None => BadRequest
