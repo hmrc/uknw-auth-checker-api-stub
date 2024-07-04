@@ -26,12 +26,9 @@ import javax.inject.{Inject, Singleton}
 class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with Helper {
 
   def authorisations(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    val myHead = request.headers.headers
     val myBody = request.body.asJson
 
-    val valid = myHead.filter(_._1.contains("authorization"))
-
-    if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) {
+    if (hasValidBearerToken(request)) {
       myBody.get.validate[Eoris] match {
         case eoris => Ok(makeAJsonRes(eoris.get))
         case _     => InternalServerError
