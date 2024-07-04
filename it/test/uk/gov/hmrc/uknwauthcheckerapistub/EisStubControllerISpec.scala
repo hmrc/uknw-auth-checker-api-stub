@@ -20,14 +20,34 @@ import play.api.http.Status
 
 class EisStubControllerISpec extends BaseISpec {
 
-"POST /authorisations" should {
-  "return 200 on a single Eori" in {
-    postRequestWithoutHeader(s"http://localhost:$port/authorisations",getJsonFile("requests/authRequest200_single.json")).status mustBe Status.OK
+  "POST /authorisations" should {
+    "return 200 on a single Eori" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/authRequest200_single.json"),
+        validHeaders
+      ).status mustBe Status.OK
+    }
+
+    "return 403 on a missing authorization in the Header" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/authRequest200_single.json"),
+        invalidHeaders1
+      ).status mustBe Status.FORBIDDEN
+    }
+
+    "return 403 on a invalid authorization in the Header" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/authRequest200_single.json"),
+        invalidHeaders2
+      ).status mustBe Status.FORBIDDEN
+    }
+
+    "return 403 on a missing Header" in {
+      postRequestWithoutHeader(authorisationUrl, getJsonFile("requests/authRequest200_single.json")).status mustBe Status.FORBIDDEN
     }
   }
 
-
 }
-
-
-

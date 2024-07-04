@@ -17,9 +17,11 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.tools
 
 import play.api.libs.json.{JsValue, Json}
+import play.api.mvc.{AnyContent, Request}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.Eoris
 
 trait Helper {
+  val validToken = "Bearer PFZBTElEX1RPS0VOPg=="
 
   def makeAJsonRes(eoris: Eoris): JsValue = {
 
@@ -44,6 +46,16 @@ trait Helper {
            |  ]
            |}""".stripMargin)
     eoriMap
+  }
+
+  def validateBearerToken(token: Seq[String]): Boolean =
+    if (token.exists(_ != validToken)) false else true
+
+  def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
+    val valid = request.headers.headers.filter(_._1.contains("authorization"))
+
+    if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) { true }
+    else { false }
   }
 
 }

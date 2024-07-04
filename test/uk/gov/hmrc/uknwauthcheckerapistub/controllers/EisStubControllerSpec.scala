@@ -24,7 +24,8 @@ class EisStubControllerSpec extends BaseSpec {
 
   private val fakeRequest_single   = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
   private val fakeRequest_multiple = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
-  private val controller           = new EisStubController(Helpers.stubControllerComponents())
+
+  private val controller = new EisStubController(Helpers.stubControllerComponents())
 
   "POST /authorisations" should {
     "return 200 on a single Eori" in {
@@ -37,6 +38,21 @@ class EisStubControllerSpec extends BaseSpec {
       val result = controller.authorisations()(fakeRequest_multiple)
       status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse200_valid_multiple.json")
+    }
+
+    "return 403 on a missing authorization Header" in {
+      val result = controller.authorisations()(fakePostReqForbiddenHeader1)
+      status(result) shouldBe Status.FORBIDDEN
+    }
+
+    "return 403 on a wrong Header" in {
+      val result = controller.authorisations()(fakePostReqForbiddenHeader2)
+      status(result) shouldBe Status.FORBIDDEN
+    }
+
+    "return 403 on a missing Header" in {
+      val result = controller.authorisations()(fakeHeadlessPostReq)
+      status(result) shouldBe Status.FORBIDDEN
     }
   }
 }
