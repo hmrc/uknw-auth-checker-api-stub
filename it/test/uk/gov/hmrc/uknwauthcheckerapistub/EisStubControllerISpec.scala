@@ -48,6 +48,14 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a missing Header" in {
       postRequestWithoutHeader(authorisationUrl, getJsonFile("requests/authRequest200_single.json")).status mustBe Status.FORBIDDEN
     }
+
+    "return 400 on multiple Eoris with multiple errors" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/authRequest400_multiple.json"),
+        validHeaders
+      ).status mustBe Status.BAD_REQUEST
+    }
   }
 
 }
