@@ -64,7 +64,7 @@ class EisStubControllerSpec extends BaseSpec {
 
     "return 400 on a wrong date, authType and eori" in {
       val result = controller.authorisations()(fakeBadRequest_multiple)
-      status(result) shouldBe Status.BAD_REQUEST
+      status(result)        shouldBe Status.BAD_REQUEST
       contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse400_multiple.json")
     }
   }
