@@ -49,6 +49,14 @@ class EisStubControllerISpec extends BaseISpec {
       postRequestWithoutHeader(authorisationUrl, getJsonFile("requests/authRequest200_single.json")).status mustBe Status.FORBIDDEN
     }
 
+    "return 400 on a single Eoris with an invalid date" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/authRequest400_single.json"),
+        validHeaders
+      ).status mustBe Status.BAD_REQUEST
+    }
+
     "return 400 on multiple Eoris with multiple errors" in {
       postRequestWithHeader(
         authorisationUrl,

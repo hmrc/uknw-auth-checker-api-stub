@@ -24,6 +24,7 @@ class EisStubControllerSpec extends BaseSpec {
 
   private val fakeRequest_single      = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
   private val fakeRequest_multiple    = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
+  private val fakeBadRequest_single   = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_multiple.json"))
   private val fakeBadRequest_multiple = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_multiple.json"))
 
   private val controller = new EisStubController(Helpers.stubControllerComponents())
@@ -56,9 +57,15 @@ class EisStubControllerSpec extends BaseSpec {
       status(result) shouldBe Status.FORBIDDEN
     }
 
+    "return 400 on a wrong date" in {
+      val result = controller.authorisations()(fakeBadRequest_single)
+      status(result) shouldBe Status.BAD_REQUEST
+    }
+
     "return 400 on a wrong date, authType and eori" in {
       val result = controller.authorisations()(fakeBadRequest_multiple)
       status(result) shouldBe Status.BAD_REQUEST
+      contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse400_multiple.json")
     }
   }
 }

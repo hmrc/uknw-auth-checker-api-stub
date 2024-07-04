@@ -19,7 +19,6 @@ package uk.gov.hmrc.uknwauthcheckerapistub.tools
 import java.time.LocalDate
 
 class ErrorMessenger {
-
   def makeMessage(date: Either[String, LocalDate], authType: Either[String, String], eoris: Either[List[String], List[String]]): String = {
     val badEori = eoris match {
       case Left(value) => value.foldRight("Invalid format of EORI(s):")((anEori, acc) => acc ++ anEori ++ ",")
@@ -32,14 +31,14 @@ class ErrorMessenger {
     }
 
     val badAuthType = authType match {
-      case Left(value) => s"Invalid authorisation type :$value"
+      case Left(value) => s",Invalid authorisation type :$value"
       case _           => ""
     }
     s"""{
        |  "errorDetail": {
        |    "timestamp": "2024-01-15T11:48:10.392967Z",
        |    "errorCode": 400,
-       |    "errorMessage": "${badEori.dropRight(1)}$badDate,$badAuthType",
+       |    "errorMessage": "$badEori$badDate$badAuthType",
        |    "sourcePDSFaultDetails": "/pds/cnit/validatecustomsauth/v1"
        |  }
        |}""".stripMargin
