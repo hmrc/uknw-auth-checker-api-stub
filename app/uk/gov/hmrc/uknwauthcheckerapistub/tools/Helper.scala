@@ -18,12 +18,12 @@ package uk.gov.hmrc.uknwauthcheckerapistub.tools
 
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.{AnyContent, Request}
-import uk.gov.hmrc.uknwauthcheckerapistub.models.Eoris
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Eori
 
 trait Helper {
   val validToken = "Bearer PFZBTElEX1RPS0VOPg=="
 
-  def makeAJsonRes(eoris: Eoris): JsValue = {
+  def makeAJsonRes(eoris: Eori): JsValue = {
 
     val eoriResults: String = eoris.eoris
       .map { anEori =>
@@ -40,7 +40,7 @@ trait Helper {
     val eoriMap: JsValue =
       Json.parse(s"""{
            |"processingDate": "${eoris.date.toString}",
-           | "authType": "UKNW",
+           | "authType": "${eoris.authType}",
            | "results": [
            |    $eoriResults
            |  ]

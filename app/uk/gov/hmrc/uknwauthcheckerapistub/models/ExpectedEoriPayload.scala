@@ -18,11 +18,9 @@ package uk.gov.hmrc.uknwauthcheckerapistub.models
 
 import play.api.libs.json.{Format, Json}
 
-import java.time.LocalDate
+case class ExpectedEoriPayload(date: String, authType: String, eoris: List[String])
 
-case class Eori(date: LocalDate, authType: String, eoris: List[String])
-
-object Eori {
-  implicit val format: Format[Eori] = Json.format[Eori]
+object ExpectedEoriPayload {
+  implicit val format: Format[ExpectedEoriPayload] = Json.format[ExpectedEoriPayload]
 
 }

@@ -22,8 +22,9 @@ import play.api.test.Helpers._
 
 class EisStubControllerSpec extends BaseSpec {
 
-  private val fakeRequest_single   = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
-  private val fakeRequest_multiple = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
+  private val fakeRequest_single      = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
+  private val fakeRequest_multiple    = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
+  private val fakeBadRequest_multiple = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_multiple.json"))
 
   private val controller = new EisStubController(Helpers.stubControllerComponents())
 
@@ -53,6 +54,11 @@ class EisStubControllerSpec extends BaseSpec {
     "return 403 on a missing Header" in {
       val result = controller.authorisations()(fakeHeadlessPostReq)
       status(result) shouldBe Status.FORBIDDEN
+    }
+
+    "return 400 on a wrong date, authType and eori" in {
+      val result = controller.authorisations()(fakeBadRequest_multiple)
+      status(result) shouldBe Status.BAD_REQUEST
     }
   }
 }

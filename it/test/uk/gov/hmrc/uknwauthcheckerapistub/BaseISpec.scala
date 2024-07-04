@@ -25,7 +25,6 @@ import play.api.libs.ws.{WSClient, WSResponse}
 import play.api.test.Helpers.{await, defaultAwaitTimeout}
 import uk.gov.hmrc.uknwauthcheckerapistub.controllers.TestDataUtils
 
-import scala.io.Source
 import scala.reflect.ClassTag
 
 class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with TestDataUtils {

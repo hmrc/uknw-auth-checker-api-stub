@@ -1,0 +1,8 @@
+{
+  "errorDetail": {
+    "timestamp": "2024-01-15T11:48:10.392967Z",
+    "errorCode": 400,
+    "errorMessage": "Invalid format of EORI(s):0000000001,0000000003,Invalid supplied date(Date format should be - YYYY-MM-DD) : 202-01-01,Invalid authorisation type :UKCC",
+    "sourcePDSFaultDetails": "/pds/cnit/validatecustomsauth/v1"
+  }
+}
