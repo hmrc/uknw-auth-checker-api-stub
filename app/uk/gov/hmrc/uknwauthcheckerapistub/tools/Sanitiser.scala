@@ -17,25 +17,26 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.tools
 
 import play.api.libs.json.{JsValue, Json}
-import uk.gov.hmrc.uknwauthcheckerapistub.models.{Eori, ExpectedEoriPayload}
-import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.BodyCheker
+import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.JsonGetter
 
-class Sanitiser extends BodyCheker {
-  private val myErrorComposer = new ErrorMessenger
-  private val myOkComposer    = new OkMessenger
+class Sanitiser extends JsonGetter {
 
   def sanitise(body: JsValue): Either[JsValue, JsValue] = {
 
-    val rawEori  = body.validate[ExpectedEoriPayload].get
-    val date     = checkDate(rawEori.date)
-    val authType = checkAuthType(rawEori.authType)
-    val eoris    = checkEori(rawEori.eoris)
+    val rawEori = body
 
-    (date, authType, eoris) match {
-      case (Right(x), Right(y), Right(z)) => Right(myOkComposer.makeMessage(Eori(x, y, z)))
+    rawEori match {
+      case x if x == getJsonFile("requests/authRequest200_multiple.json") => Right(getJsonFile("responses/eisAuthResponse200_valid_multiple.json"))
+      case x if x == getJsonFile("requests/authRequest200_single.json")   => Right(getJsonFile("responses/eisAuthResponse200_valid_single.json"))
+      case x if x == getJsonFile("requests/authRequest400_multiple.json") => Left(getJsonFile("responses/eisAuthResponse400_multiple.json"))
+      case x if x == getJsonFile("requests/authRequest400_single.json")   => Left(getJsonFile("responses/eisAuthResponse400_single.json"))
       case _ =>
-        val res = Json.parse(myErrorComposer.makeMessage(date, authType, eoris))
-        Left(res)
+        val fourthWall: JsValue =
+          Json.parse(s"""{
+                        |"StubError": "The request sent doesn't match any of the stubbed cases"
+                        |}""".stripMargin)
+        Left(fourthWall)
+
     }
 
   }

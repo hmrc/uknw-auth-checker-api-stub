@@ -16,21 +16,12 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
-import play.api.libs.json.{JsValue, Json}
+import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.JsonGetter
 
-import scala.io.Source
+trait TestDataUtils extends JsonGetter {
 
-trait TestDataUtils {
-  private val basePath = "conf/resources/stubJsons/"
   val validHeaders:    Seq[(String, String)] = Seq("authorization" -> "Bearer PFZBTElEX1RPS0VOPg==", "Content-Type" -> "application/json")
   val invalidHeaders1: Seq[(String, String)] = Seq("Content-Type" -> "application/json")
   val invalidHeaders2: Seq[(String, String)] = Seq("authorization" -> "Bearer <FORBIDDEN>", "Content-Type" -> "application/json")
 
-  def getJsonFile(fileName: String): JsValue = {
-    val source = Source.fromFile(basePath ++ fileName)
-    val lines =
-      try Json.parse(source.mkString)
-      finally source.close()
-    lines
-  }
 }

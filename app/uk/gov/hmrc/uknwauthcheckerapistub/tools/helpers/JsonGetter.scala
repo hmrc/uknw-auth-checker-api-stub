@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.models
+package uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers
 
-import play.api.libs.json.{Format, Json}
+import play.api.libs.json.{JsValue, Json}
 
-case class ExpectedEoriPayload(date: String, authType: String, eoris: List[String])
+import scala.io.Source
 
-object ExpectedEoriPayload {
-  implicit val format: Format[ExpectedEoriPayload] = Json.format[ExpectedEoriPayload]
+trait JsonGetter {
+  private val basePath = "conf/resources/stubJsons/"
 
+  def getJsonFile(fileName: String): JsValue = {
+    val source = Source.fromFile(basePath ++ fileName)
+    val lines =
+      try Json.parse(source.mkString)
+      finally source.close()
+    lines
+  }
 }

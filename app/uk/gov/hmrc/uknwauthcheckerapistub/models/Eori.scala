@@ -20,7 +20,7 @@ import play.api.libs.json.{Format, Json}
 
 import java.time.LocalDate
 
-case class Eori(date: LocalDate, authType: String, eoris: List[String])
+case class Eori(date: String, authType: String, eoris: List[String])
 
 object Eori {
   implicit val format: Format[Eori] = Json.format[Eori]

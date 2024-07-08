@@ -25,16 +25,16 @@ import javax.inject.{Inject, Singleton}
 
 @Singleton()
 class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with HeadCheker {
-  private val myPurifier = new Sanitiser
+
+  val mySanitiser = new Sanitiser
 
   def authorisations(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val myBody = request.body.asJson
 
     if (hasValidBearerToken(request)) {
-
       val res = myBody match {
         case eoris =>
-          myPurifier.sanitise(eoris.get) match {
+          mySanitiser.sanitise(eoris.get) match {
             case Right(value) => Ok(value)
             case Left(value)  => BadRequest(value)
           }
