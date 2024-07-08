@@ -26,10 +26,12 @@ class Sanitiser extends JsonGetter {
     val rawEori = body
 
     rawEori match {
-      case x if x == getJsonFile("requests/authRequest200_multiple.json") => Right(getJsonFile("responses/eisAuthResponse200_valid_multiple.json"))
-      case x if x == getJsonFile("requests/authRequest200_single.json")   => Right(getJsonFile("responses/eisAuthResponse200_valid_single.json"))
-      case x if x == getJsonFile("requests/authRequest400_multiple.json") => Left(getJsonFile("responses/eisAuthResponse400_multiple.json"))
-      case x if x == getJsonFile("requests/authRequest400_single.json")   => Left(getJsonFile("responses/eisAuthResponse400_single.json"))
+      case x if x == getJsonFile("requests/authRequest200_multiple.json")  => Right(getJsonFile("responses/eisAuthResponse200_valid_multiple.json"))
+      case x if x == getJsonFile("requests/authRequest200_single.json")    => Right(getJsonFile("responses/eisAuthResponse200_valid_single.json"))
+      case x if x == getJsonFile("requests/authRequest400_wrongAll.json")  => Left(getJsonFile("responses/eisAuthResponse400_wrongAll.json"))
+      case x if x == getJsonFile("requests/authRequest400_wrongAuth.json") => Left(getJsonFile("responses/eisAuthResponse400_wrongAuth.json"))
+      case x if x == getJsonFile("requests/authRequest400_wrongDate.json") => Left(getJsonFile("responses/eisAuthResponse400_wrongDate.json"))
+      case x if x == getJsonFile("requests/authRequest400_wrongEori.json") => Left(getJsonFile("responses/eisAuthResponse400_wrongEori.json"))
       case _ =>
         val fourthWall: JsValue =
           Json.parse(s"""{

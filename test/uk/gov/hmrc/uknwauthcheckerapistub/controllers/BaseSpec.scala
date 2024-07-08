@@ -20,7 +20,7 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import play.api.mvc.AnyContentAsEmpty
 import play.api.test.FakeRequest
-import play.api.test.Helpers.{POST , GET}
+import play.api.test.Helpers.{GET, POST}
 
 class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
 
@@ -35,6 +35,9 @@ class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
 
   val fakeHeadlessPostReq: FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(POST, "/authorisations")
+
+  val fakeNoBodyPostReq: FakeRequest[AnyContentAsEmpty.type] =
+    FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders2: _*)
 
   val fakeGetRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest(GET, "/authorisations").withHeaders(validHeaders: _*)
 

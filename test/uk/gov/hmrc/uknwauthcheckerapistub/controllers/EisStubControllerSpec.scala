@@ -22,10 +22,12 @@ import play.api.test.Helpers._
 
 class EisStubControllerSpec extends BaseSpec {
 
-  private val fakeRequest_single      = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
-  private val fakeRequest_multiple    = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
-  private val fakeBadRequest_single   = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_multiple.json"))
-  private val fakeBadRequest_multiple = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_multiple.json"))
+  private val fakeRequest_single       = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_single.json"))
+  private val fakeRequest_multiple     = fakePostReq.withJsonBody(getJsonFile("requests/authRequest200_multiple.json"))
+  private val fakeBadRequest_wrongAll  = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_wrongAll.json"))
+  private val fakeBadRequest_wrongAuth = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_wrongAuth.json"))
+  private val fakeBadRequest_wrongDate = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_wrongDate.json"))
+  private val fakeBadRequest_wrongEori = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_wrongEori.json"))
 
   private val controller = new EisStubController(Helpers.stubControllerComponents())
 
@@ -57,17 +59,38 @@ class EisStubControllerSpec extends BaseSpec {
       status(result) shouldBe Status.FORBIDDEN
     }
 
-    "return 400 on a wrong date" in {
-      val result = controller.authorisations()(fakeBadRequest_single)
-      status(result) shouldBe Status.BAD_REQUEST
-    }
-
     "return 400 on a wrong date, authType and eori" in {
-      val result = controller.authorisations()(fakeBadRequest_multiple)
+      val result = controller.authorisations()(fakeBadRequest_wrongAll)
       status(result)        shouldBe Status.BAD_REQUEST
-      contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse400_multiple.json")
+      contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse400_wrongAll.json")
     }
 
+    "return 400 on a wrong auth" in {
+      val result = controller.authorisations()(fakeBadRequest_wrongAuth)
+      status(result)        shouldBe Status.BAD_REQUEST
+      contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse400_wrongAuth.json")
+    }
+
+    "return 400 on a wrong date" in {
+      val result = controller.authorisations()(fakeBadRequest_wrongDate)
+      status(result)        shouldBe Status.BAD_REQUEST
+      contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse400_wrongDate.json")
+    }
+
+    "return 400 on a wrong eori" in {
+      val result = controller.authorisations()(fakeBadRequest_wrongEori)
+      status(result)        shouldBe Status.BAD_REQUEST
+      contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse400_wrongEori.json")
+    }
+
+    "return 500 on a body-less POST Request" in {
+      val result = controller.notAllowed()(fakeNoBodyPostReq)
+      status(result) shouldBe Status.METHOD_NOT_ALLOWED
+    }
+
+  }
+
+  "GET /authorisations" should {
     "return 405 on a get Request" in {
       val result = controller.notAllowed()(fakeGetRequest)
       status(result) shouldBe Status.METHOD_NOT_ALLOWED
