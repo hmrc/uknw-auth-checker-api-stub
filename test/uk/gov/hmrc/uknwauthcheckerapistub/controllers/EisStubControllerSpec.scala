@@ -67,5 +67,10 @@ class EisStubControllerSpec extends BaseSpec {
       status(result)        shouldBe Status.BAD_REQUEST
       contentAsJson(result) shouldBe getJsonFile("responses/eisAuthResponse400_multiple.json")
     }
+
+    "return 405 on a get Request" in {
+      val result = controller.notAllowed()(fakeGetRequest)
+      status(result) shouldBe Status.METHOD_NOT_ALLOWED
+    }
   }
 }
