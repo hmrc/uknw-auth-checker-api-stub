@@ -48,4 +48,14 @@ class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with TestDataUtils 
 
   def postRequestWithoutHeader(url: String, body: JsValue): WSResponse =
     await(wsClient.url(url).post(Json.toJson(body)))
+
+  def getRequestWithHeader(url: String, headers: Seq[(String, String)]): WSResponse =
+    await(
+      wsClient
+        .url(url)
+        .addHttpHeaders(
+          headers: _*
+        )
+        .get()
+    )
 }

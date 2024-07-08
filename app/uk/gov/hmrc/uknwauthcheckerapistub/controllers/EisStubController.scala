@@ -31,22 +31,27 @@ class EisStubController @Inject() (cc: ControllerComponents) extends BackendCont
   def authorisations(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val myBody = request.body.asJson
 
-    if (hasValidBearerToken(request)) {
-      val res = myBody match {
-        case eoris =>
-          mySanitiser.sanitise(eoris.get) match {
-            case Right(value) => Ok(value)
-            case Left(value)  => BadRequest(value)
-          }
-        case None => BadRequest
-        case _    => InternalServerError
-      }
-      res
+    try
+      if (hasValidBearerToken(request)) {
+        val res = myBody match {
+          case eoris =>
+            mySanitiser.sanitise(eoris.get) match {
+              case Right(value) => Ok(value)
+              case Left(value)  => BadRequest(value)
+            }
+          case _ => BadRequest
+        }
+        res
 
-    } else {
-      Forbidden
+      } else {
+        Forbidden
+      }
+    catch {
+      case _: Throwable => InternalServerError
     }
 
   }
+
+  def notAllowed(): Action[AnyContent] = Action(MethodNotAllowed)
 
 }

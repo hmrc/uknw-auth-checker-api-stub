@@ -66,4 +66,8 @@ class EisStubControllerISpec extends BaseISpec {
     }
   }
 
+  "return 405 on a GET request" in {
+    getRequestWithHeader(authorisationUrl,validHeaders).status mustBe Status.METHOD_NOT_ALLOWED
+  }
+
 }
