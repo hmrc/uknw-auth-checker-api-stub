@@ -24,8 +24,10 @@ import play.api.test.Helpers.{GET, POST}
 
 class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
 
+  val endPointUrl = "/cau/validatecustomsauth/v1"
+
   val fakePostReq: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, "/authorisations").withHeaders(validHeaders: _*)
+    FakeRequest(POST, endPointUrl).withHeaders(validHeaders: _*)
 
   val fakePostErrorHandling: FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(POST, "")
@@ -34,17 +36,17 @@ class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
     FakeRequest(POST, "/xyz").withHeaders(validHeaders: _*)
 
   val fakePostReqForbiddenHeader1: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders1: _*)
+    FakeRequest(POST, endPointUrl).withHeaders(invalidHeaders1: _*)
 
   val fakePostReqForbiddenHeader2: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders2: _*)
+    FakeRequest(POST, endPointUrl).withHeaders(invalidHeaders2: _*)
 
   val fakeHeadlessPostReq: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, "/authorisations")
+    FakeRequest(POST, endPointUrl)
 
   val fakeNoBodyPostReq: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, "/authorisations").withHeaders(validHeaders: _*)
+    FakeRequest(POST, endPointUrl).withHeaders(validHeaders: _*)
 
-  val fakeGetRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest(GET, "/authorisations").withHeaders(validHeaders: _*)
+  val fakeGetRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest(GET, endPointUrl).withHeaders(validHeaders: _*)
 
 }

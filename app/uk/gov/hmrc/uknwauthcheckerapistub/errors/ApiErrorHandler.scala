@@ -40,8 +40,8 @@ class ApiErrorHandler @Inject() extends HttpErrorHandler with Logging {
       statusCode match {
         case NOT_FOUND =>
           request.path match {
-            case "/authorisations" => Status(METHOD_NOT_ALLOWED)
-            case _                 => Status(NOT_FOUND)
+            case "/cau/validatecustomsauth/v1" => Status(METHOD_NOT_ALLOWED)
+            case _                             => Status(NOT_FOUND)
           }
         case code => Status(code)
       }

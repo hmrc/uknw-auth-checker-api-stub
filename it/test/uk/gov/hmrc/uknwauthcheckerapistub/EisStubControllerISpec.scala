@@ -20,7 +20,7 @@ import play.api.http.Status
 
 class EisStubControllerISpec extends BaseISpec {
 
-  "POST /authorisations" should {
+  "POST /cau/validatecustomsauth/v1" should {
     "return 200 on a single Eori" in {
       postRequestWithHeader(
         authorisationUrl,
@@ -97,7 +97,7 @@ class EisStubControllerISpec extends BaseISpec {
       ).status mustBe Status.INTERNAL_SERVER_ERROR
     }
   }
-  "GET /authorisations" should {
+  "GET /cau/validatecustomsauth/v1" should {
     "return 405 on a GET request" in {
       getRequestWithHeader(authorisationUrl, validHeaders).status mustBe Status.METHOD_NOT_ALLOWED
     }
