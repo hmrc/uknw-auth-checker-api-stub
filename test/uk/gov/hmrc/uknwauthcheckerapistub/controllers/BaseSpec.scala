@@ -27,6 +27,12 @@ class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
   val fakePostReq: FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(POST, "/authorisations").withHeaders(validHeaders: _*)
 
+  val fakePostErrorHandling: FakeRequest[AnyContentAsEmpty.type] =
+    FakeRequest(POST, "")
+
+  val fake404PostReq: FakeRequest[AnyContentAsEmpty.type] =
+    FakeRequest(POST, "/xyz").withHeaders(validHeaders: _*)
+
   val fakePostReqForbiddenHeader1: FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders1: _*)
 
@@ -37,7 +43,7 @@ class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
     FakeRequest(POST, "/authorisations")
 
   val fakeNoBodyPostReq: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, "/authorisations").withHeaders(invalidHeaders2: _*)
+    FakeRequest(POST, "/authorisations").withHeaders(validHeaders: _*)
 
   val fakeGetRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest(GET, "/authorisations").withHeaders(validHeaders: _*)
 

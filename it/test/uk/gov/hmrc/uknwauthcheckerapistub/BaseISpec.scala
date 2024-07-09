@@ -36,14 +36,14 @@ class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with TestDataUtils 
   def injected[T](c:                 Class[T]):    T = app.injector.instanceOf(c)
   def injected[T](implicit evidence: ClassTag[T]): T = app.injector.instanceOf[T]
 
-  def postRequestWithHeader(url: String, body: Option[JsValue], headers: Seq[(String, String)]): WSResponse =
+  def postRequestWithHeader(url: String, body: JsValue, headers: Seq[(String, String)]): WSResponse =
     await(
       wsClient
         .url(url)
         .addHttpHeaders(
           headers: _*
         )
-        .post(Json.toJson(body.get))
+        .post(Json.toJson(body))
     )
 
   def postRequestWithoutHeader(url: String, body: JsValue): WSResponse =

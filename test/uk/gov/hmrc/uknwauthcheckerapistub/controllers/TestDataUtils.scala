@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
+import play.api.libs.json.{JsValue, Json}
 import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.JsonGetter
 
 trait TestDataUtils extends JsonGetter {
@@ -23,5 +24,6 @@ trait TestDataUtils extends JsonGetter {
   val validHeaders:    Seq[(String, String)] = Seq("authorization" -> "Bearer PFZBTElEX1RPS0VOPg==", "Content-Type" -> "application/json")
   val invalidHeaders1: Seq[(String, String)] = Seq("Content-Type" -> "application/json")
   val invalidHeaders2: Seq[(String, String)] = Seq("authorization" -> "Bearer <FORBIDDEN>", "Content-Type" -> "application/json")
+  val invalidBody:     JsValue               = Json.parse("""{"invalid": "invalid"}""".mkString)
 
 }

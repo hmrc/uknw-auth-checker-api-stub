@@ -84,15 +84,15 @@ class EisStubControllerSpec extends BaseSpec {
     }
 
     "return 500 on a body-less POST Request" in {
-      val result = controller.notAllowed()(fakeNoBodyPostReq)
-      status(result) shouldBe Status.METHOD_NOT_ALLOWED
+      val result = controller.authorisations()(fakeNoBodyPostReq)
+      status(result) shouldBe Status.INTERNAL_SERVER_ERROR
     }
 
   }
 
   "GET /authorisations" should {
     "return 405 on a get Request" in {
-      val result = controller.notAllowed()(fakeGetRequest)
+      val result = controller.authorisations()(fakeGetRequest)
       status(result) shouldBe Status.METHOD_NOT_ALLOWED
     }
   }

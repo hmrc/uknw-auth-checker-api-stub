@@ -18,40 +18,24 @@ package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import play.api.mvc.{Action, AnyContent, ControllerComponents, Request}
-import uk.gov.hmrc.uknwauthcheckerapistub.tools.Sanitiser
-import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.HeadCheker
+import uk.gov.hmrc.uknwauthcheckerapistub.tools.StubDataService
+import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.HeadChecker
 
 import javax.inject.{Inject, Singleton}
 
 @Singleton()
-class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with HeadCheker {
+class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with HeadChecker {
 
-  val mySanitiser = new Sanitiser
+  private val myStubber = new StubDataService
 
   def authorisations(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    val myBody = request.body.asJson
-
-    try
-      if (hasValidBearerToken(request)) {
-        val res = myBody match {
-          case eoris =>
-            mySanitiser.sanitise(eoris.get) match {
-              case Right(value) => Ok(value)
-              case Left(value)  => BadRequest(value)
-            }
-          case _ => BadRequest
-        }
-        res
-
-      } else {
-        Forbidden
-      }
-    catch {
-      case _: Throwable => InternalServerError
+    request match {
+      case req if req.method == "POST" && hasValidBearerToken(req) => myStubber.stubbing(req)
+      case req if !hasValidBearerToken(req)                        => Forbidden
+      case req if req.method != "POST"                             => MethodNotAllowed
+      case _                                                       => InternalServerError
     }
 
   }
-
-  def notAllowed(): Action[AnyContent] = Action(MethodNotAllowed)
 
 }

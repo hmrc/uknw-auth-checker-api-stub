@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.models
+package uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers
 
-import play.api.libs.json.{Format, Json}
+import play.api.mvc.{AnyContent, Request}
 
-import java.time.LocalDate
+trait HeadChecker {
+  val validToken = "Bearer PFZBTElEX1RPS0VOPg=="
 
-case class Eori(date: String, authType: String, eoris: List[String])
+  def validateBearerToken(token: Seq[String]): Boolean =
+    if (token.exists(_ != validToken)) false else true
 
-object Eori {
-  implicit val format: Format[Eori] = Json.format[Eori]
+  def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
+    val valid = request.headers.headers.filter(_._1.contains("authorization"))
+
+    if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) { true }
+    else { false }
+  }
 
 }

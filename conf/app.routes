@@ -1,5 +1,4 @@
 # microservice specific routes
 
-GET         /authorisations             uk.gov.hmrc.uknwauthcheckerapistub.controllers.EisStubController.notAllowed
 POST        /authorisations             uk.gov.hmrc.uknwauthcheckerapistub.controllers.EisStubController.authorisations
 
