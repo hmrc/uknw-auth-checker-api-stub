@@ -14,39 +14,12 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.tools
+package uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers
 
-import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.{AnyContent, Request}
-import uk.gov.hmrc.uknwauthcheckerapistub.models.Eoris
 
-trait Helper {
+trait HeadChecker {
   val validToken = "Bearer PFZBTElEX1RPS0VOPg=="
-
-  def makeAJsonRes(eoris: Eoris): JsValue = {
-
-    val eoriResults: String = eoris.eoris
-      .map { anEori =>
-        s"""{
-         |"eori": "$anEori",
-         |"valid": true,
-         |"code": 0
-         |},""".stripMargin
-
-      }
-      .mkString
-      .dropRight(1) // Drop is to get rid of the final comma
-
-    val eoriMap: JsValue =
-      Json.parse(s"""{
-           |"processingDate": "${eoris.date.toString}",
-           | "authType": "UKNW",
-           | "results": [
-           |    $eoriResults
-           |  ]
-           |}""".stripMargin)
-    eoriMap
-  }
 
   def validateBearerToken(token: Seq[String]): Boolean =
     if (token.exists(_ != validToken)) false else true

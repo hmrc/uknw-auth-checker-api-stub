@@ -18,24 +18,22 @@ package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import play.api.mvc.{Action, AnyContent, ControllerComponents, Request}
-import uk.gov.hmrc.uknwauthcheckerapistub.tools.Helper
-import uk.gov.hmrc.uknwauthcheckerapistub.models.Eoris
+import uk.gov.hmrc.uknwauthcheckerapistub.tools.StubDataService
+import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.HeadChecker
+
 import javax.inject.{Inject, Singleton}
 
 @Singleton()
-class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with Helper {
+class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with HeadChecker {
+
+  private val serviceStub = new StubDataService
 
   def authorisations(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    val myBody = request.body.asJson
-
-    if (hasValidBearerToken(request)) {
-      myBody.get.validate[Eoris] match {
-        case eoris => Ok(makeAJsonRes(eoris.get))
-        case _     => InternalServerError
-      }
-
-    } else {
-      Forbidden
+    request match {
+      case req if req.method == "POST" && hasValidBearerToken(req) => serviceStub.stubbing(req)
+      case req if !hasValidBearerToken(req)                        => Forbidden
+      case req if req.method != "POST"                             => MethodNotAllowed
+      case _                                                       => InternalServerError
     }
 
   }

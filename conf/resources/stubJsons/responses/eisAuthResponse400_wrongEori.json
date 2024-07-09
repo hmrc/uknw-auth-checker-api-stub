@@ -1,0 +1,8 @@
+{
+  "errorDetail": {
+    "timestamp": "2024-01-15T11:48:10.392967Z",
+    "errorCode": 400,
+    "errorMessage": "Invalid format of EORI(s):JsdbuwnNN%$400",
+    "sourcePDSFaultDetails": "/pds/cnit/validatecustomsauth/v1"
+  }
+}

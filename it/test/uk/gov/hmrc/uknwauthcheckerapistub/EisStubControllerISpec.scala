@@ -48,6 +48,59 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a missing Header" in {
       postRequestWithoutHeader(authorisationUrl, getJsonFile("requests/authRequest200_single.json")).status mustBe Status.FORBIDDEN
     }
+
+    "return 400 on a single Eoris with an invalid date" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/authRequest400_wrongDate.json"),
+        validHeaders
+      ).status mustBe Status.BAD_REQUEST
+    }
+
+    "return 400 on multiple Eoris with multiple errors" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/authRequest400_wrongAll.json"),
+        validHeaders
+      ).status mustBe Status.BAD_REQUEST
+    }
+
+    "return 400 on wrong Auth" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/authRequest400_wrongAuth.json"),
+        validHeaders
+      ).status mustBe Status.BAD_REQUEST
+    }
+
+    "return 400 on wrong Date" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/authRequest400_wrongDate.json"),
+        validHeaders
+      ).status mustBe Status.BAD_REQUEST
+    }
+
+    "return 400 on wrong Eori" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/authRequest400_wrongEori.json"),
+        validHeaders
+      ).status mustBe Status.BAD_REQUEST
+    }
+
+    "return 500 on invalid Body" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        invalidBody,
+        validHeaders
+      ).status mustBe Status.INTERNAL_SERVER_ERROR
+    }
+  }
+  "GET /authorisations" should {
+    "return 405 on a GET request" in {
+      getRequestWithHeader(authorisationUrl, validHeaders).status mustBe Status.METHOD_NOT_ALLOWED
+    }
   }
 
 }

@@ -25,7 +25,6 @@ import play.api.libs.ws.{WSClient, WSResponse}
 import play.api.test.Helpers.{await, defaultAwaitTimeout}
 import uk.gov.hmrc.uknwauthcheckerapistub.controllers.TestDataUtils
 
-import scala.io.Source
 import scala.reflect.ClassTag
 
 class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with TestDataUtils {
@@ -49,4 +48,14 @@ class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with TestDataUtils 
 
   def postRequestWithoutHeader(url: String, body: JsValue): WSResponse =
     await(wsClient.url(url).post(Json.toJson(body)))
+
+  def getRequestWithHeader(url: String, headers: Seq[(String, String)]): WSResponse =
+    await(
+      wsClient
+        .url(url)
+        .addHttpHeaders(
+          headers: _*
+        )
+        .get()
+    )
 }

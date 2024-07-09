@@ -1,3 +1,4 @@
 # microservice specific routes
 
 POST        /authorisations             uk.gov.hmrc.uknwauthcheckerapistub.controllers.EisStubController.authorisations
+
