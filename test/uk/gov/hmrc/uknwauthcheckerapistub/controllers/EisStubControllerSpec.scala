@@ -31,7 +31,7 @@ class EisStubControllerSpec extends BaseSpec {
 
   private val controller = new EisStubController(Helpers.stubControllerComponents())
 
-  "POST /authorisations" should {
+  "POST /cau/validatecustomsauth/v1" should {
     "return 200 on a single Eori" in {
       val result = controller.authorisations()(fakeRequest_single)
       status(result)        shouldBe Status.OK
@@ -90,7 +90,7 @@ class EisStubControllerSpec extends BaseSpec {
 
   }
 
-  "GET /authorisations" should {
+  "GET /cau/validatecustomsauth/v1" should {
     "return 405 on a get Request" in {
       val result = controller.authorisations()(fakeGetRequest)
       status(result) shouldBe Status.METHOD_NOT_ALLOWED

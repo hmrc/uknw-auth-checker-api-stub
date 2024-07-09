@@ -60,8 +60,8 @@ class ApiErrorHandlerSpec extends BaseSpec {
       status(result) shouldEqual NOT_FOUND
     }
 
-    "convert a NOT_FOUND with /authorisations url to to Method Not Allowed (405) response" in {
-      val result = apiErrorHandler.onClientError(FakeRequest(POST, "/authorisations"), NOT_FOUND, errorMessage)
+    "convert a NOT_FOUND with /cau/validatecustomsauth/v1 url to to Method Not Allowed (405) response" in {
+      val result = apiErrorHandler.onClientError(FakeRequest(POST, endPointUrl), NOT_FOUND, errorMessage)
 
       status(result) shouldEqual METHOD_NOT_ALLOWED
     }
