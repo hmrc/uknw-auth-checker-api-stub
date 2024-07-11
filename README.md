@@ -40,8 +40,8 @@ This code is open source software licensed under the [Apache 2.0 License]("http:
 
 ### Add new expected requests
 
-To add new expected requests go to `conf/resources/stubJsons/requests` and add a new `.json` file.
+To add new expected requests go to `conf/resources/stubJsons/requests` and add a new expected request `body` as a `.json` file.
 
 The `.json` file must follow the naming convention `authRequest<ExpectedCode>_<contentDescription>.json`, then go to `conf/resources/stubJsons/responses` and add the expected response, follow the naming convention ``eisAuthResponse<code>_<contentDescription>.json``.
 
-Finally, go to `app/uk/gov/hmrc/uknwauthcheckerapistub/tools/StubDataService.scala` and add a new `case`
+Finally, go to `app/uk/gov/hmrc/uknwauthcheckerapistub/tools/StubDataService.scala` and add a new `case`.
