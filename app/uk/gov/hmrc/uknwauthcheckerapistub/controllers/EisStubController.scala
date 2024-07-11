@@ -29,13 +29,14 @@ class EisStubController @Inject() (cc: ControllerComponents) extends BackendCont
   private val serviceStub = new StubDataService
 
   def authorisations(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    request match {
-      case req if req.method == "POST" && hasValidBearerToken(req) => serviceStub.stubbing(req)
-      case req if !hasValidBearerToken(req)                        => Forbidden
-      case req if req.method != "POST"                             => MethodNotAllowed
-      case _                                                       => InternalServerError
+    val isValidToken: Boolean = hasValidBearerToken(request)
+    val isPost:       Boolean = request.method == "POST"
+
+    (isValidToken, isPost) match {
+      case (true, true) => serviceStub.stubbing(request)
+      case (false, _)   => Forbidden
+      case (_, false)   => MethodNotAllowed
+      case _            => InternalServerError
     }
-
   }
-
 }

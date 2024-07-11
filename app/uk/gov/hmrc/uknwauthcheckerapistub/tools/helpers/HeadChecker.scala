@@ -25,7 +25,7 @@ trait HeadChecker {
     if (token.exists(_ != validToken)) false else true
 
   def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
-    val valid = request.headers.headers.filter(_._1.contains("authorization"))
+    val valid = request.headers.headers.filter(_._1.toLowerCase.contains("authorization"))
 
     if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) { true }
     else { false }
