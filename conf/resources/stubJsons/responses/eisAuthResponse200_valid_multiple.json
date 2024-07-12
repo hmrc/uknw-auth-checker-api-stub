@@ -3,12 +3,12 @@
   "authType": "UKNW",
   "results": [
     {
-      "eori": "GB0000000200",
+      "eori": "GB000000000200",
       "valid": true,
       "code": 0
     },
     {
-      "eori": "XI0000000200",
+      "eori": "XI000000000200",
       "valid": true,
       "code": 0
     }
