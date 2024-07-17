@@ -28,6 +28,7 @@ class EisStubControllerSpec extends BaseSpec {
   private val fakeBadRequest_wrongAuth = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_wrongAuth.json"))
   private val fakeBadRequest_wrongDate = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_wrongDate.json"))
   private val fakeBadRequest_wrongEori = fakePostReq.withJsonBody(getJsonFile("requests/authRequest400_wrongEori.json"))
+  private val fakeForbidden_dummy      = fakePostReq.withJsonBody(getJsonFile("dummies/authRequest403_api-test-only.json"))
 
   private val controller = new EisStubController(Helpers.stubControllerComponents())
 
@@ -94,6 +95,13 @@ class EisStubControllerSpec extends BaseSpec {
     "return 405 on a get Request" in {
       val result = controller.authorisations()(fakeGetRequest)
       status(result) shouldBe Status.METHOD_NOT_ALLOWED
+    }
+  }
+
+  "Dummy post request" should {
+    "return 403 on a dummy POST Request" in {
+      val result = controller.authorisations()(fakeForbidden_dummy)
+      status(result) shouldBe Status.FORBIDDEN
     }
   }
 }
