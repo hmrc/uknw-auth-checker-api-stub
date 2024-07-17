@@ -109,7 +109,7 @@ class EisStubControllerISpec extends BaseISpec {
         authorisationUrl,
         getJsonFile("dummies/authRequest401_api-test-only.json"),
         validHeaders
-      ).status mustBe Status.UNAUTHORIZED
+      ).status mustBe Status.FORBIDDEN
     }
   }
 

@@ -101,7 +101,7 @@ class EisStubControllerSpec extends BaseSpec {
   "Dummy post request" should {
     "return 403 on a dummy POST Request" in {
       val result = controller.authorisations()(fakeUnauthorised_dummy)
-      status(result) shouldBe Status.UNAUTHORIZED
+      status(result) shouldBe Status.FORBIDDEN
     }
   }
 }
