@@ -107,7 +107,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a dummy POST Request" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("dummies/authRequest401_api-test-only.json"),
+        getJsonFile("dummies/authRequest403_api-test-only.json"),
         validHeaders
       ).status mustBe Status.FORBIDDEN
     }
