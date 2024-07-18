@@ -2,6 +2,8 @@ import uk.gov.hmrc.DefaultBuildSettings
 
 ThisBuild / majorVersion := 0
 ThisBuild / scalaVersion := "2.13.12"
+ThisBuild / semanticdbEnabled := true
+ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 
 lazy val microservice = Project("uknw-auth-checker-api-stub", file("."))
   .enablePlugins(play.sbt.PlayScala, SbtDistributablesPlugin)
@@ -10,10 +12,10 @@ lazy val microservice = Project("uknw-auth-checker-api-stub", file("."))
     // https://www.scala-lang.org/2021/01/12/configuring-and-suppressing-warnings.html
     // suppress warnings in generated routes files
     scalacOptions += "-Wconf:src=routes/.*:s",
-    PlayKeys.devSettings := Seq("play.server.http.port" -> "9071"),
+    PlayKeys.devSettings := Seq("play.server.http.port" -> "9071")
   )
   .settings(resolvers += Resolver.jcenterRepo)
-  .settings(CodeCoverageSettings.settings: _*)
+  .settings(CodeCoverageSettings.settings *)
 
 lazy val it = project
   .enablePlugins(PlayScala)
@@ -21,4 +23,7 @@ lazy val it = project
   .settings(DefaultBuildSettings.itSettings())
   .settings(libraryDependencies ++= AppDependencies.it)
 
+addCommandAlias("fmtAll", ";scalafmtAll;it/scalafmtAll")
+addCommandAlias("fixAll", ";scalafixAll;it/scalafixAll")
+addCommandAlias("preCommit", ";clean;compile;scalafmtSbt;fmtAll;fixAll;coverage;test;it/test;scalastyle;coverageReport")
 addCommandAlias("runAllChecks", ";clean;compile;scalafmtCheckAll;coverage;test;it/test;scalastyle;coverageReport")

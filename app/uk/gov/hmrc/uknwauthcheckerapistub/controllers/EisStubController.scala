@@ -16,12 +16,12 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
-import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
+import javax.inject.{Inject, Singleton}
+
 import play.api.mvc.{Action, AnyContent, ControllerComponents, Request}
+import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import uk.gov.hmrc.uknwauthcheckerapistub.tools.StubDataService
 import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.HeadChecker
-
-import javax.inject.{Inject, Singleton}
 
 @Singleton()
 class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with HeadChecker {

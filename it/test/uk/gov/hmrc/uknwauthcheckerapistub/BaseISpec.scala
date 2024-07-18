@@ -16,16 +16,17 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub
 
+import scala.reflect.ClassTag
+
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneServerPerSuite
+
 import play.api.Application
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.libs.json.{JsValue, Json}
 import play.api.libs.ws.{WSClient, WSResponse}
 import play.api.test.Helpers.{await, defaultAwaitTimeout}
 import uk.gov.hmrc.uknwauthcheckerapistub.controllers.TestDataUtils
-
-import scala.reflect.ClassTag
 
 class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with TestDataUtils {
 

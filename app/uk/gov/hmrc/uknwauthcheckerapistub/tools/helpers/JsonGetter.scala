@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers
 
-import play.api.libs.json.{JsValue, Json}
-
 import scala.io.Source
+
+import play.api.libs.json.{JsValue, Json}
 
 trait JsonGetter {
   private val basePath = "conf/resources/stubJsons/"

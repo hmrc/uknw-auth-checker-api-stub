@@ -18,6 +18,7 @@ package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+
 import play.api.mvc.AnyContentAsEmpty
 import play.api.test.FakeRequest
 import play.api.test.Helpers.{GET, POST}
