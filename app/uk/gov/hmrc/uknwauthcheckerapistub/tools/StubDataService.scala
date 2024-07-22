@@ -41,7 +41,12 @@ class StubDataService extends JsonGetter {
       // This is a dummy test case just to trigger a 403 in test-api, it has nothing to do with the api-stub spec.
       case Some(x) if x == getJsonFile("dummies/authRequest403_api-test-only.json") =>
         Forbidden
-      case _ => InternalServerError
+      case Some(x) if x == getJsonFile("requests/perfTest_1Eori.json")    => Ok(getJsonFile("responses/perfTest_1Eori.json"))
+      case Some(x) if x == getJsonFile("requests/perfTest_100Eori.json")  => Ok(getJsonFile("responses/perfTest_100Eori.json"))
+      case Some(x) if x == getJsonFile("requests/perfTest_500Eori.json")  => Ok(getJsonFile("responses/perfTest_500Eori.json"))
+      case Some(x) if x == getJsonFile("requests/perfTest_1000Eori.json") => Ok(getJsonFile("responses/perfTest_1000Eori.json"))
+      case Some(x) if x == getJsonFile("requests/perfTest_3000Eori.json") => Ok(getJsonFile("responses/perfTest_3000Eori.json"))
+      case _                                                              => InternalServerError
 
     }
   }

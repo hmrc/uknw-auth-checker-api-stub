@@ -29,6 +29,47 @@ class EisStubControllerISpec extends BaseISpec {
       ).status mustBe Status.OK
     }
 
+    //Performance testing
+    "return 200 on single Eori" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/perfTest_1Eori.json"),
+        validHeaders
+      ).status mustBe Status.OK
+    }
+
+    "return 200 on 100 Eori" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/perfTest_100Eori.json"),
+        validHeaders
+      ).status mustBe Status.OK
+    }
+
+    "return 200 on 500 Eori" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/perfTest_500Eori.json"),
+        validHeaders
+      ).status mustBe Status.OK
+    }
+
+    "return 200 on 1000 Eori" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/perfTest_1000Eori.json"),
+        validHeaders
+      ).status mustBe Status.OK
+    }
+
+    "return 200 on 3000 Eori" in {
+      postRequestWithHeader(
+        authorisationUrl,
+        getJsonFile("requests/perfTest_3000Eori.json"),
+        validHeaders
+      ).status mustBe Status.OK
+    }
+
     "return 403 on a missing authorization in the Header" in {
       postRequestWithHeader(
         authorisationUrl,

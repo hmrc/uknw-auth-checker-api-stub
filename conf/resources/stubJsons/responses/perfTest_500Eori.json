@@ -1,0 +1,2506 @@
+{
+  "processingDate": "2024-07-22",
+  "authType": "UKNW",
+  "results": [
+    {
+      "eori": "GB067923337129",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI041177131154142",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI675926161105887",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB889342696852",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI555810835227",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI993615806838503",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB780905528075",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB340810521183",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI005794929255245",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB602187239888369",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI710957793723200",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI563069742493",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI166990667397",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB407974427214",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI911571276606",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB216831891570",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI050431156891640",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB758064498335444",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI017230015457",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI160989831945332",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB481420539276280",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB825779147158",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB616756479308",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI887390981107",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI431195522180876",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI063632849821",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB914080572795",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB945743261625507",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI262648202996700",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI029343428368",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI344522225975",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI955757270150197",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI552113460050",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB750204153128384",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB731237316992738",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI782844295083493",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB581291538452765",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB963703768754456",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI238810289118422",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB625579933002",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB190851574102",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB014394894788",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB552912773595875",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI925946310442",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI374820814971080",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI641562344235",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI269090386019",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB127344471682816",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI835884840878381",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB523237391687",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB266880289742547",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI842878498644714",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB684569730076334",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI022889405161058",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB705318212684",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI660791728691",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB131795558089812",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB627488662022189",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB202130623434887",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI082029720541",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI991240274311611",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB260757937230",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI720530622999151",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI259457247234",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI244087662097",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI131332986172854",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI614042762521133",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB924202622506",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB243035848397894",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI091536054933",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB610068487530977",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB691797298033",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB475271820660272",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB883923345380",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI143555364689590",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB456606943817809",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI899823401696",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI273600018262",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI031028410808311",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB421434569950",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI068120991778",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB800689074327938",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI611812856161151",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB819862657460",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI380625914025",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI242026595421806",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB152395985529",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI184491335015",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI728404275061649",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB573447197062386",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB290341490144",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI670539639305544",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI014868985714747",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI801089952131",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI430526445593308",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB219028085303",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI053922942458524",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB359388588891",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI673095468035494",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB305783179338687",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI132951064629381",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI301061041408004",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI690634708572647",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI265829142509952",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB928523397588415",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI310438814472",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB819960260822269",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI552551453868",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB301457640365",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI484832403540",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB710834314217",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI988679707652583",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI523617822187534",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB950183498985",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI410898033474007",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI101008740647014",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI301038288303244",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI879185817933379",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB987253162599513",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB779949844239",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB367055058697",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI513028324927054",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI649019271151",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI781059294928",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB003984293905",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB610887857700",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB855377076096",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI882528281236405",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI075478580070",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI789239475653802",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI964200883784940",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI566224160506",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI653962618630124",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI845587319369799",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB162562175718",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB136517510360912",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB168133633083954",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB940630437448",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI071878467207",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB021089425868087",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB142946824202053",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI662810192515",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB550806060467905",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI108742306789233",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI908556780221579",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI835145032985786",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI349945125538974",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI903465611396",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI353854163901",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI614806195389785",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB695725129472751",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI980077977702",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB621975091915669",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI525209926555129",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB310695600817232",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB229928465779354",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI293542340921",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB241516994854",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB044915922289",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI979995885385",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI472087439147",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI424217893346",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB344051617183",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB220350457709",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI658794453644",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI559541777053739",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI034562023118335",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB944402142116",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI495628093754216",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB924235024297299",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI127560476836863",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB189755096598",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB224715110642207",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB057395069723",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI946029989836",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB255459865276475",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB158647834706",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB700328833598",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB155977185179",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI991928696755124",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI207425343762283",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB407743489773846",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB505854279047862",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI855949786804",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI256373645006290",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB165027634323114",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI240290912644",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI704875078976000",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB262340896885751",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI130541831480",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB355151234904274",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB752245403749",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI308091375365169",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI126635049501486",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB293603999350",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB722658216692",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB640215669285856",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI256519648898",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB150926372109",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB080264415677452",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB377956892834",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI329113871976035",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB221177012055494",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI405766236693103",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB460934226777",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI491615353799090",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB483470796444041",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB735606717402",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB559870957346",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI112336787695666",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB302848092645",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI614384270018208",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI660166571956",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB530122092176",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB708014446014",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI405370076436",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB347049361579",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI197086692128160",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB587292908337850",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI695632342060976",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI053061827390450",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI185537254321",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI373919576981831",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI513016356701",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB354717428869220",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB547507777627",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB160969240143",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI468409896172515",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB867867042976",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI729821908921",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI693397813777627",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB431716494947",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB755417341001",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB085392026045739",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI558308285240328",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI843392698499870",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB307214887212048",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI498170805877180",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB952362146382696",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB904129850946",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB999689421041",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI727831242140",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB086871642485",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI693952651651260",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI785230334431855",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI246873910004",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB131347593021035",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI187687749125",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB424054796420894",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI278591531791374",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI271043980804114",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI123385533852",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB917871404004865",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB135387328750",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI141834257943776",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB279271624199025",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI394134613819214",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB648697228250115",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI110566122471",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB264898313095",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB510062250105",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI409598875787",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI126306400604",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB932154846989",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB682681727241",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB476430442177763",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI116809079057",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI720576706780051",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB423043173939",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB064858455197185",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB213188323874944",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI001349900580",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB573363388069941",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI718920402085",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI252875305552",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI477693926597",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI512753478389699",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI363857957099425",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB008666548836",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI262906953404289",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI640088051945",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI493578673591",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI571613089793",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI443538714613",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI565153982063",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB745877528825",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI243074197599728",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB687384534925",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI348571241098",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI077062458704485",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB804567165619",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI176599999216",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI960883758408",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI156128202452",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI071719077815419",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI202155910502355",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI364848014517",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI687138368996",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI156017535895",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB442062197814",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB868147503166",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI237757132614",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB788740534612031",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB701620291234159",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI431416554749198",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB183877199672",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI388266484299",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI071795158653126",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI024640279846",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB535820462893888",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI009210203772",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB077491847371",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB671576183560",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI845252160762932",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB141488672835",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI613064884195",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB271427467017986",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI162748442406906",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI670330374024576",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB256768441528",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI479066778705",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB160941388461",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB426412275802180",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB532978424889",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB808300368068",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI946439749681467",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB152635563933612",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI762761999802872",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB354039388746377",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI080432399501033",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB120585596465560",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB332241037399",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI369289241238245",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI401631706101070",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB477426845588",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB024544964070",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB941130668169",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI748731810657631",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB309696400547",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB008198386979",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB329805643825384",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB567071554966",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB693524795547481",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB697404575836",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB906649618842",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB675957035066",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI287227912686817",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB151520118865711",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI294178873644636",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI976897712845044",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI935579821431",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB437498917127657",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB219534419161",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI778930889377321",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI344797173944",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI459758661958",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI688647515590",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB439493498473095",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI554187312027",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB874778387069",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI163579614135",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB101817497159119",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB158424746206",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB113087527215",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI965547989417",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI930029620975774",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI106869641992",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB040788264874",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB872739007540613",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB306025241892",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB364570844095685",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI550819228076",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB479461520802808",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB146282769134",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI345534270337423",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB297761246971",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB891440650399181",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB262281389426",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB041732553877",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB457968255395179",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI075281361466",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB792408838129433",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI325005852784",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB534735718501",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB147581262729",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI845835642467",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI308729108275",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB382661529946408",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB285986693789",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI692053156791",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB874341736055",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI647445061021",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB973817234909025",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB960866797783",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI850557351132",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI346466851830",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI641944667667",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI202801565788",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI470561688592",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI577702465201307",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB920813166786",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB861119997659",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI369390032195",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI932285947688864",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB404948903645",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB485338696766",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB899645714780",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB139625966121",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB330380671276",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI363951644623",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI447258174419",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI591141073793",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI150750270994",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI125244504163",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB357265576773",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB123929824785",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB392049951012",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI091714681039",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI361036902695",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB347706380621",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI358359326418",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI528033142413341",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI759931757687",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB689640277767198",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB365540963841",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI989299027434",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB732091180037741",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI330713793368565",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB358723931170",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB639217330323",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI013029738922608",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI494250922528253",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB449145139693015",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB025555176587",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI616811068259906",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB519106254988",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI793452186988781",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI812615119780195",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI642249704470488",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB927602083102638",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI322952788714",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB846799241168158",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI025717328354580",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI502069432460",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI246645615802",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI960992196381874",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB757458574830",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB888110637519",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB020584331891266",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB168412721494",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB240923454577480",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB557391548361",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB469293265597692",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB433550866761",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB181865151114815",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB283837183104794",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB596854812181236",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI137639892151",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB126849423040",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI245449192752657",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI612508715682427",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI295344798343353",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB439649489389835",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB540684301323",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB803352182868397",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB236834776580",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI467908662026",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB236707820571213",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB395944417714",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB623396484028",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI240587639901158",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB728256570847",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI498150862414",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI454716934330",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB227900387238",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB111653677474909",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB447449774354",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB219507198242",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB937861279908",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI887864396312266",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB263368756932",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI421301404502325",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB351857904723",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB017959049657",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB744938357385970",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI969660723231",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI938588547021843",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB422470426821413",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB690022101941",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB477012148800581",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI056003962393788",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB076592171437",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB887430643557",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB621267548621692",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI460235659870908",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB894879964707",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB340760936842685",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "GB400990294354",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI445685796941",
+      "valid": true,
+      "code": 0
+    },
+    {
+      "eori": "XI028550199428449",
+      "valid": true,
+      "code": 0
+    }
+  ]
+}
