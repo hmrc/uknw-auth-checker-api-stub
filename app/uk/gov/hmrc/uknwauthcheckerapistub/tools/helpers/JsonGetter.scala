@@ -21,10 +21,10 @@ import scala.io.Source
 import play.api.libs.json.{JsValue, Json}
 
 trait JsonGetter {
-  private val basePath = "conf/resources/stubJsons/"
+  private val basePath = "resources/stubJsons/"
 
   def getJsonFile(fileName: String): JsValue = {
-    val source = Source.fromFile(basePath ++ fileName)
+    val source = Source.fromResource(basePath ++ fileName)
     val lines =
       try Json.parse(source.mkString)
       finally source.close()

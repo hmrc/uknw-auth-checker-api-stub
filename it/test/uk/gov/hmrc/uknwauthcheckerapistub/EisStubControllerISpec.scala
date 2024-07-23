@@ -29,7 +29,7 @@ class EisStubControllerISpec extends BaseISpec {
       ).status mustBe Status.OK
     }
 
-    //Performance testing
+    // Performance testing
     "return 200 on single Eori" in {
       postRequestWithHeader(
         authorisationUrl,
