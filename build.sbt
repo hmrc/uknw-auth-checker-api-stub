@@ -13,7 +13,9 @@ lazy val microservice = Project("uknw-auth-checker-api-stub", file("."))
     // suppress warnings in generated routes files
     scalacOptions += "-Wconf:src=routes/.*:s",
     PlayKeys.devSettings := Seq("play.server.http.port" -> "9071"),
-    Compile / unmanagedResourceDirectories += baseDirectory.value / "resources"
+    Compile / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "dummies",
+    Compile / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "requests",
+    Compile / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "responses"
   )
   .settings(resolvers += Resolver.jcenterRepo)
   .settings(CodeCoverageSettings.settings *)
