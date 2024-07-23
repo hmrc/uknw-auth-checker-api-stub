@@ -15,7 +15,13 @@ lazy val microservice = Project("uknw-auth-checker-api-stub", file("."))
     PlayKeys.devSettings := Seq("play.server.http.port" -> "9071"),
     Compile / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "dummies",
     Compile / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "requests",
-    Compile / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "responses"
+    Compile / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "responses",
+    Runtime / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "dummies",
+    Runtime / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "requests",
+    Runtime / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "responses",
+    Test / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "dummies",
+    Test / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "requests",
+    Test / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "responses"
   )
   .settings(resolvers += Resolver.jcenterRepo)
   .settings(CodeCoverageSettings.settings *)
