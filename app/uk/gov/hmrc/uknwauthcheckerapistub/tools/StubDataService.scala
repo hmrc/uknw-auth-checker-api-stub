@@ -28,25 +28,25 @@ class StubDataService extends JsonGetter {
     val rawEori: Option[JsValue] = req.body.asJson
 
     rawEori match {
-      case Some(x) if x == getJsonFile("requests/authRequest200_multiple.json") => Ok(getJsonFile("responses/eisAuthResponse200_valid_multiple.json"))
-      case Some(x) if x == getJsonFile("requests/authRequest200_single.json")   => Ok(getJsonFile("responses/eisAuthResponse200_valid_single.json"))
-      case Some(x) if x == getJsonFile("requests/authRequest400_wrongAll.json") =>
-        BadRequest(getJsonFile("responses/eisAuthResponse400_wrongAll.json"))
-      case Some(x) if x == getJsonFile("requests/authRequest400_wrongAuth.json") =>
-        BadRequest(getJsonFile("responses/eisAuthResponse400_wrongAuth.json"))
-      case Some(x) if x == getJsonFile("requests/authRequest400_wrongDate.json") =>
-        BadRequest(getJsonFile("responses/eisAuthResponse400_wrongDate.json"))
-      case Some(x) if x == getJsonFile("requests/authRequest400_wrongEori.json") =>
-        BadRequest(getJsonFile("responses/eisAuthResponse400_wrongEori.json"))
+      case Some(x) if x == getJsonFile("authRequest200_multiple.json") => Ok(getJsonFile("eisAuthResponse200_valid_multiple.json"))
+      case Some(x) if x == getJsonFile("authRequest200_single.json")   => Ok(getJsonFile("eisAuthResponse200_valid_single.json"))
+      case Some(x) if x == getJsonFile("authRequest400_wrongAll.json") =>
+        BadRequest(getJsonFile("eisAuthResponse400_wrongAll.json"))
+      case Some(x) if x == getJsonFile("authRequest400_wrongAuth.json") =>
+        BadRequest(getJsonFile("eisAuthResponse400_wrongAuth.json"))
+      case Some(x) if x == getJsonFile("authRequest400_wrongDate.json") =>
+        BadRequest(getJsonFile("eisAuthResponse400_wrongDate.json"))
+      case Some(x) if x == getJsonFile("authRequest400_wrongEori.json") =>
+        BadRequest(getJsonFile("eisAuthResponse400_wrongEori.json"))
       // This is a dummy test case just to trigger a 403 in test-api, it has nothing to do with the api-stub spec.
-      case Some(x) if x == getJsonFile("dummies/authRequest403_api-test-only.json") =>
+      case Some(x) if x == getJsonFile("authRequest403_api-test-only.json") =>
         Forbidden
-      case Some(x) if x == getJsonFile("requests/perfTest_1Eori.json")    => Ok(getJsonFile("responses/perfTest_1Eori.json"))
-      case Some(x) if x == getJsonFile("requests/perfTest_100Eori.json")  => Ok(getJsonFile("responses/perfTest_100Eori.json"))
-      case Some(x) if x == getJsonFile("requests/perfTest_500Eori.json")  => Ok(getJsonFile("responses/perfTest_500Eori.json"))
-      case Some(x) if x == getJsonFile("requests/perfTest_1000Eori.json") => Ok(getJsonFile("responses/perfTest_1000Eori.json"))
-      case Some(x) if x == getJsonFile("requests/perfTest_3000Eori.json") => Ok(getJsonFile("responses/perfTest_3000Eori.json"))
-      case _                                                              => InternalServerError
+      case Some(x) if x == getJsonFile("perfTestRequest_1Eori.json")    => Ok(getJsonFile("perfTestResponse_1Eori.json"))
+      case Some(x) if x == getJsonFile("perfTestRequest_100Eori.json")  => Ok(getJsonFile("perfTestResponse_100Eori.json"))
+      case Some(x) if x == getJsonFile("perfTestRequest_500Eori.json")  => Ok(getJsonFile("perfTestResponse_500Eori.json"))
+      case Some(x) if x == getJsonFile("perfTestRequest_1000Eori.json") => Ok(getJsonFile("perfTestResponse_1000Eori.json"))
+      case Some(x) if x == getJsonFile("perfTestRequest_3000Eori.json") => Ok(getJsonFile("perfTestResponse_3000Eori.json"))
+      case _                                                            => InternalServerError
 
     }
   }

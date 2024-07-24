@@ -24,16 +24,16 @@ class EisStubControllerISpec extends BaseISpec {
     "return 200 on a single Eori" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/authRequest200_single.json"),
+        getJsonFile("authRequest200_single.json"),
         validHeaders
       ).status mustBe Status.OK
     }
 
-    //Performance testing
+    // Performance testing
     "return 200 on single Eori" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/perfTest_1Eori.json"),
+        getJsonFile("perfTestRequest_1Eori.json"),
         validHeaders
       ).status mustBe Status.OK
     }
@@ -41,7 +41,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 200 on 100 Eori" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/perfTest_100Eori.json"),
+        getJsonFile("perfTestRequest_100Eori.json"),
         validHeaders
       ).status mustBe Status.OK
     }
@@ -49,7 +49,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 200 on 500 Eori" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/perfTest_500Eori.json"),
+        getJsonFile("perfTestRequest_500Eori.json"),
         validHeaders
       ).status mustBe Status.OK
     }
@@ -57,7 +57,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 200 on 1000 Eori" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/perfTest_1000Eori.json"),
+        getJsonFile("perfTestRequest_1000Eori.json"),
         validHeaders
       ).status mustBe Status.OK
     }
@@ -65,7 +65,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 200 on 3000 Eori" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/perfTest_3000Eori.json"),
+        getJsonFile("perfTestRequest_3000Eori.json"),
         validHeaders
       ).status mustBe Status.OK
     }
@@ -73,7 +73,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a missing authorization in the Header" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/authRequest200_single.json"),
+        getJsonFile("authRequest200_single.json"),
         invalidHeaders1
       ).status mustBe Status.FORBIDDEN
     }
@@ -81,19 +81,19 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a invalid authorization in the Header" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/authRequest200_single.json"),
+        getJsonFile("authRequest200_single.json"),
         invalidHeaders2
       ).status mustBe Status.FORBIDDEN
     }
 
     "return 403 on a missing Header" in {
-      postRequestWithoutHeader(authorisationUrl, getJsonFile("requests/authRequest200_single.json")).status mustBe Status.FORBIDDEN
+      postRequestWithoutHeader(authorisationUrl, getJsonFile("authRequest200_single.json")).status mustBe Status.FORBIDDEN
     }
 
     "return 400 on a single Eoris with an invalid date" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/authRequest400_wrongDate.json"),
+        getJsonFile("authRequest400_wrongDate.json"),
         validHeaders
       ).status mustBe Status.BAD_REQUEST
     }
@@ -101,7 +101,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 400 on multiple Eoris with multiple errors" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/authRequest400_wrongAll.json"),
+        getJsonFile("authRequest400_wrongAll.json"),
         validHeaders
       ).status mustBe Status.BAD_REQUEST
     }
@@ -109,7 +109,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 400 on wrong Auth" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/authRequest400_wrongAuth.json"),
+        getJsonFile("authRequest400_wrongAuth.json"),
         validHeaders
       ).status mustBe Status.BAD_REQUEST
     }
@@ -117,7 +117,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 400 on wrong Date" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/authRequest400_wrongDate.json"),
+        getJsonFile("authRequest400_wrongDate.json"),
         validHeaders
       ).status mustBe Status.BAD_REQUEST
     }
@@ -125,7 +125,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 400 on wrong Eori" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("requests/authRequest400_wrongEori.json"),
+        getJsonFile("authRequest400_wrongEori.json"),
         validHeaders
       ).status mustBe Status.BAD_REQUEST
     }
@@ -148,7 +148,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a dummy POST Request" in {
       postRequestWithHeader(
         authorisationUrl,
-        getJsonFile("dummies/authRequest403_api-test-only.json"),
+        getJsonFile("authRequest403_api-test-only.json"),
         validHeaders
       ).status mustBe Status.FORBIDDEN
     }

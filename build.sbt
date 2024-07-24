@@ -12,7 +12,13 @@ lazy val microservice = Project("uknw-auth-checker-api-stub", file("."))
     // https://www.scala-lang.org/2021/01/12/configuring-and-suppressing-warnings.html
     // suppress warnings in generated routes files
     scalacOptions += "-Wconf:src=routes/.*:s",
-    PlayKeys.devSettings := Seq("play.server.http.port" -> "9071")
+    PlayKeys.devSettings := Seq("play.server.http.port" -> "9071"),
+    Compile / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "dummies",
+    Compile / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "requests",
+    Compile / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "responses",
+    Test / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "dummies",
+    Test / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "requests",
+    Test / unmanagedResourceDirectories += baseDirectory.value / "conf" / "resources" / "stubJsons" / "responses"
   )
   .settings(resolvers += Resolver.jcenterRepo)
   .settings(CodeCoverageSettings.settings *)
