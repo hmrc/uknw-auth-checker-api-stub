@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers
+package uk.gov.hmrc.uknwauthcheckerapistub.services
 
-import play.api.mvc.{AnyContent, Request}
+import java.time.LocalDate
+import javax.inject.Singleton
 
-trait HeadChecker {
-  val validToken = "Bearer PFZBTElEX1RPS0VOPg=="
-
-  def validateBearerToken(token: Seq[String]): Boolean =
-    if (token.exists(_ != validToken)) false else true
-
-  def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
-    val valid = request.headers.headers.filter(_._1.toLowerCase.contains("authorization"))
-
-    if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) { true }
-    else { false }
-  }
-
+@Singleton
+class LocalDateService {
+  def now(): LocalDate = LocalDate.now()
 }

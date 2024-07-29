@@ -1,5 +1,5 @@
 {
-  "validityDate":"2024-02-xx",
+  "validityDate": "{{date}}",
   "authType": "XYZ",
   "eoris" : ["GB000000000200","JsdbuwnNN%$400"]
 }

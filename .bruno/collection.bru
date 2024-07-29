@@ -1,0 +1,13 @@
+auth {
+  mode: none
+}
+
+script:pre-request {
+  let dateTime = new Date();
+  let localDate = dateTime.toISOString().split('T')[0]
+  bru.setEnvVar('date', localDate);
+}
+
+script:post-response {
+  bru.setEnvVar('date', '');
+}

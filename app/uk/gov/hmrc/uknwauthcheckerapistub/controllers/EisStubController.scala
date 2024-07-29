@@ -20,20 +20,18 @@ import javax.inject.{Inject, Singleton}
 
 import play.api.mvc.{Action, AnyContent, ControllerComponents, Request}
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
-import uk.gov.hmrc.uknwauthcheckerapistub.tools.StubDataService
-import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.HeadChecker
+import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.HeadChecker
 
 @Singleton()
-class EisStubController @Inject() (cc: ControllerComponents) extends BackendController(cc) with HeadChecker {
-
-  private val serviceStub = new StubDataService
+class EisStubController @Inject() (stubDataService: StubDataService, cc: ControllerComponents) extends BackendController(cc) with HeadChecker {
 
   def authorisations(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val isValidToken: Boolean = hasValidBearerToken(request)
     val isPost:       Boolean = request.method == "POST"
 
     (isValidToken, isPost) match {
-      case (true, true) => serviceStub.stubbing(request)
+      case (true, true) => stubDataService.stubbing(request)
       case (false, _)   => Forbidden
       case (_, false)   => MethodNotAllowed
       case _            => InternalServerError

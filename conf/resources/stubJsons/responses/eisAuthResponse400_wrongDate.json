@@ -1,8 +1,0 @@
-{
-  "errorDetail": {
-    "timestamp": "2024-01-15T11:48:10.392967Z",
-    "errorCode": 400,
-    "errorMessage": "Invalid supplied date(Date format should be - YYYY-MM-DD) : 2024-02-xx",
-    "sourcePDSFaultDetails": "/pds/cnit/validatecustomsauth/v1"
-  }
-}

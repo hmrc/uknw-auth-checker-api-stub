@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.tools
+package uk.gov.hmrc.uknwauthcheckerapistub.services
+
+import javax.inject.Inject
 
 import play.api.libs.json.JsValue
 import play.api.mvc.Results._
 import play.api.mvc.{AnyContent, Request, Result}
-import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.JsonGetter
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.JsonGetter
 
-class StubDataService extends JsonGetter {
+class StubDataService @Inject() (implicit localDateService: LocalDateService) extends JsonGetter {
 
   def stubbing(req: Request[AnyContent]): Result = {
 
@@ -34,8 +36,6 @@ class StubDataService extends JsonGetter {
         BadRequest(getJsonFile("eisAuthResponse400_wrongAll.json"))
       case Some(x) if x == getJsonFile("authRequest400_wrongAuth.json") =>
         BadRequest(getJsonFile("eisAuthResponse400_wrongAuth.json"))
-      case Some(x) if x == getJsonFile("authRequest400_wrongDate.json") =>
-        BadRequest(getJsonFile("eisAuthResponse400_wrongDate.json"))
       case Some(x) if x == getJsonFile("authRequest400_wrongEori.json") =>
         BadRequest(getJsonFile("eisAuthResponse400_wrongEori.json"))
       // This is a dummy test case just to trigger a 403 in test-api, it has nothing to do with the api-stub spec.

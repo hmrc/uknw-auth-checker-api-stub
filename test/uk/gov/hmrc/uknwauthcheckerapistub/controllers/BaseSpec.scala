@@ -16,14 +16,23 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
+import java.time.LocalDate
+
+import org.mockito.Mockito.when
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+import org.scalatestplus.mockito.MockitoSugar.mock
 
 import play.api.mvc.AnyContentAsEmpty
 import play.api.test.FakeRequest
 import play.api.test.Helpers.{GET, POST}
+import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
 
 class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
+
+  protected implicit val mockLocalDateService: LocalDateService = mock[LocalDateService]
+
+  when(mockLocalDateService.now()).thenReturn(LocalDate.now)
 
   val endPointUrl = "/cau/validatecustomsauth/v1"
 
