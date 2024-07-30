@@ -16,10 +16,11 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
-import scala.io.Source
-
 import play.api.libs.json.{JsValue, Json}
 import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
+
+import java.time.LocalTime
+import scala.io.Source
 
 trait JsonGetter extends TokenReplacer {
   def getJsonFile(fileName: String)(implicit localDateService: LocalDateService): JsValue = {
@@ -29,6 +30,7 @@ trait JsonGetter extends TokenReplacer {
         Json.parse(
           source.mkString
             .replaceFormattedDate(localDateService.now())
+            .replaceFormattedDateTime(localDateService.now().atTime(LocalTime.MIDNIGHT))
         )
       finally source.close()
     lines
