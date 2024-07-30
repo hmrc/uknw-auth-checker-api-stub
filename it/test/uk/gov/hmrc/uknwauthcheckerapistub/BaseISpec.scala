@@ -16,8 +16,13 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub
 
+import java.time.LocalDate
 import scala.reflect.ClassTag
 
+import com.google.inject.AbstractModule
+import org.mockito.Mockito.when
+import org.scalatest.BeforeAndAfterAll
+import org.scalatestplus.mockito.MockitoSugar.mock
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneServerPerSuite
 
@@ -27,15 +32,31 @@ import play.api.libs.json.{JsValue, Json}
 import play.api.libs.ws.{WSClient, WSResponse}
 import play.api.test.Helpers.{await, defaultAwaitTimeout}
 import uk.gov.hmrc.uknwauthcheckerapistub.controllers.TestDataUtils
+import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
 
-class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with TestDataUtils {
+class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with BeforeAndAfterAll with TestDataUtils {
 
-  lazy val authorisationUrl: String = s"http://localhost:$port/cau/validatecustomsauth/v1"
+  lazy val authorisationUrl:                    String           = s"http://localhost:$port/cau/validatecustomsauth/v1"
+  protected implicit lazy val localDateService: LocalDateService = injected[LocalDateService]
 
-  override lazy val app:     Application = GuiceApplicationBuilder().build()
-  private lazy val wsClient: WSClient    = injected[WSClient]
+  override lazy val app: Application = GuiceApplicationBuilder()
+    .overrides(moduleOverrides)
+    .build()
+
+  override protected def beforeAll(): Unit = {
+    super.beforeAll()
+    when(injected[LocalDateService].now()).thenReturn(LocalDate.now)
+  }
+
+  private lazy val wsClient: WSClient = injected[WSClient]
+
   def injected[T](c:                 Class[T]):    T = app.injector.instanceOf(c)
   def injected[T](implicit evidence: ClassTag[T]): T = app.injector.instanceOf[T]
+
+  def moduleOverrides: AbstractModule = new AbstractModule {
+    override def configure(): Unit =
+      bind(classOf[LocalDateService]).toInstance(mock[LocalDateService])
+  }
 
   def postRequestWithHeader(url: String, body: JsValue, headers: Seq[(String, String)]): WSResponse =
     await(

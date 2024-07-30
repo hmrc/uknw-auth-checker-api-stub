@@ -62,4 +62,6 @@ To add new expected requests go to `conf/resources/stubJsons/requests` and add a
 
 The `.json` file must follow the naming convention `authRequest<ExpectedCode>_<contentDescription>.json`, then go to `conf/resources/stubJsons/responses` and add the expected response, follow the naming convention ``eisAuthResponse<code>_<contentDescription>.json``.
 
-Finally, go to `app/uk/gov/hmrc/uknwauthcheckerapistub/tools/StubDataService.scala` and add a new `case`.
+Any `validityDate` body parameter in requests should be replaced with the `{{date}}` token. It will be replaced on load with today's date formatted as `YYYY-MM-DD` (ISO_LOCAL_DATE)
+
+Finally, go to `app/uk/gov/hmrc/uknwauthcheckerapistub/services/StubDataService.scala` and add a new `case`.

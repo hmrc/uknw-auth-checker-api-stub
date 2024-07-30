@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers
+package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
-import scala.io.Source
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-import play.api.libs.json.{JsValue, Json}
+trait TokenReplacer {
+  implicit class TokenReplacer(value: String) {
 
-trait JsonGetter {
-  def getJsonFile(fileName: String): JsValue = {
-    val source = Source.fromResource(fileName)
-    val lines =
-      try Json.parse(source.mkString)
-      finally source.close()
-    lines
+    def replaceFormattedDate(date: LocalDate): String =
+      value.replace("{{date}}", date.format(DateTimeFormatter.ISO_LOCAL_DATE))
   }
 }

@@ -1,5 +1,5 @@
 {
-  "validityDate": "2024-07-22",
+  "validityDate": "{{date}}",
   "authType": "UKNW",
   "eoris": [
     "GB473815539404392",

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import play.api.libs.json.{JsValue, Json}
-import uk.gov.hmrc.uknwauthcheckerapistub.tools.helpers.JsonGetter
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.JsonGetter
 
 trait TestDataUtils extends JsonGetter {
 

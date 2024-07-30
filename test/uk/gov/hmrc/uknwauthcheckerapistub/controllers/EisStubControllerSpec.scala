@@ -19,6 +19,7 @@ package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 import play.api.http.Status
 import play.api.test.Helpers
 import play.api.test.Helpers._
+import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
 
 class EisStubControllerSpec extends BaseSpec {
 
@@ -26,7 +27,6 @@ class EisStubControllerSpec extends BaseSpec {
   private val fakeRequest_multiple     = fakePostReq.withJsonBody(getJsonFile("authRequest200_multiple.json"))
   private val fakeBadRequest_wrongAll  = fakePostReq.withJsonBody(getJsonFile("authRequest400_wrongAll.json"))
   private val fakeBadRequest_wrongAuth = fakePostReq.withJsonBody(getJsonFile("authRequest400_wrongAuth.json"))
-  private val fakeBadRequest_wrongDate = fakePostReq.withJsonBody(getJsonFile("authRequest400_wrongDate.json"))
   private val fakeBadRequest_wrongEori = fakePostReq.withJsonBody(getJsonFile("authRequest400_wrongEori.json"))
   private val fakeForbidden_dummy      = fakePostReq.withJsonBody(getJsonFile("authRequest403_api-test-only.json"))
 
@@ -37,7 +37,8 @@ class EisStubControllerSpec extends BaseSpec {
   private val fakePerfRequest1000Eori = fakePostReq.withJsonBody(getJsonFile("perfTestRequest_1000Eori.json"))
   private val fakePerfRequest3000Eori = fakePostReq.withJsonBody(getJsonFile("perfTestRequest_3000Eori.json"))
 
-  private val controller = new EisStubController(Helpers.stubControllerComponents())
+  private val stubDataService: StubDataService   = new StubDataService()
+  private val controller:      EisStubController = new EisStubController(stubDataService, Helpers.stubControllerComponents())
 
   "POST /cau/validatecustomsauth/v1" should {
     "return 200 on a single Eori" in {
@@ -77,12 +78,6 @@ class EisStubControllerSpec extends BaseSpec {
       val result = controller.authorisations()(fakeBadRequest_wrongAuth)
       status(result)        shouldBe Status.BAD_REQUEST
       contentAsJson(result) shouldBe getJsonFile("eisAuthResponse400_wrongAuth.json")
-    }
-
-    "return 400 on a wrong date" in {
-      val result = controller.authorisations()(fakeBadRequest_wrongDate)
-      status(result)        shouldBe Status.BAD_REQUEST
-      contentAsJson(result) shouldBe getJsonFile("eisAuthResponse400_wrongDate.json")
     }
 
     "return 400 on a wrong eori" in {
