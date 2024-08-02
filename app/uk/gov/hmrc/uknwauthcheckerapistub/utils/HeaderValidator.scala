@@ -18,16 +18,15 @@ package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
 import play.api.mvc.{AnyContent, Request}
 
-trait HeadChecker {
-  val validToken = "Bearer PFZBTElEX1RPS0VOPg=="
+trait HeaderValidator {
 
-  def validateBearerToken(token: Seq[String]): Boolean =
-    if (token.exists(_ != validToken)) false else true
+  private def validateBearerToken(request: Request[AnyContent], token: Seq[String]): Boolean =
+    token.contains(Constants.bearerToken)
 
   def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
     val valid = request.headers.headers.filter(_._1.toLowerCase.contains("authorization"))
 
-    if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) { true }
+    if (valid.nonEmpty && validateBearerToken(request, valid.map(_._2))) { true }
     else { false }
   }
 

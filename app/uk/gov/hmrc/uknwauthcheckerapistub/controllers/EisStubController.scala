@@ -17,18 +17,18 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import javax.inject.{Inject, Singleton}
-
 import play.api.mvc.{Action, AnyContent, ControllerComponents, Request}
+import uk.gov.hmrc.http.HttpVerbs.POST
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.HeadChecker
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.HeaderValidator
 
 @Singleton()
-class EisStubController @Inject() (stubDataService: StubDataService, cc: ControllerComponents) extends BackendController(cc) with HeadChecker {
+class EisStubController @Inject() (stubDataService: StubDataService, cc: ControllerComponents) extends BackendController(cc) with HeaderValidator {
 
   def authorisations(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val isValidToken: Boolean = hasValidBearerToken(request)
-    val isPost:       Boolean = request.method == "POST"
+    val isPost:       Boolean = request.method == POST
 
     (isValidToken, isPost) match {
       case (true, true) => stubDataService.stubbing(request)
