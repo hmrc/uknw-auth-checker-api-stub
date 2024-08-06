@@ -1,7 +1,28 @@
-{
-  "validityDate": "{{date}}",
-  "authType": "UKNW",
-  "eoris": [
+/*
+ * Copyright 2024 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package uk.gov.hmrc.uknwauthcheckerapistub.models.requests
+
+object Requests400 {
+  val req400_singleEori:   Seq[String] = Seq("ABCD000000000200")
+  val req400_multipleEori: Seq[String] = Seq("ABCD000000000200", "EFGH000000000200")
+  val req400_noEoris:      Seq[String] = Seq.empty
+
+  val req403_single: Seq[String] = Seq("GB999999999403")
+  val req400_tooManyEoris: Seq[String] = Seq(
     "GB837826880909874",
     "XI968840631629",
     "XI436105828614",
@@ -3001,6 +3022,8 @@
     "XI005516834042",
     "XI804750399201361",
     "GB843625004921645",
+    "GB618696708714294",
     "GB618696708714294"
-  ]
+  )
+
 }

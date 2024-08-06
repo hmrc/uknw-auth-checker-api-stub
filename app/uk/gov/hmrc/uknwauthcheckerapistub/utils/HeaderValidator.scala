@@ -14,12 +14,20 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.config
+package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
-import com.google.inject.AbstractModule
+import play.api.mvc.{AnyContent, Request}
 
-class Module extends AbstractModule {
+trait HeaderValidator {
 
-  override def configure(): Unit =
-    bind(classOf[AppConfig]).asEagerSingleton()
+  private def validateBearerToken(request: Request[AnyContent], token: Seq[String]): Boolean =
+    token.contains(Constants.bearerToken)
+
+  def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
+    val valid = request.headers.headers.filter(_._1.toLowerCase.contains("authorization"))
+
+    if (valid.nonEmpty && validateBearerToken(request, valid.map(_._2))) { true }
+    else { false }
+  }
+
 }

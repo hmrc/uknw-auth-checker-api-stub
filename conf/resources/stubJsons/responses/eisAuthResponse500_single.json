@@ -1,8 +1,0 @@
-{
-  "errorDetail": {
-    "timestamp": "2024-03-21T17:51:48.664872Z",
-    "errorCode": 500,
-    "errorMessage": "An internal error has occurred",
-    "sourcePDSFaultDetails": "uri=/pds/cnit/validatecustomsauth/v1"
-  }
-}

@@ -25,7 +25,7 @@ the UKNW auth checker stub.
 
 ### Integration tests
 
-> `sbt it:test`
+> `sbt it/test`
 
 
 ### All tests
@@ -56,11 +56,11 @@ linter/reformatter in the app, tests, and integration tests
 
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
 
-### Add new expected requests
-
-To add new expected requests go to `conf/resources/stubJsons/requests` and add a new expected request `body` as a `.json` file.
-
-The `.json` file must follow the naming convention `authRequest<ExpectedCode>_<contentDescription>.json`, then go to `conf/resources/stubJsons/responses` and add the expected response, follow the naming convention ``eisAuthResponse<code>_<contentDescription>.json``.
+### Sample Requests and Responses
+| Requests                                                                                                | Responses |
+|---------------------------------------------------------------------------------------------------------| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| {   "validityDate": "{{date}}",   "authType": "UKNW",   "eoris" : ["GB000000000200"] }                  | {   "processingDate": "{{dateTime}}",   "authType": "UKNW",   "results": [     {       "eori": "GB000000000200",       "valid": true,       "code": 0     }   ] }                                                                                                                                                                                                                                                                                                                                      |
+| {   "validityDate": "{{date}}",   "authType": "UKNW",   "eoris" : ["GB000000000200","XI000000000200"] } | {   "processingDate": "{{dateTime}}",   "authType": "UKNW",   "results": [     {       "eori": "GB000000000200",       "valid": true,       "code": 0     },     {       "eori": "XI000000000200",       "valid": true,       "code": 0     }   ] }                                                                                                                                                                                                                                                    |
 
 Any `validityDate` body parameter in requests should be replaced with the `{{date}}` token. It will be replaced on load with today's date formatted as `YYYY-MM-DD` (ISO_LOCAL_DATE)
 

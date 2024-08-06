@@ -26,6 +26,7 @@ import play.api.mvc.Results.Status
 import play.api.mvc.{RequestHeader, Result}
 import uk.gov.hmrc.auth.core.AuthorisationException
 import uk.gov.hmrc.http.{JsValidationException, NotFoundException}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants
 
 @Singleton
 class ApiErrorHandler @Inject() extends HttpErrorHandler with Logging {
@@ -40,8 +41,8 @@ class ApiErrorHandler @Inject() extends HttpErrorHandler with Logging {
       statusCode match {
         case NOT_FOUND =>
           request.path match {
-            case "/cau/validatecustomsauth/v1" => Status(METHOD_NOT_ALLOWED)
-            case _                             => Status(NOT_FOUND)
+            case Constants.path => Status(METHOD_NOT_ALLOWED)
+            case _              => Status(NOT_FOUND)
           }
         case code => Status(code)
       }

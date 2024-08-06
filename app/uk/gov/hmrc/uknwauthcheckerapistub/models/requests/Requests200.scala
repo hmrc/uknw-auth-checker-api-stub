@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.config
+package uk.gov.hmrc.uknwauthcheckerapistub.models.requests
 
-import javax.inject.{Inject, Singleton}
+object Requests200 {
+  val req200_single: Seq[String] = Seq("GB000000000200")
 
-import play.api.Configuration
+  val req200_multiple: Seq[String] = Seq("GB000000000200", "XI000000000200")
 
-@Singleton
-class AppConfig @Inject() (config: Configuration) {
-
-  val appName: String = config.get[String]("appName")
 }

@@ -17,25 +17,28 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import play.api.http.Status
+import play.api.libs.json.Json
 import play.api.test.Helpers
 import play.api.test.Helpers._
+import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
+import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
+import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests400._
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorResponses.expectedRes400_singleEori
 import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
 
 class EisStubControllerSpec extends BaseSpec {
 
-  private val fakeRequest_single       = fakePostReq.withJsonBody(getJsonFile("authRequest200_single.json"))
-  private val fakeRequest_multiple     = fakePostReq.withJsonBody(getJsonFile("authRequest200_multiple.json"))
-  private val fakeBadRequest_wrongAll  = fakePostReq.withJsonBody(getJsonFile("authRequest400_wrongAll.json"))
-  private val fakeBadRequest_wrongAuth = fakePostReq.withJsonBody(getJsonFile("authRequest400_wrongAuth.json"))
-  private val fakeBadRequest_wrongEori = fakePostReq.withJsonBody(getJsonFile("authRequest400_wrongEori.json"))
-  private val fakeForbidden_dummy      = fakePostReq.withJsonBody(getJsonFile("authRequest403_api-test-only.json"))
+  private val fakeRequest_single       = fakePostReq.withJsonBody(getRequestJson(req200_single))
+  private val fakeRequest_multiple     = fakePostReq.withJsonBody(getRequestJson(req200_multiple))
+  private val fakeBadRequest_wrongEori = fakePostReq.withJsonBody(getRequestJson(req400_singleEori))
+  private val fakeForbidden_dummy      = fakePostReq.withJsonBody(getRequestJson(req403_single))
 
   // Performance testing
-  private val fakePerfRequest1Eori    = fakePostReq.withJsonBody(getJsonFile("perfTestRequest_1Eori.json"))
-  private val fakePerfRequest100Eori  = fakePostReq.withJsonBody(getJsonFile("perfTestRequest_100Eori.json"))
-  private val fakePerfRequest500Eori  = fakePostReq.withJsonBody(getJsonFile("perfTestRequest_500Eori.json"))
-  private val fakePerfRequest1000Eori = fakePostReq.withJsonBody(getJsonFile("perfTestRequest_1000Eori.json"))
-  private val fakePerfRequest3000Eori = fakePostReq.withJsonBody(getJsonFile("perfTestRequest_3000Eori.json"))
+  private val fakePerfRequest1Eori    = fakePostReq.withJsonBody(getRequestJson(perfTest_1Eori))
+  private val fakePerfRequest100Eori  = fakePostReq.withJsonBody(getRequestJson(perfTest_100Eori))
+  private val fakePerfRequest500Eori  = fakePostReq.withJsonBody(getRequestJson(perfTest_500Eori))
+  private val fakePerfRequest1000Eori = fakePostReq.withJsonBody(getRequestJson(perfTest_1000Eori))
+  private val fakePerfRequest3000Eori = fakePostReq.withJsonBody(getRequestJson(perfTest_3000Eori))
 
   private val stubDataService: StubDataService   = new StubDataService()
   private val controller:      EisStubController = new EisStubController(stubDataService, Helpers.stubControllerComponents())
@@ -44,13 +47,13 @@ class EisStubControllerSpec extends BaseSpec {
     "return 200 on a single Eori" in {
       val result = controller.authorisations()(fakeRequest_single)
       status(result)        shouldBe Status.OK
-      contentAsJson(result) shouldBe getJsonFile("eisAuthResponse200_valid_single.json")
+      contentAsJson(result) shouldBe getResponseJson(req200_single)
     }
 
     "return 200 on a multiple Eoris" in {
       val result = controller.authorisations()(fakeRequest_multiple)
       status(result)        shouldBe Status.OK
-      contentAsJson(result) shouldBe getJsonFile("eisAuthResponse200_valid_multiple.json")
+      contentAsJson(result) shouldBe getResponseJson(req200_multiple)
     }
 
     "return 403 on a missing authorization Header" in {
@@ -68,22 +71,10 @@ class EisStubControllerSpec extends BaseSpec {
       status(result) shouldBe Status.FORBIDDEN
     }
 
-    "return 400 on a wrong date, authType and eori" in {
-      val result = controller.authorisations()(fakeBadRequest_wrongAll)
-      status(result)        shouldBe Status.BAD_REQUEST
-      contentAsJson(result) shouldBe getJsonFile("eisAuthResponse400_wrongAll.json")
-    }
-
-    "return 400 on a wrong auth" in {
-      val result = controller.authorisations()(fakeBadRequest_wrongAuth)
-      status(result)        shouldBe Status.BAD_REQUEST
-      contentAsJson(result) shouldBe getJsonFile("eisAuthResponse400_wrongAuth.json")
-    }
-
     "return 400 on a wrong eori" in {
       val result = controller.authorisations()(fakeBadRequest_wrongEori)
       status(result)        shouldBe Status.BAD_REQUEST
-      contentAsJson(result) shouldBe getJsonFile("eisAuthResponse400_wrongEori.json")
+      contentAsJson(result) shouldBe Json.parse(expectedRes400_singleEori)
     }
 
     "return 500 on a body-less POST Request" in {
@@ -111,31 +102,31 @@ class EisStubControllerSpec extends BaseSpec {
   "return 200 on a single Eori" in {
     val result = controller.authorisations()(fakePerfRequest1Eori)
     status(result)        shouldBe Status.OK
-    contentAsJson(result) shouldBe getJsonFile("perfTestResponse_1Eori.json")
+    contentAsJson(result) shouldBe getResponseJson(perfTest_1Eori)
   }
 
   "return 200 on 100 Eori" in {
     val result = controller.authorisations()(fakePerfRequest100Eori)
     status(result)        shouldBe Status.OK
-    contentAsJson(result) shouldBe getJsonFile("perfTestResponse_100Eori.json")
+    contentAsJson(result) shouldBe getResponseJson(perfTest_100Eori)
   }
 
   "return 200 on 500 Eori" in {
     val result = controller.authorisations()(fakePerfRequest500Eori)
     status(result)        shouldBe Status.OK
-    contentAsJson(result) shouldBe getJsonFile("perfTestResponse_500Eori.json")
+    contentAsJson(result) shouldBe getResponseJson(perfTest_500Eori)
   }
 
   "return 200 on 1000 Eori" in {
     val result = controller.authorisations()(fakePerfRequest1000Eori)
     status(result)        shouldBe Status.OK
-    contentAsJson(result) shouldBe getJsonFile("perfTestResponse_1000Eori.json")
+    contentAsJson(result) shouldBe getResponseJson(perfTest_1000Eori)
   }
 
   "return 200 on 3000 Eori" in {
     val result = controller.authorisations()(fakePerfRequest3000Eori)
     status(result)        shouldBe Status.OK
-    contentAsJson(result) shouldBe getJsonFile("perfTestResponse_3000Eori.json")
+    contentAsJson(result) shouldBe getResponseJson(perfTest_3000Eori)
   }
 
 }

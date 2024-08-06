@@ -16,19 +16,31 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
-import play.api.mvc.{AnyContent, Request}
-
-trait HeadChecker {
-  val validToken = "Bearer PFZBTElEX1RPS0VOPg=="
-
-  def validateBearerToken(token: Seq[String]): Boolean =
-    if (token.exists(_ != validToken)) false else true
-
-  def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
-    val valid = request.headers.headers.filter(_._1.toLowerCase.contains("authorization"))
-
-    if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) { true }
-    else { false }
-  }
-
+object Constants {
+  val path        = "/cau/validatecustomsauth/v1"
+  val bearerToken = "Bearer PFZBTElEX1RPS0VOPg=="
+  val eisRequest: String =
+    """
+      |{
+      |  "validityDate": "{{date}}",
+      |  "authType": "UKNW",
+      |  "eoris" : {{eoris}}
+      |}
+      |""".stripMargin
+  val eisResponse: String =
+    """
+      |{
+      |"processingDate": "{{dateTime}}",
+      |"authType": "{{authType}}",
+      |"results": {{results}}
+      |}
+      |""".stripMargin
+  val eoriStatus: String =
+    """
+      |{
+      |"eori": "{{eori}}",
+      |"valid": true,
+      |"code": 0
+      |}
+      |""".stripMargin
 }
