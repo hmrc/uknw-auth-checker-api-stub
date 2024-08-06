@@ -17,6 +17,7 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import javax.inject.{Inject, Singleton}
+
 import play.api.mvc.{Action, AnyContent, ControllerComponents, Request}
 import uk.gov.hmrc.http.HttpVerbs.POST
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController

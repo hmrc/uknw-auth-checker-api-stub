@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.services
 
+import javax.inject.Inject
+
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.Results._
 import play.api.mvc.{AnyContent, Request, Result}
@@ -24,8 +26,6 @@ import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests400._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorResponses._
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.JsonGetter
-
-import javax.inject.Inject
 
 class StubDataService @Inject() (implicit localDateService: LocalDateService) extends JsonGetter {
 

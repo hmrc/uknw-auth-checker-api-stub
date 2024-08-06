@@ -23,7 +23,7 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests400._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorResponses.{expectedRes400_singleEori, expectedRes400_wrongNumberOfEoris}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorResponses.expectedRes400_singleEori
 import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
 
 class EisStubControllerSpec extends BaseSpec {

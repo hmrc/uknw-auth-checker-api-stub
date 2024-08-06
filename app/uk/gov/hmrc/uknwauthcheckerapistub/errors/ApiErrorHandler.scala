@@ -18,6 +18,7 @@ package uk.gov.hmrc.uknwauthcheckerapistub.errors
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
+
 import play.api.Logging
 import play.api.http.HttpErrorHandler
 import play.api.http.Status._

@@ -16,11 +16,11 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
+import java.time.LocalTime
+
 import play.api.libs.json.{JsValue, Json}
 import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.eoriStatus
-
-import java.time.LocalTime
 
 trait JsonGetter extends TokenReplacer {
 
