@@ -16,12 +16,16 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.services
 
-import javax.inject.Inject
-
-import play.api.libs.json.JsValue
+import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.Results._
 import play.api.mvc.{AnyContent, Request, Result}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
+import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
+import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests400._
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorResponses._
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.JsonGetter
+
+import javax.inject.Inject
 
 class StubDataService @Inject() (implicit localDateService: LocalDateService) extends JsonGetter {
 
@@ -30,24 +34,22 @@ class StubDataService @Inject() (implicit localDateService: LocalDateService) ex
     val rawEori: Option[JsValue] = req.body.asJson
 
     rawEori match {
-      case Some(x) if x == getJsonFile("authRequest200_multiple.json") => Ok(getJsonFile("eisAuthResponse200_valid_multiple.json"))
-      case Some(x) if x == getJsonFile("authRequest200_single.json")   => Ok(getJsonFile("eisAuthResponse200_valid_single.json"))
-      case Some(x) if x == getJsonFile("authRequest400_wrongAll.json") =>
-        BadRequest(getJsonFile("eisAuthResponse400_wrongAll.json"))
-      case Some(x) if x == getJsonFile("authRequest400_wrongAuth.json") =>
-        BadRequest(getJsonFile("eisAuthResponse400_wrongAuth.json"))
-      case Some(x) if x == getJsonFile("authRequest400_wrongEori.json") =>
-        BadRequest(getJsonFile("eisAuthResponse400_wrongEori.json"))
-      // This is a dummy test case just to trigger a 403 in test-api, it has nothing to do with the api-stub spec.
-      case Some(x) if x == getJsonFile("authRequest403_api-test-only.json") =>
-        Forbidden
-      case Some(x) if x == getJsonFile("perfTestRequest_1Eori.json")    => Ok(getJsonFile("perfTestResponse_1Eori.json"))
-      case Some(x) if x == getJsonFile("perfTestRequest_100Eori.json")  => Ok(getJsonFile("perfTestResponse_100Eori.json"))
-      case Some(x) if x == getJsonFile("perfTestRequest_500Eori.json")  => Ok(getJsonFile("perfTestResponse_500Eori.json"))
-      case Some(x) if x == getJsonFile("perfTestRequest_1000Eori.json") => Ok(getJsonFile("perfTestResponse_1000Eori.json"))
-      case Some(x) if x == getJsonFile("perfTestRequest_3000Eori.json") => Ok(getJsonFile("perfTestResponse_3000Eori.json"))
-      case _                                                            => InternalServerError
+      case Some(x) if x == getRequestJson(req200_single)   => Ok(getResponseJson(req200_single))
+      case Some(x) if x == getRequestJson(req200_multiple) => Ok(getResponseJson(req200_multiple))
 
+      case Some(x) if x == getRequestJson(req400_singleEori)   => BadRequest(Json.parse(expectedRes400_singleEori))
+      case Some(x) if x == getRequestJson(req400_multipleEori) => BadRequest(Json.parse(expectedRes400_multipleEori))
+      case Some(x) if x == getRequestJson(req400_noEoris)      => BadRequest(Json.parse(expectedRes400_missingEori))
+      case Some(x) if x == getRequestJson(req400_tooManyEoris) => BadRequest(Json.parse(expectedRes400_wrongNumberOfEoris))
+
+      case Some(x) if x == getRequestJson(req403_single) => Forbidden(Json.parse(expectedRes403_forbidden))
+
+      case Some(x) if x == getRequestJson(perfTest_1Eori)    => Ok(getResponseJson(perfTest_1Eori))
+      case Some(x) if x == getRequestJson(perfTest_100Eori)  => Ok(getResponseJson(perfTest_100Eori))
+      case Some(x) if x == getRequestJson(perfTest_500Eori)  => Ok(getResponseJson(perfTest_500Eori))
+      case Some(x) if x == getRequestJson(perfTest_1000Eori) => Ok(getResponseJson(perfTest_1000Eori))
+      case Some(x) if x == getRequestJson(perfTest_3000Eori) => Ok(getResponseJson(perfTest_3000Eori))
+      case _                                                 => InternalServerError
     }
   }
 

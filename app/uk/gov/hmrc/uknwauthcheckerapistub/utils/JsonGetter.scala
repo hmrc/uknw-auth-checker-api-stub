@@ -18,21 +18,25 @@ package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
 import play.api.libs.json.{JsValue, Json}
 import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.eoriStatus
 
 import java.time.LocalTime
-import scala.io.Source
 
 trait JsonGetter extends TokenReplacer {
-  def getJsonFile(fileName: String)(implicit localDateService: LocalDateService): JsValue = {
-    val source = Source.fromResource(fileName)
-    val lines =
-      try
-        Json.parse(
-          source.mkString
-            .replaceFormattedDate(localDateService.now())
-            .replaceFormattedDateTime(localDateService.now().atTime(LocalTime.MIDNIGHT))
-        )
-      finally source.close()
-    lines
-  }
+
+  def getRequestJson(eoris: Seq[String])(implicit localDateService: LocalDateService): JsValue =
+    Json.parse(
+      Constants.eisRequest
+        .replaceFormattedDate(localDateService.now())
+        .replaceAuthType
+        .replaceEoris(eoris.map(e => s"\"" + e + "\"").mkString("[", ",", "]"))
+    )
+
+  def getResponseJson(eoris: Seq[String])(implicit localDateService: LocalDateService): JsValue =
+    Json.parse(
+      Constants.eisResponse
+        .replaceFormattedDateTime(localDateService.now().atTime(LocalTime.MIDNIGHT))
+        .replaceAuthType
+        .replaceResults(eoris.map(e => eoriStatus.replaceEori(e)).mkString("[", ",", "]"))
+    )
 }
