@@ -33,6 +33,7 @@ import play.api.libs.ws.{WSClient, WSResponse}
 import play.api.test.Helpers.{await, defaultAwaitTimeout}
 import uk.gov.hmrc.uknwauthcheckerapistub.controllers.TestDataUtils
 import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
+import play.api.libs.ws.WSBodyWritables.writeableOf_JsValue
 
 class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with BeforeAndAfterAll with TestDataUtils {
 
