@@ -20,13 +20,13 @@ import play.api.mvc.{AnyContent, Request}
 
 trait HeaderValidator {
 
-  private def validateBearerToken(request: Request[AnyContent], token: Seq[String]): Boolean =
+  private def validateBearerToken(token: Seq[String]): Boolean =
     token.contains(Constants.bearerToken)
 
   def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
     val valid = request.headers.headers.filter(_._1.toLowerCase.contains("authorization"))
 
-    if (valid.nonEmpty && validateBearerToken(request, valid.map(_._2))) { true }
+    if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) { true }
     else { false }
   }
 
