@@ -37,26 +37,26 @@ class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
   val endPointUrl = "/cau/validatecustomsauth/v1"
 
   val fakePostReq: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, endPointUrl).withHeaders(validHeaders: _*)
+    FakeRequest(POST, endPointUrl).withHeaders(validHeaders*)
 
   val fakePostErrorHandling: FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(POST, "")
 
   val fake404PostReq: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, "/xyz").withHeaders(validHeaders: _*)
+    FakeRequest(POST, "/xyz").withHeaders(validHeaders*)
 
   val fakePostReqForbiddenHeader1: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, endPointUrl).withHeaders(invalidHeaders1: _*)
+    FakeRequest(POST, endPointUrl).withHeaders(invalidHeaders1*)
 
   val fakePostReqForbiddenHeader2: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, endPointUrl).withHeaders(invalidHeaders2: _*)
+    FakeRequest(POST, endPointUrl).withHeaders(invalidHeaders2*)
 
   val fakeHeadlessPostReq: FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(POST, endPointUrl)
 
   val fakeNoBodyPostReq: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, endPointUrl).withHeaders(validHeaders: _*)
+    FakeRequest(POST, endPointUrl).withHeaders(validHeaders*)
 
-  val fakeGetRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest(GET, endPointUrl).withHeaders(validHeaders: _*)
+  val fakeGetRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest(GET, endPointUrl).withHeaders(validHeaders*)
 
 }
