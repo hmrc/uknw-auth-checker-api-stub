@@ -1,7 +1,7 @@
 meta {
-  name: 400-Wrong-Eori
+  name: 400-No-Eoris
   type: http
-  seq: 6
+  seq: 3
 }
 
 post {
@@ -18,6 +18,6 @@ body:json {
   {
     "validityDate": "{{date}}",
     "authType": "UKNW",
-    "eoris" : ["ABCD000000000200"]
+    "eoris": []
   }
 }

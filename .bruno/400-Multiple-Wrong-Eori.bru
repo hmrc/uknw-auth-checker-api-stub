@@ -1,7 +1,7 @@
 meta {
-  name: 400-Wrong-All
+  name: 400-Multiple-Wrong-Eori
   type: http
-  seq: 4
+  seq: 6
 }
 
 post {
@@ -17,7 +17,10 @@ auth:bearer {
 body:json {
   {
     "validityDate": "{{date}}",
-    "authType": "XYZ",
-    "eoris" : ["GB000000000200","JsdbuwnNN%$400"]
+    "authType": "UKNW",
+    "eoris" : [
+      "ABCD000000000200",
+      "EFGH000000000200"
+    ]
   }
 }
