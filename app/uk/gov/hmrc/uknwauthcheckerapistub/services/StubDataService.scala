@@ -47,6 +47,6 @@ class StubDataService @Inject() (implicit localDateService: LocalDateService) ex
       getRequestJson(perfTest_3000Eori)   -> Ok(getResponseJson(perfTest_3000Eori))
     )
 
-    rawEori.flatMap(responseMapping.get).getOrElse(InternalServerError)
+    rawEori.flatMap(responseMapping.get).getOrElse(InternalServerError(Json.parse(expectedRes500)))
   }
 }
