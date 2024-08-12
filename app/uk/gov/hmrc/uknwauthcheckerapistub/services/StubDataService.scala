@@ -29,28 +29,26 @@ import uk.gov.hmrc.uknwauthcheckerapistub.utils.JsonGetter
 
 class StubDataService @Inject() (implicit localDateService: LocalDateService) extends JsonGetter {
 
-  def stubbing(req: Request[AnyContent]): Result = {
+  private val defaultCase: Result = InternalServerError(Json.parse(expectedRes500))
 
+  def stubbing(req: Request[AnyContent]): Result = {
     val rawEori: Option[JsValue] = req.body.asJson
 
-    rawEori match {
-      case Some(x) if x == getRequestJson(req200_single)   => Ok(getResponseJson(req200_single))
-      case Some(x) if x == getRequestJson(req200_multiple) => Ok(getResponseJson(req200_multiple))
+    val responseMapping: Map[JsValue, Result] = Map(
+      getRequestJson(req200_single)       -> Ok(getResponseJson(req200_single)),
+      getRequestJson(req200_multiple)     -> Ok(getResponseJson(req200_multiple)),
+      getRequestJson(req400_singleEori)   -> BadRequest(Json.parse(expectedRes400_singleEori)),
+      getRequestJson(req400_multipleEori) -> BadRequest(Json.parse(expectedRes400_multipleEori)),
+      getRequestJson(req400_noEoris)      -> BadRequest(Json.parse(expectedRes400_missingEori)),
+      getRequestJson(req400_tooManyEoris) -> BadRequest(Json.parse(expectedRes400_wrongNumberOfEoris)),
+      getRequestJson(req403_single)       -> Forbidden(Json.parse(expectedRes403_forbidden)),
+      getRequestJson(perfTest_1Eori)      -> Ok(getResponseJson(perfTest_1Eori)),
+      getRequestJson(perfTest_100Eori)    -> Ok(getResponseJson(perfTest_100Eori)),
+      getRequestJson(perfTest_500Eori)    -> Ok(getResponseJson(perfTest_500Eori)),
+      getRequestJson(perfTest_1000Eori)   -> Ok(getResponseJson(perfTest_1000Eori)),
+      getRequestJson(perfTest_3000Eori)   -> Ok(getResponseJson(perfTest_3000Eori))
+    )
 
-      case Some(x) if x == getRequestJson(req400_singleEori)   => BadRequest(Json.parse(expectedRes400_singleEori))
-      case Some(x) if x == getRequestJson(req400_multipleEori) => BadRequest(Json.parse(expectedRes400_multipleEori))
-      case Some(x) if x == getRequestJson(req400_noEoris)      => BadRequest(Json.parse(expectedRes400_missingEori))
-      case Some(x) if x == getRequestJson(req400_tooManyEoris) => BadRequest(Json.parse(expectedRes400_wrongNumberOfEoris))
-
-      case Some(x) if x == getRequestJson(req403_single) => Forbidden(Json.parse(expectedRes403_forbidden))
-
-      case Some(x) if x == getRequestJson(perfTest_1Eori)    => Ok(getResponseJson(perfTest_1Eori))
-      case Some(x) if x == getRequestJson(perfTest_100Eori)  => Ok(getResponseJson(perfTest_100Eori))
-      case Some(x) if x == getRequestJson(perfTest_500Eori)  => Ok(getResponseJson(perfTest_500Eori))
-      case Some(x) if x == getRequestJson(perfTest_1000Eori) => Ok(getResponseJson(perfTest_1000Eori))
-      case Some(x) if x == getRequestJson(perfTest_3000Eori) => Ok(getResponseJson(perfTest_3000Eori))
-      case _                                                 => InternalServerError(Json.parse(expectedRes500))
-    }
+    rawEori.flatMap(responseMapping.get).getOrElse(defaultCase)
   }
-
 }
