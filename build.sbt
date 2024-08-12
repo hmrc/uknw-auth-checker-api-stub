@@ -17,8 +17,6 @@ lazy val microservice = Project("uknw-auth-checker-api-stub", file("."))
   .settings(resolvers += Resolver.jcenterRepo)
   .settings(CodeCoverageSettings.settings*)
 
-Test / javaOptions += "-Dlogger.resource=logback-test.xml"
-
 lazy val it = project
   .enablePlugins(PlayScala)
   .dependsOn(microservice % "test->test")
