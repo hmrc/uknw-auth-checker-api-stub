@@ -49,7 +49,7 @@ class StubDataService @Inject() (implicit localDateService: LocalDateService) ex
       case Some(x) if x == getRequestJson(perfTest_500Eori)  => Ok(getResponseJson(perfTest_500Eori))
       case Some(x) if x == getRequestJson(perfTest_1000Eori) => Ok(getResponseJson(perfTest_1000Eori))
       case Some(x) if x == getRequestJson(perfTest_3000Eori) => Ok(getResponseJson(perfTest_3000Eori))
-      case _                                                 => InternalServerError
+      case _                                                 => InternalServerError(Json.parse(expectedRes500))
     }
   }
 
