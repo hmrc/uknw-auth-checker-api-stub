@@ -19,7 +19,6 @@ package uk.gov.hmrc.uknwauthcheckerapistub
 import play.api.http.Status
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests400._
 
 class EisStubControllerISpec extends BaseISpec {
 

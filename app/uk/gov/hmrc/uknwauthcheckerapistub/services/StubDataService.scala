@@ -34,13 +34,13 @@ class StubDataService @Inject() (implicit localDateService: LocalDateService) ex
     val rawEori: Option[JsValue] = req.body.asJson
 
     val responseMapping: Map[JsValue, Result] = Map(
-      getRequestJson(req200_single)       -> Ok(getResponseJson(req200_single)),
-      getRequestJson(req200_multiple)     -> Ok(getResponseJson(req200_multiple)),
-      getRequestJson(perfTest_1Eori)      -> Ok(getResponseJson(perfTest_1Eori)),
-      getRequestJson(perfTest_100Eori)    -> Ok(getResponseJson(perfTest_100Eori)),
-      getRequestJson(perfTest_500Eori)    -> Ok(getResponseJson(perfTest_500Eori)),
-      getRequestJson(perfTest_1000Eori)   -> Ok(getResponseJson(perfTest_1000Eori)),
-      getRequestJson(perfTest_3000Eori)   -> Ok(getResponseJson(perfTest_3000Eori))
+      getRequestJson(req200_single)     -> Ok(getResponseJson(req200_single)),
+      getRequestJson(req200_multiple)   -> Ok(getResponseJson(req200_multiple)),
+      getRequestJson(perfTest_1Eori)    -> Ok(getResponseJson(perfTest_1Eori)),
+      getRequestJson(perfTest_100Eori)  -> Ok(getResponseJson(perfTest_100Eori)),
+      getRequestJson(perfTest_500Eori)  -> Ok(getResponseJson(perfTest_500Eori)),
+      getRequestJson(perfTest_1000Eori) -> Ok(getResponseJson(perfTest_1000Eori)),
+      getRequestJson(perfTest_3000Eori) -> Ok(getResponseJson(perfTest_3000Eori))
     )
 
     rawEori.flatMap(responseMapping.get).getOrElse(defaultCase)

@@ -21,13 +21,12 @@ import play.api.test.Helpers
 import play.api.test.Helpers._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests400._
 import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
 
 class EisStubControllerSpec extends BaseSpec {
 
-  private val fakeRequest_single       = fakePostReq.withJsonBody(getRequestJson(req200_single))
-  private val fakeRequest_multiple     = fakePostReq.withJsonBody(getRequestJson(req200_multiple))
+  private val fakeRequest_single   = fakePostReq.withJsonBody(getRequestJson(req200_single))
+  private val fakeRequest_multiple = fakePostReq.withJsonBody(getRequestJson(req200_multiple))
 
   // Performance testing
   private val fakePerfRequest1Eori    = fakePostReq.withJsonBody(getRequestJson(perfTest_1Eori))
