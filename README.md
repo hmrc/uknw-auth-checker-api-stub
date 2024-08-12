@@ -110,7 +110,7 @@ Any `processingDate` body parameter in responses should be replaced with the `{{
 
 <tr>
 <td>req200_multiple</td>
-<td></td>
+<td>Valid request with 2 EORIs matching <strong>^(GB&#124;XI)[0-9]{12}&#124;(GB&#124;XI)[0-9]{15}$</strong></td>
 <td>
     <pre>
 {
@@ -146,110 +146,8 @@ Any `processingDate` body parameter in responses should be replaced with the `{{
 </tr>
 
 <tr>
-<td>req400_multipleEori</td>
-<td></td>
-<td>
-    <pre>
-{
-  "validityDate": "{{date}}",
-  "authType": "UKNW",
-  "eoris" : [
-    "ABCD000000000200",
-    "EFGH000000000200"
-  ]
-}
-    </pre>
-</td>
-<td>
-    <pre>
-{
-  "code": "BAD_REQUEST",
-  "message": "Bad request",
-  "errors": [
-    {
-      "code": "INVALID_FORMAT",
-      "message": "ABCD000000000200 is not a supported EORI number",
-      "path": "eoris"
-    },
-    {
-      "code": "INVALID_FORMAT",
-      "message": "EFGH000000000200 is not a supported EORI number",
-      "path": "eoris"
-    }
-  ]
-}
-    </pre>
-    </td>
-</tr>
-
-<tr>
-<td>req400_noEoris</td>
-<td></td>
-<td>
-    <pre>
-{
-  "validityDate": "{{date}}",
-  "authType": "UKNW",
-  "eoris": []
-}
-    </pre>
-</td>
-<td>
-    <pre>
-{
-  "code": "BAD_REQUEST",
-  "message": "Bad request",
-  "errors": [
-    {
-      "code": "INVALID_FORMAT",
-      "message": "eoris field missing from JSON",
-      "path": "eoris"
-    }
-  ]
-}
-    </pre>
-    </td>
-</tr>
-
-<tr>
-<td>req400_tooManyEoris</td>
-<td></td>
-<td>
-    <pre>
-{
-  "validityDate": "{{date}}",
-  "authType": "UKNW",
-  "eoris": [
-    "GB837826880909874",
-    "XI968840631629",
-    "XI436105828614",
-    "XI670738444417",
-    "XI299090776708",
-    ...
-  ]
-}
-    </pre>
-</td>
-<td>
-    <pre>
-{
-  "code": "BAD_REQUEST",
-  "message": "Bad request",
-  "errors": [
-    {
-      "code": "INVALID_FORMAT",
-      "message": "The request payload must contain between 1 and 3000 EORI entries",
-      "path": "eoris"
-    }
-  ]
-}
-    </pre>
-    </td>
-</tr>
-
-<tr>
 <td>req403_single</td>
-<td></td>
+<td>Valid request where bearer token is not present. Has no response body as per EIS spec</td>
 <td>
     <pre>
 {
@@ -259,14 +157,7 @@ Any `processingDate` body parameter in responses should be replaced with the `{{
 }
     </pre>
 </td>
-<td>
-    <pre>
-{
-  "code": "FORBIDDEN",
-  "message": "You are not allowed to access this resource"
-}
-    </pre>
-    </td>
+<td></td>
 </tr>
 
 <tr>
@@ -300,7 +191,7 @@ Any `processingDate` body parameter in responses should be replaced with the `{{
 
 <tr>
 <td>perfTest_100Eori</td>
-<td>Valid request with 100 EORI matching <strong>^(GB&#124;XI)[0-9]{12}&#124;(GB&#124;XI)[0-9]{15}$</strong></td>
+<td>Valid request with 100 EORIs matching <strong>^(GB&#124;XI)[0-9]{12}&#124;(GB&#124;XI)[0-9]{15}$</strong></td>
 <td>
     <pre>
 {
@@ -357,7 +248,7 @@ Any `processingDate` body parameter in responses should be replaced with the `{{
 
 <tr>
 <td>perfTest_500Eori</td>
-<td></td>
+<td>Valid request with 500 EORIs matching <strong>^(GB&#124;XI)[0-9]{12}&#124;(GB&#124;XI)[0-9]{15}$</strong></td>
 <td>
     <pre>
 {
@@ -414,7 +305,7 @@ Any `processingDate` body parameter in responses should be replaced with the `{{
 
 <tr>
 <td>perfTest_1000Eori</td>
-<td></td>
+<td>Valid request with 1000 EORIs matching <strong>^(GB&#124;XI)[0-9]{12}&#124;(GB&#124;XI)[0-9]{15}$</strong></td>
 <td>
     <pre>
 {
@@ -471,7 +362,7 @@ Any `processingDate` body parameter in responses should be replaced with the `{{
 
 <tr>
 <td>perfTest_3000Eori</td>
-<td></td>
+<td>Valid request with 3000 EORIs matching <strong>^(GB&#124;XI)[0-9]{12}&#124;(GB&#124;XI)[0-9]{15}$</strong></td>
 <td>
     <pre>
 {
