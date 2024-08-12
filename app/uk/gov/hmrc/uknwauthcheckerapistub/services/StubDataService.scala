@@ -23,7 +23,6 @@ import play.api.mvc.Results._
 import play.api.mvc.{AnyContent, Request, Result}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests400._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorResponses._
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.JsonGetter
 
@@ -37,11 +36,6 @@ class StubDataService @Inject() (implicit localDateService: LocalDateService) ex
     val responseMapping: Map[JsValue, Result] = Map(
       getRequestJson(req200_single)       -> Ok(getResponseJson(req200_single)),
       getRequestJson(req200_multiple)     -> Ok(getResponseJson(req200_multiple)),
-      getRequestJson(req400_singleEori)   -> BadRequest(Json.parse(expectedRes400_singleEori)),
-      getRequestJson(req400_multipleEori) -> BadRequest(Json.parse(expectedRes400_multipleEori)),
-      getRequestJson(req400_noEoris)      -> BadRequest(Json.parse(expectedRes400_missingEori)),
-      getRequestJson(req400_tooManyEoris) -> BadRequest(Json.parse(expectedRes400_wrongNumberOfEoris)),
-      getRequestJson(req403_single)       -> Forbidden(Json.parse(expectedRes403_forbidden)),
       getRequestJson(perfTest_1Eori)      -> Ok(getResponseJson(perfTest_1Eori)),
       getRequestJson(perfTest_100Eori)    -> Ok(getResponseJson(perfTest_100Eori)),
       getRequestJson(perfTest_500Eori)    -> Ok(getResponseJson(perfTest_500Eori)),

@@ -17,15 +17,11 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.models.responses
 
 object ErrorResponses {
-  val expectedRes400_singleEori: String =
-    """{"code":"BAD_REQUEST","message":"Bad request","errors":[{"code":"INVALID_FORMAT","message":"ABCD000000000200 is not a supported EORI number","path":"eoris"}]}"""
-  val expectedRes400_multipleEori: String =
-    """{"code":"BAD_REQUEST","message":"Bad request","errors":[{"code":"INVALID_FORMAT","message":"ABCD000000000200 is not a supported EORI number","path":"eoris"},{"code":"INVALID_FORMAT","message":"EFGH000000000200 is not a supported EORI number","path":"eoris"}]}"""
-  val expectedRes400_missingEori: String =
-    """{"code":"BAD_REQUEST","message":"Bad request","errors":[{"code":"INVALID_FORMAT","message":"eoris field missing from JSON","path":"eoris"}]}"""
-  val expectedRes400_wrongNumberOfEoris: String =
-    """{"code":"BAD_REQUEST","message":"Bad request","errors":[{"code":"INVALID_FORMAT","message":"The request payload must contain between 1 and 3000 EORI entries","path":"eoris"}]}"""
-  val expectedRes403_forbidden: String =
-    """{"code":"FORBIDDEN","message":"You are not allowed to access this resource"}"""
-  val expectedRes500: String = """{"code":"INTERNAL_SERVER_ERROR","message":"Unexpected internal server error"}"""
+  val expectedRes500: String =
+    """
+      |{
+      |"code":"INTERNAL_SERVER_ERROR",
+      |"message":"Unexpected internal server error"
+      |}
+    """.stripMargin
 }
