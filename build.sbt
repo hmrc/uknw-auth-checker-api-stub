@@ -1,7 +1,7 @@
 import uk.gov.hmrc.DefaultBuildSettings
 
 ThisBuild / majorVersion := 0
-ThisBuild / scalaVersion := "2.13.12"
+ThisBuild / scalaVersion := "3.4.2"
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 
@@ -15,7 +15,7 @@ lazy val microservice = Project("uknw-auth-checker-api-stub", file("."))
     PlayKeys.devSettings := Seq("play.server.http.port" -> "9071")
   )
   .settings(resolvers += Resolver.jcenterRepo)
-  .settings(CodeCoverageSettings.settings *)
+  .settings(CodeCoverageSettings.settings*)
 
 Test / javaOptions += "-Dlogger.resource=logback-test.xml"
 
@@ -27,5 +27,5 @@ lazy val it = project
 
 addCommandAlias("fmtAll", ";scalafmtAll;it/scalafmtAll")
 addCommandAlias("fixAll", ";scalafixAll;it/scalafixAll")
-addCommandAlias("preCommit", ";clean;compile;scalafmtSbt;fmtAll;fixAll;coverage;test;it/test;scalastyle;coverageReport")
-addCommandAlias("runAllChecks", ";clean;compile;scalafmtCheckAll;coverage;test;it/test;scalastyle;coverageReport")
+addCommandAlias("preCommit", ";clean;compile;scalafmtSbt;fmtAll;fixAll;coverage;test;it/test;coverageReport")
+addCommandAlias("runAllChecks", ";clean;compile;scalafmtCheckAll;coverage;test;it/test;coverageReport")
