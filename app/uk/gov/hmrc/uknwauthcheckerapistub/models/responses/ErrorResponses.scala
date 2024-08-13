@@ -20,8 +20,10 @@ object ErrorResponses {
   val expectedRes500: String =
     """
       |{
-      |"code":"INTERNAL_SERVER_ERROR",
-      |"message":"Unexpected internal server error"
+      |  "errorDetail": {
+      |    "errorCode": 500,
+      |    "errorMessage": "An internal error has occurred"
+      |  }
       |}
     """.stripMargin
 }
