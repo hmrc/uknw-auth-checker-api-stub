@@ -416,6 +416,22 @@ Any `processingDate` body parameter in responses should be replaced with the `{{
     </pre>
     </td>
 </tr>
+
+<tr>
+<td>500 Internal Server Error</td>
+<td>Any request not authenticated and also not matched will respond with a 500 Internal Server Error</td>
+<td></td>
+<td>
+    <pre>
+{
+  "errorDetail": {
+    "errorCode": 500,
+    "errorMessage": "An internal error has occurred"
+  }
+}
+    </pre>
+    </td>
+</tr>
 </table>
 
 ### License
