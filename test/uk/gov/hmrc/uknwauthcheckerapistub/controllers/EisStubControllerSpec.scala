@@ -19,7 +19,6 @@ package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 import play.api.http.Status
 import play.api.test.Helpers
 import play.api.test.Helpers._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
 import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
 

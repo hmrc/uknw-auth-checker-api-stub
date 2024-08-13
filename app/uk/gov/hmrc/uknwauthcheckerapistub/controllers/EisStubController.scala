@@ -22,7 +22,7 @@ import play.api.mvc.{Action, AnyContent, ControllerComponents, Request}
 import uk.gov.hmrc.http.HttpVerbs.POST
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.HeaderValidator
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.validators.HeaderValidator
 
 @Singleton()
 class EisStubController @Inject() (stubDataService: StubDataService, cc: ControllerComponents) extends BackendController(cc) with HeaderValidator {

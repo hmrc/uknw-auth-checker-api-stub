@@ -17,32 +17,27 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.services
 
 import javax.inject.Inject
-
-import play.api.libs.json.{JsValue, Json}
-import play.api.mvc.Results._
+import play.api.mvc.Results.*
 import play.api.mvc.{AnyContent, Request, Result}
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorResponses._
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.JsonGetter
+import play.api.libs.json.{JsError, JsSuccess, JsValue, Json}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.{ApiCheckerRequest, EoriResults}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.validators.BodyValidator
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants
 
-class StubDataService @Inject() (implicit localDateService: LocalDateService) extends JsonGetter {
+class StubDataService @Inject() (implicit localDateService: LocalDateService) {
 
-  private val defaultCase: Result = InternalServerError(Json.parse(expectedRes500))
+  private val myValidator: BodyValidator = new BodyValidator
 
-  def stubbing(req: Request[AnyContent]): Result = {
-    val rawEori: Option[JsValue] = req.body.asJson
+  private val defaultCase: Result = InternalServerError(Json.parse(Constants.expectedRes500))
 
-    val responseMapping: Map[JsValue, Result] = Map(
-      getRequestJson(req200_single)     -> Ok(getResponseJson(req200_single)),
-      getRequestJson(req200_multiple)   -> Ok(getResponseJson(req200_multiple)),
-      getRequestJson(perfTest_1Eori)    -> Ok(getResponseJson(perfTest_1Eori)),
-      getRequestJson(perfTest_100Eori)  -> Ok(getResponseJson(perfTest_100Eori)),
-      getRequestJson(perfTest_500Eori)  -> Ok(getResponseJson(perfTest_500Eori)),
-      getRequestJson(perfTest_1000Eori) -> Ok(getResponseJson(perfTest_1000Eori)),
-      getRequestJson(perfTest_3000Eori) -> Ok(getResponseJson(perfTest_3000Eori))
-    )
+  def stubbing(req: Request[JsValue]): Result =
+    req.body.validate[ApiCheckerRequest] match {
+      case JsSuccess(checkerReq: ApiCheckerRequest, _) =>
+        myValidator.checkRequest(checkerReq) match {
+          case Right(value) => Ok(Json.toJson(value))
+          case Left(value)  => BadRequest(Json.toJson(value))
+        }
+      case _ => InternalServerError
+    }
 
-    rawEori.flatMap(responseMapping.get).getOrElse(defaultCase)
-  }
 }

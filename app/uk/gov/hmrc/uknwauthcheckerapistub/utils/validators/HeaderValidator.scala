@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.models.responses
+package uk.gov.hmrc.uknwauthcheckerapistub.utils.validators
 
-object ErrorResponses {
-  val expectedRes500: String =
-    """
-      |{
-      |  "errorDetail": {
-      |    "errorCode": 500,
-      |    "errorMessage": "An internal error has occurred"
-      |  }
-      |}
-    """.stripMargin
+import play.api.mvc.{AnyContent, Request}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants
+
+trait HeaderValidator {
+
+  private def validateBearerToken(token: Seq[String]): Boolean =
+    token.contains(Constants.bearerToken)
+
+  def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
+    val valid = request.headers.headers.filter(_._1.toLowerCase.contains("authorization"))
+
+    if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) { true }
+    else { false }
+  }
+
 }
