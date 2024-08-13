@@ -17,25 +17,13 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.models.responses
 
 object ErrorResponses {
-  val expectedRes400_singleEori: String =
-    """{"code":"BAD_REQUEST","message":"Bad request","errors":[{"code":"INVALID_FORMAT","message":"ABCD000000000200 is not a supported EORI number","path":"eoris"}]}"""
-  val expectedRes400_multipleEori: String =
-    """{"code":"BAD_REQUEST","message":"Bad request","errors":[{"code":"INVALID_FORMAT","message":"ABCD000000000200 is not a supported EORI number","path":"eoris"},{"code":"INVALID_FORMAT","message":"EFGH000000000200 is not a supported EORI number","path":"eoris"}]}"""
-  val expectedRes400_missingEori: String =
-    """{"code":"BAD_REQUEST","message":"Bad request","errors":[{"code":"INVALID_FORMAT","message":"eoris field missing from JSON","path":"eoris"}]}"""
-  val expectedRes400_wrongNumberOfEoris: String =
-    """{"code":"BAD_REQUEST","message":"Bad request","errors":[{"code":"INVALID_FORMAT","message":"The request payload must contain between 1 and 3000 EORI entries","path":"eoris"}]}"""
-
-  val expectedRes401_invalid:     String = """{"code":"UNAUTHORIZED","message":"Invalid bearer token"}"""
-  val expectedRes401_notSupplied: String = """{"code":"UNAUTHORIZED","message":"Bearer token not supplied"}"""
-
-  val expectedRes401_unauthorized: String =
-    """{"code":"UNAUTHORIZED","message":"The bearer token is invalid, missing, or expired"}"""
-  val expectedRes403_forbidden: String =
-    """{"code":"FORBIDDEN","message":"You are not allowed to access this resource"}"""
-  val expectedRes405_notAllowed: String = """{"code":"METHOD_NOT_ALLOWED","message":"This method is not supported"}"""
-  val expectedRes406: String =
-    """{"code":"NOT_ACCEPTABLE","message":"Cannot produce an acceptable response. The Accept or Content-Type header is missing or invalid"}"""
-  val expectedRes500: String = """{"code":"INTERNAL_SERVER_ERROR","message":"Unexpected internal server error"}"""
-
+  val expectedRes500: String =
+    """
+      |{
+      |  "errorDetail": {
+      |    "errorCode": 500,
+      |    "errorMessage": "An internal error has occurred"
+      |  }
+      |}
+    """.stripMargin
 }

@@ -17,21 +17,16 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import play.api.http.Status
-import play.api.libs.json.Json
 import play.api.test.Helpers
 import play.api.test.Helpers._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests400._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorResponses.expectedRes400_singleEori
 import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
 
 class EisStubControllerSpec extends BaseSpec {
 
-  private val fakeRequest_single       = fakePostReq.withJsonBody(getRequestJson(req200_single))
-  private val fakeRequest_multiple     = fakePostReq.withJsonBody(getRequestJson(req200_multiple))
-  private val fakeBadRequest_wrongEori = fakePostReq.withJsonBody(getRequestJson(req400_singleEori))
-  private val fakeForbidden_dummy      = fakePostReq.withJsonBody(getRequestJson(req403_single))
+  private val fakeRequest_single   = fakePostReq.withJsonBody(getRequestJson(req200_single))
+  private val fakeRequest_multiple = fakePostReq.withJsonBody(getRequestJson(req200_multiple))
 
   // Performance testing
   private val fakePerfRequest1Eori    = fakePostReq.withJsonBody(getRequestJson(perfTest_1Eori))
@@ -71,12 +66,6 @@ class EisStubControllerSpec extends BaseSpec {
       status(result) shouldBe Status.FORBIDDEN
     }
 
-    "return 400 on a wrong eori" in {
-      val result = controller.authorisations()(fakeBadRequest_wrongEori)
-      status(result)        shouldBe Status.BAD_REQUEST
-      contentAsJson(result) shouldBe Json.parse(expectedRes400_singleEori)
-    }
-
     "return 500 on a body-less POST Request" in {
       val result = controller.authorisations()(fakeNoBodyPostReq)
       status(result) shouldBe Status.INTERNAL_SERVER_ERROR
@@ -88,13 +77,6 @@ class EisStubControllerSpec extends BaseSpec {
     "return 405 on a get Request" in {
       val result = controller.authorisations()(fakeGetRequest)
       status(result) shouldBe Status.METHOD_NOT_ALLOWED
-    }
-  }
-
-  "Dummy post request" should {
-    "return 403 on a dummy POST Request" in {
-      val result = controller.authorisations()(fakeForbidden_dummy)
-      status(result) shouldBe Status.FORBIDDEN
     }
   }
 
@@ -128,5 +110,4 @@ class EisStubControllerSpec extends BaseSpec {
     status(result)        shouldBe Status.OK
     contentAsJson(result) shouldBe getResponseJson(perfTest_3000Eori)
   }
-
 }

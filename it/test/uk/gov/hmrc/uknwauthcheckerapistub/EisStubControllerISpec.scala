@@ -19,7 +19,6 @@ package uk.gov.hmrc.uknwauthcheckerapistub
 import play.api.http.Status
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests400._
 
 class EisStubControllerISpec extends BaseISpec {
 
@@ -96,22 +95,6 @@ class EisStubControllerISpec extends BaseISpec {
       ).status mustBe Status.FORBIDDEN
     }
 
-    "return 400 on multiple Eoris with multiple errors" in {
-      postRequestWithHeader(
-        authorisationUrl,
-        getRequestJson(req400_multipleEori),
-        validHeaders
-      ).status mustBe Status.BAD_REQUEST
-    }
-
-    "return 400 on wrong Eori" in {
-      postRequestWithHeader(
-        authorisationUrl,
-        getRequestJson(req400_singleEori),
-        validHeaders
-      ).status mustBe Status.BAD_REQUEST
-    }
-
     "return 500 on invalid Body" in {
       postRequestWithHeader(
         authorisationUrl,
@@ -125,15 +108,4 @@ class EisStubControllerISpec extends BaseISpec {
       getRequestWithHeader(authorisationUrl, validHeaders).status mustBe Status.METHOD_NOT_ALLOWED
     }
   }
-
-  "Dummy post request" should {
-    "return 403 on a dummy POST Request" in {
-      postRequestWithHeader(
-        authorisationUrl,
-        getRequestJson(req403_single),
-        validHeaders
-      ).status mustBe Status.FORBIDDEN
-    }
-  }
-
 }
