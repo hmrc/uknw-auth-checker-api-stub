@@ -17,24 +17,37 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import java.time.LocalDate
-
 import org.mockito.Mockito.when
+import org.scalatest.BeforeAndAfterAll
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import org.scalatestplus.mockito.MockitoSugar.mock
-
+import play.api.libs.json.JsValue
 import play.api.mvc.AnyContentAsEmpty
-import play.api.test.FakeRequest
+import play.api.test.{DefaultAwaitTimeout, FakeHeaders, FakeRequest}
 import play.api.test.Helpers.{GET, POST}
 import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
+import org.scalatestplus.mockito.MockitoSugar.mock
+import org.scalatestplus.play.guice.GuiceOneAppPerSuite
+import play.api.http.HeaderNames
 
-class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
+import scala.reflect.ClassTag
+
+class BaseSpec
+    extends AnyWordSpec
+    with Matchers
+    with TestDataUtils
+    with GuiceOneAppPerSuite
+    with HeaderNames {
 
   protected implicit val mockLocalDateService: LocalDateService = mock[LocalDateService]
+  protected def injected[T](implicit evidence: ClassTag[T]): T = app.injector.instanceOf[T]
 
   when(mockLocalDateService.now()).thenReturn(LocalDate.now)
 
   val endPointUrl = "/cau/validatecustomsauth/v1"
+
+  def createRequest(headers: Seq[(String, String)] = validHeaders, body: JsValue): FakeRequest[JsValue] =
+    FakeRequest(POST, endPointUrl, FakeHeaders(headers), body)
 
   val fakePostReq: FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(POST, endPointUrl).withHeaders(validHeaders*)

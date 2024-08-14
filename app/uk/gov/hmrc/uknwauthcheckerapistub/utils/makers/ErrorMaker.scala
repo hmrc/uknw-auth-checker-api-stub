@@ -16,15 +16,14 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.utils.makers
 
-import java.time.ZonedDateTime
-
+import java.time.{LocalDate, ZonedDateTime}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorDetails
-import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
+import uk.gov.hmrc.uknwauthcheckerapistub.services.{LocalDateService, ZonedDateTimeService}
 
 class ErrorMaker {
-  private val localDateService: LocalDateService = new LocalDateService
+  private val zonedDateService: ZonedDateTimeService = new ZonedDateTimeService
   
-  private def makeMessage(date: Either[String, ZonedDateTime], eoris: Either[Seq[String], Seq[String]]): String = {
+  private def makeMessage(date: Either[String, LocalDate], eoris: Either[Seq[String], Seq[String]]): String = {
 
     val badEori: String = eoris match {
       case Left(value) => value.foldRight("Invalid format of EORI(s):")((anEori, acc) => acc ++ anEori ++ ",")
@@ -40,7 +39,7 @@ class ErrorMaker {
     badEori.dropRight(1) + badDate
   }
 
-  def makeError(date: Either[String, ZonedDateTime], eoris: Either[Seq[String], Seq[String]]): ErrorDetails = {
-    ErrorDetails(localDateService.now().toString, 400, makeMessage(date, eoris))
+  def makeError(date: Either[String, LocalDate], eoris: Either[Seq[String], Seq[String]]): ErrorDetails = {
+    ErrorDetails(zonedDateService.now().toString, 400, makeMessage(date, eoris))
   }
 }

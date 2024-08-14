@@ -16,33 +16,32 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.utils.validators
 
-import java.time.ZonedDateTime
+import java.time.{LocalDate, ZonedDateTime}
 import java.time.format.DateTimeFormatter
 import scala.util.matching.Regex
-
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.ApiCheckerRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{ErrorResponse, StubResponse}
+import uk.gov.hmrc.uknwauthcheckerapistub.services.ZonedDateTimeService
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.makers.{ErrorMaker, OkMaker}
 
 class BodyValidator {
   private val myErrorMaker: ErrorMaker = new ErrorMaker
   private val myOkMaker:    OkMaker    = new OkMaker
+  private val zonedDateService: ZonedDateTimeService = new ZonedDateTimeService
 
   def checkRequest(body: ApiCheckerRequest): Either[ErrorResponse, StubResponse] = {
     val isDateValid   = checkDate(body.date)
     val areEorisRight = checkEori(body.eoris)
 
     (isDateValid, areEorisRight) match
-      case (Right(date), Right(eoris)) => Right(StubResponse(date, results = myOkMaker.makeResults(eoris)))
+      case (Right(date), Right(eoris)) => Right(StubResponse(zonedDateService.now(), results = myOkMaker.makeResults(eoris)))
       case _                           => Left(ErrorResponse(myErrorMaker.makeError(isDateValid, areEorisRight)))
 
   }
 
-  def checkDate(stringDate: String): Either[String, ZonedDateTime] = {
-    val formatter = DateTimeFormatter.ISO_DATE_TIME
-
+  def checkDate(stringDate: String): Either[String, LocalDate] = {
     try
-      Right(ZonedDateTime.parse(stringDate, formatter))
+      Right(LocalDate.parse(stringDate))
     catch {
       case _: Throwable => Left(s"Invalid supplied date(Date format should be - YYYY-MM-DD) : $stringDate")
     }
@@ -50,12 +49,12 @@ class BodyValidator {
 
   def checkEori(eorisSeq: Seq[String]): Either[Seq[String], Seq[String]] = {
 
-    val eoriPattern: Regex               = "^(GB|XI)[0-9]{12}|(GB|XI)[0-9]{15}$".r
-    val badEoris:    Option[Seq[String]] = Some(eorisSeq.distinct.filterNot(anEori => eoriPattern.findFirstIn(anEori).isDefined))
+    val eoriPattern: Regex       = "^(GB|XI)[0-9]{12}|(GB|XI)[0-9]{15}$".r
+    val badEoris:    Seq[String] = eorisSeq.distinct.filterNot(anEori => eoriPattern.findFirstIn(anEori).isDefined)
 
-    badEoris match
-      case Some(x) => Left(x)
-      case _       => Right(eorisSeq.distinct)
+    badEoris.isEmpty match
+      case true => Right(eorisSeq.distinct)
+      case _    => Left(badEoris)
 
   }
 
