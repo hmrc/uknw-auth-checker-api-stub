@@ -16,13 +16,14 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.utils.makers
 
-import java.time.{LocalDate, ZonedDateTime}
+import java.time.LocalDate
+
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorDetails
-import uk.gov.hmrc.uknwauthcheckerapistub.services.{LocalDateService, ZonedDateTimeService}
+import uk.gov.hmrc.uknwauthcheckerapistub.services.ZonedDateTimeService
 
 class ErrorMaker {
   private val zonedDateService: ZonedDateTimeService = new ZonedDateTimeService
-  
+
   private def makeMessage(date: Either[String, LocalDate], eoris: Either[Seq[String], Seq[String]]): String = {
 
     val badEori: String = eoris match {
@@ -39,7 +40,6 @@ class ErrorMaker {
     badEori.dropRight(1) + badDate
   }
 
-  def makeError(date: Either[String, LocalDate], eoris: Either[Seq[String], Seq[String]]): ErrorDetails = {
+  def makeError(date: Either[String, LocalDate], eoris: Either[Seq[String], Seq[String]]): ErrorDetails =
     ErrorDetails(zonedDateService.now().toString, 400, makeMessage(date, eoris))
-  }
 }

@@ -27,9 +27,8 @@ object Constants {
       |    "errorMessage": "An internal error has occurred"
       |  }
       |}""".stripMargin
-  
-  val perfTest_1Eori: Seq[String] = Seq("GB000000000200")
-  val perfTest_3000Eori: Seq[String] = Seq(
+
+  val validEoris_3000: Seq[String] = Seq(
     "GB837826880909874",
     "XI968840631629",
     "XI436105828614",

@@ -17,16 +17,16 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.utils.validators
 
 import java.time.{LocalDate, ZonedDateTime}
-import java.time.format.DateTimeFormatter
 import scala.util.matching.Regex
+
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.ApiCheckerRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{ErrorResponse, StubResponse}
 import uk.gov.hmrc.uknwauthcheckerapistub.services.ZonedDateTimeService
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.makers.{ErrorMaker, OkMaker}
 
 class BodyValidator {
-  private val myErrorMaker: ErrorMaker = new ErrorMaker
-  private val myOkMaker:    OkMaker    = new OkMaker
+  private val myErrorMaker:     ErrorMaker           = new ErrorMaker
+  private val myOkMaker:        OkMaker              = new OkMaker
   private val zonedDateService: ZonedDateTimeService = new ZonedDateTimeService
 
   def checkRequest(body: ApiCheckerRequest): Either[ErrorResponse, StubResponse] = {
@@ -39,13 +39,12 @@ class BodyValidator {
 
   }
 
-  def checkDate(stringDate: String): Either[String, LocalDate] = {
+  def checkDate(stringDate: String): Either[String, LocalDate] =
     try
       Right(LocalDate.parse(stringDate))
     catch {
       case _: Throwable => Left(s"Invalid supplied date(Date format should be - YYYY-MM-DD) : $stringDate")
     }
-  }
 
   def checkEori(eorisSeq: Seq[String]): Either[Seq[String], Seq[String]] = {
 

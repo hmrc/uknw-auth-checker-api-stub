@@ -16,18 +16,14 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.utils.makers
 
-import java.time.{LocalDate, LocalTime, ZoneId, ZonedDateTime}
-
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.EoriResults
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants
 
 class OkMaker {
-  private val zonedNow: ZonedDateTime = ZonedDateTime.of(LocalDate.now.atTime(LocalTime.MIDNIGHT), ZoneId.of("UTC"))
 
-  def makeResults(eoris: Seq[String]): Seq[EoriResults] = {
-    eoris.map{anEori =>
-      EoriResults(anEori, Constants.perfTest_3000Eori.contains(anEori), 1)
+  def makeResults(eoris: Seq[String]): Seq[EoriResults] =
+    eoris.map { anEori =>
+      EoriResults(anEori, Constants.validEoris_3000.contains(anEori), 1)
     }
-  }
 
 }
