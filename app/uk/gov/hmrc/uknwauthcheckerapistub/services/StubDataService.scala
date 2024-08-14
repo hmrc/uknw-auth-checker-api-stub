@@ -16,19 +16,15 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.services
 
-import javax.inject.Inject
-import play.api.mvc.Results.*
-import play.api.mvc.{AnyContent, Request, Result}
-import play.api.libs.json.{JsError, JsSuccess, JsValue, Json}
-import uk.gov.hmrc.uknwauthcheckerapistub.models.{ApiCheckerRequest, EoriResults}
+import play.api.libs.json.{JsSuccess, JsValue, Json}
+import play.api.mvc.Results._
+import play.api.mvc.{Request, Result}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.ApiCheckerRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.validators.BodyValidator
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants
 
-class StubDataService @Inject() (implicit localDateService: LocalDateService) {
+class StubDataService {
 
   private val myValidator: BodyValidator = new BodyValidator
-
-  private val defaultCase: Result = InternalServerError(Json.parse(Constants.expectedRes500))
 
   def stubbing(req: Request[JsValue]): Result =
     req.body.validate[ApiCheckerRequest] match {

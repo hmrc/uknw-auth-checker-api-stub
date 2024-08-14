@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.models.responses
+package uk.gov.hmrc.uknwauthcheckerapistub.models
 
-import play.api.libs.json.{Json, OFormat}
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
-case class ErrorDetails(timestamp: String, errorCode: Int, errorMessage: String, sourcePDSFaultDetails : String = "/pds/cnit/validatecustomsauth/v1")
-object ErrorDetails {
-  implicit val format: OFormat[ErrorDetails] = Json.format[ErrorDetails]
-}
+import play.api.libs.json.Writes
+import play.api.libs.json.Writes.temporalWrites
 
-case class ErrorResponse(errorDetails: ErrorDetails)
-object ErrorResponse {
-  implicit val format: OFormat[ErrorResponse] = Json.format[ErrorResponse]
+object Iso8601DateTimeWrites {
+  private val iso8601DateTimeFormat:    String                = "yyyy-MM-dd'T'HH:mm:ss.SS'Z'"
+  private val iso8601DateTimeFormatter: DateTimeFormatter     = DateTimeFormatter.ofPattern(iso8601DateTimeFormat)
+  implicit val iso8601DateTimeWrites:   Writes[ZonedDateTime] = temporalWrites[ZonedDateTime, DateTimeFormatter](iso8601DateTimeFormatter)
 }

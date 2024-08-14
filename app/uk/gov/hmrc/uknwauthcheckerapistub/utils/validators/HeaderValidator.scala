@@ -16,7 +16,8 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.utils.validators
 
-import play.api.mvc.{AnyContent, Request}
+import play.api.libs.json.JsValue
+import play.api.mvc.Request
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants
 
 trait HeaderValidator {
@@ -24,7 +25,7 @@ trait HeaderValidator {
   private def validateBearerToken(token: Seq[String]): Boolean =
     token.contains(Constants.bearerToken)
 
-  def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
+  def hasValidBearerToken(request: Request[JsValue]): Boolean = {
     val valid = request.headers.headers.filter(_._1.toLowerCase.contains("authorization"))
 
     if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) { true }

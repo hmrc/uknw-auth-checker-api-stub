@@ -18,7 +18,7 @@ package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import play.api.libs.json.{JsValue, Json}
 
-trait TestDataUtils extends JsonGetter {
+trait TestDataUtils {
 
   val validHeaders:    Seq[(String, String)] = Seq("authorization" -> "Bearer PFZBTElEX1RPS0VOPg==", "Content-Type" -> "application/json")
   val invalidHeaders1: Seq[(String, String)] = Seq("Content-Type" -> "application/json")
