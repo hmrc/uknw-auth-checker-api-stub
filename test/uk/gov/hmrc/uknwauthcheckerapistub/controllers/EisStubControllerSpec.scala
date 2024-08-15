@@ -22,7 +22,7 @@ import play.api.libs.json.Json
 import play.api.test.Helpers
 import play.api.test.Helpers.*
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{ErrorDetails, EisAuthorisationResponseError, EisAuthorisationsResponse}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
 
 class EisStubControllerSpec extends BaseSpec {
 

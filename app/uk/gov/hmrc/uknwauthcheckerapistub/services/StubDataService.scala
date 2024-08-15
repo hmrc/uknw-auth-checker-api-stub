@@ -20,7 +20,7 @@ import play.api.libs.json.{JsSuccess, JsValue, Json}
 import play.api.mvc.Results.*
 import play.api.mvc.{Request, Result}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{ErrorDetails, EisAuthorisationResponseError, EisAuthorisationsResponse}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.makers.OkMaker
 
 class StubDataService {
