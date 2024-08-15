@@ -16,10 +16,15 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.models.responses
 
-import play.api.libs.json.{Json, OFormat}
+import play.api.libs.json.{Json, OFormat, Writes}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Iso8601DateTimeWrites
 
-case class ErrorDetails(timestamp: String, errorCode: Int, errorMessage: String, sourcePDSFaultDetails : String = "/pds/cnit/validatecustomsauth/v1")
+import java.time.ZonedDateTime
+
+case class ErrorDetails(timestamp: String, errorCode: Int, errorMessage: String, sourcePDSFaultDetails: String = "/pds/cnit/validatecustomsauth/v1")
 object ErrorDetails {
+  implicit val zonedDateTimeWrites: Writes[ZonedDateTime] = Iso8601DateTimeWrites.iso8601DateTimeWrites
+
   implicit val format: OFormat[ErrorDetails] = Json.format[ErrorDetails]
 }
 
