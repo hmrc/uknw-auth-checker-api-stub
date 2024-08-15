@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.utils.makers
+package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.EoriResults
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants
 
-class OkMaker {
+class EoriResultBuilder {
 
   def makeResults(eoris: Seq[String]): Seq[EoriResults] =
     eoris.map { anEori =>

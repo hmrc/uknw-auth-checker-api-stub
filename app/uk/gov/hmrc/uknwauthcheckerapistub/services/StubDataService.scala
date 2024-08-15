@@ -21,17 +21,16 @@ import play.api.mvc.Results.*
 import play.api.mvc.{Request, Result}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.makers.OkMaker
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
 
-class StubDataService {
+import javax.inject.Inject
 
-  private val myOkMaker:        OkMaker              = new OkMaker
-  private val zonedDateService: ZonedDateTimeService = new ZonedDateTimeService
+class StubDataService @Inject() (myEoriResultBuilder: EoriResultBuilder, zonedDateService: ZonedDateTimeService) {
 
   def stubbing(req: Request[JsValue]): Result =
     req.body.validate[EisAuthorisationRequest] match {
       case JsSuccess(checkerReq: EisAuthorisationRequest, _) =>
-        val res = EisAuthorisationsResponse(zonedDateService.now(), results = myOkMaker.makeResults(checkerReq.eoris))
+        val res = EisAuthorisationsResponse(zonedDateService.now(), results = myEoriResultBuilder.makeResults(checkerReq.eoris))
         Ok(Json.toJson(res))
 
       case _ =>
