@@ -16,28 +16,19 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
-import java.time.LocalDate
 import scala.reflect.ClassTag
-
-import org.mockito.Mockito.when
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import org.scalatestplus.mockito.MockitoSugar.mock
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-
 import play.api.http.HeaderNames
 import play.api.libs.json.JsValue
 import play.api.mvc.AnyContentAsEmpty
 import play.api.test.Helpers.POST
 import play.api.test.{FakeHeaders, FakeRequest}
-import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
 
 class BaseSpec extends AnyWordSpec with Matchers with TestData with GuiceOneAppPerSuite with HeaderNames {
 
-  protected implicit val mockLocalDateService: LocalDateService = mock[LocalDateService]
   protected def injected[T](implicit evidence: ClassTag[T]): T = app.injector.instanceOf[T]
-
-  when(mockLocalDateService.now()).thenReturn(LocalDate.now)
 
   val endPointUrl = "/cau/validatecustomsauth/v1"
 

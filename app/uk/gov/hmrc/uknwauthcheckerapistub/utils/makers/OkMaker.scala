@@ -23,7 +23,7 @@ class OkMaker {
 
   def makeResults(eoris: Seq[String]): Seq[EoriResults] =
     eoris.map { anEori =>
-      EoriResults(anEori, Constants.validEoris_3000.contains(anEori), 1)
+      EoriResults(anEori, Constants.authorisedEoris.contains(anEori), 1)
     }
 
 }

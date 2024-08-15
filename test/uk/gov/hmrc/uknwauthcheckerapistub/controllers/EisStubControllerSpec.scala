@@ -17,13 +17,12 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import java.time.{LocalDate, LocalTime, ZoneId, ZonedDateTime}
-
 import play.api.http.Status
 import play.api.libs.json.Json
 import play.api.test.Helpers
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.ApiCheckerRequest
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.StubResponse
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{ErrorDetails, ErrorResponse, StubResponse}
 
 class EisStubControllerSpec extends BaseSpec {
 
@@ -67,43 +66,13 @@ class EisStubControllerSpec extends BaseSpec {
     }
 
     "return 500 on a body-less POST Request" in {
-      val request = createRequest(body = Json.toJson("{}"))
-      val result  = controller.authorisations()(request)
-      status(result) shouldBe Status.INTERNAL_SERVER_ERROR
+      val request  = createRequest(body = Json.toJson("{}"))
+      val result   = controller.authorisations()(request)
+      val expected = ErrorResponse(ErrorDetails(zonedNow.toString, 500, "An internal error has occurred"))
+      status(result)        shouldBe Status.INTERNAL_SERVER_ERROR
+      contentAsJson(result) shouldBe Json.toJson(expected)
     }
 
   }
-
-  "GET /cau/validatecustomsauth/v1" should {
-    "return 405 on a get Request" in {
-      val request = createRequest(method = "GET", body = Json.toJson(ApiCheckerRequest(localNow.toString, eoris = eoriRq_2_valid)))
-      val result  = controller.authorisations()(request)
-      status(result) shouldBe Status.METHOD_NOT_ALLOWED
-    }
-  }
-//
-//  "return 200 on 100 Eori" in {
-//    val result = controller.authorisations()(fakePerfRequest100Eori)
-//    status(result)        shouldBe Status.OK
-//    contentAsJson(result) shouldBe getResponseJson(perfTest_100Eori)
-//  }
-//
-//  "return 200 on 500 Eori" in {
-//    val result = controller.authorisations()(fakePerfRequest500Eori)
-//    status(result)        shouldBe Status.OK
-//    contentAsJson(result) shouldBe getResponseJson(perfTest_500Eori)
-//  }
-//
-//  "return 200 on 1000 Eori" in {
-//    val result = controller.authorisations()(fakePerfRequest1000Eori)
-//    status(result)        shouldBe Status.OK
-//    contentAsJson(result) shouldBe getResponseJson(perfTest_1000Eori)
-//  }
-//
-//  "return 200 on 3000 Eori" in {
-//    val result = controller.authorisations()(fakePerfRequest3000Eori)
-//    status(result)        shouldBe Status.OK
-//    contentAsJson(result) shouldBe getResponseJson(perfTest_3000Eori)
-//}
 
 }

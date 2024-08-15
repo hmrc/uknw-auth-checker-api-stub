@@ -19,16 +19,8 @@ package uk.gov.hmrc.uknwauthcheckerapistub.utils
 object Constants {
   val path        = "/cau/validatecustomsauth/v1"
   val bearerToken = "Bearer PFZBTElEX1RPS0VOPg=="
-  val expectedRes500: String =
-    """
-      |{
-      |  "errorDetail": {
-      |    "errorCode": 500,
-      |    "errorMessage": "An internal error has occurred"
-      |  }
-      |}""".stripMargin
 
-  val validEoris_3000: Seq[String] = Seq(
+  val authorisedEoris: Set[String] = Set(
     "GB837826880909874",
     "XI968840631629",
     "XI436105828614",

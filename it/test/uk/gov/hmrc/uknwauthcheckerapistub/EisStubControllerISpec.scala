@@ -34,47 +34,6 @@ class EisStubControllerISpec extends BaseISpec {
       ).status mustBe Status.OK
     }
 
-    // Performance testing
-//    "return 200 on single Eori" in {
-//      postRequestWithHeader(
-//        authorisationUrl,
-//        getRequestJson(perfTest_1Eori),
-//        validHeaders
-//      ).status mustBe Status.OK
-//    }
-//
-//    "return 200 on 100 Eori" in {
-//      postRequestWithHeader(
-//        authorisationUrl,
-//        getRequestJson(perfTest_100Eori),
-//        validHeaders
-//      ).status mustBe Status.OK
-//    }
-//
-//    "return 200 on 500 Eori" in {
-//      postRequestWithHeader(
-//        authorisationUrl,
-//        getRequestJson(perfTest_500Eori),
-//        validHeaders
-//      ).status mustBe Status.OK
-//    }
-//
-//    "return 200 on 1000 Eori" in {
-//      postRequestWithHeader(
-//        authorisationUrl,
-//        getRequestJson(perfTest_1000Eori),
-//        validHeaders
-//      ).status mustBe Status.OK
-//    }
-//
-//    "return 200 on 3000 Eori" in {
-//      postRequestWithHeader(
-//        authorisationUrl,
-//        getRequestJson(perfTest_3000Eori),
-//        validHeaders
-//      ).status mustBe Status.OK
-//    }
-
     "return 403 on a missing authorization in the Header" in {
       postRequestWithHeader(
         authorisationUrl,
@@ -96,12 +55,6 @@ class EisStubControllerISpec extends BaseISpec {
         authorisationUrl,
         Json.toJson(ApiCheckerRequest(localNow.toString, eoris = eoriRq_1_valid))
       ).status mustBe Status.FORBIDDEN
-    }
-
-    "GET /cau/validatecustomsauth/v1" should {
-      "return 405 on a GET request" in {
-        getRequestWithHeader(authorisationUrl, validHeaders).status mustBe Status.METHOD_NOT_ALLOWED
-      }
     }
 
     "return 500 on invalid Body" in {

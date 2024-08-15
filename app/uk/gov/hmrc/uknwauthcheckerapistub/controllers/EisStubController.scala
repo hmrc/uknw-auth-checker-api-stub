@@ -21,7 +21,6 @@ import scala.concurrent.{ExecutionContext, Future}
 
 import play.api.libs.json.JsValue
 import play.api.mvc.{Action, ControllerComponents, Request}
-import uk.gov.hmrc.http.HttpVerbs.POST
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.validators.HeaderValidator
@@ -33,13 +32,7 @@ class EisStubController @Inject() (stubDataService: StubDataService, cc: Control
 
   def authorisations: Action[JsValue] = Action.async(parse.json) { implicit request: Request[JsValue] =>
     val isValidToken: Boolean = hasValidBearerToken(request)
-    val isPost:       Boolean = request.method == POST
 
-    (isValidToken, isPost) match {
-      case (true, true) => Future(stubDataService.stubbing(request))
-      case (false, _)   => Future(Forbidden)
-      case (_, false)   => Future(MethodNotAllowed)
-      case _            => Future(InternalServerError)
-    }
+    if isValidToken then Future(stubDataService.stubbing(request)) else Future(Forbidden)
   }
 }

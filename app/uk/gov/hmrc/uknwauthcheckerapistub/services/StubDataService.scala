@@ -17,23 +17,25 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.services
 
 import play.api.libs.json.{JsSuccess, JsValue, Json}
-import play.api.mvc.Results._
+import play.api.mvc.Results.*
 import play.api.mvc.{Request, Result}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.ApiCheckerRequest
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.validators.BodyValidator
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{ErrorDetails, ErrorResponse, StubResponse}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.makers.OkMaker
 
 class StubDataService {
 
-  private val myValidator: BodyValidator = new BodyValidator
+  private val myOkMaker:        OkMaker              = new OkMaker
+  private val zonedDateService: ZonedDateTimeService = new ZonedDateTimeService
 
   def stubbing(req: Request[JsValue]): Result =
     req.body.validate[ApiCheckerRequest] match {
       case JsSuccess(checkerReq: ApiCheckerRequest, _) =>
-        myValidator.checkRequest(checkerReq) match {
-          case Right(value) => Ok(Json.toJson(value))
-          case Left(value)  => BadRequest(Json.toJson(value))
-        }
-      case _ => InternalServerError
-    }
+        val res = StubResponse(zonedDateService.now(), results = myOkMaker.makeResults(checkerReq.eoris))
+        Ok(Json.toJson(res))
 
+      case _ =>
+        val res = ErrorResponse(ErrorDetails(zonedDateService.now().toString, 500, "An internal error has occurred"))
+        InternalServerError(Json.toJson(res))
+    }
 }
