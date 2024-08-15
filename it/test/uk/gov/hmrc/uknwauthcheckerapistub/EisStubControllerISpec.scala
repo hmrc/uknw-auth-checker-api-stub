@@ -20,7 +20,7 @@ import java.time.LocalDate
 
 import play.api.http.Status
 import play.api.libs.json.Json
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.ApiCheckerRequest
+import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
 
 class EisStubControllerISpec extends BaseISpec {
   private val localNow: LocalDate = LocalDate.now()
@@ -29,7 +29,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 200 on a single Eori" in {
       postRequestWithHeader(
         authorisationUrl,
-        Json.toJson(ApiCheckerRequest(localNow.toString, eoris = eoriRq_1_valid)),
+        Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_1_valid)),
         validHeaders
       ).status mustBe Status.OK
     }
@@ -37,7 +37,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a missing authorization in the Header" in {
       postRequestWithHeader(
         authorisationUrl,
-        Json.toJson(ApiCheckerRequest(localNow.toString, eoris = eoriRq_1_valid)),
+        Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_1_valid)),
         invalidHeaders1
       ).status mustBe Status.FORBIDDEN
     }
@@ -45,7 +45,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a invalid authorization in the Header" in {
       postRequestWithHeader(
         authorisationUrl,
-        Json.toJson(ApiCheckerRequest(localNow.toString, eoris = eoriRq_1_valid)),
+        Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_1_valid)),
         invalidHeaders2
       ).status mustBe Status.FORBIDDEN
     }
@@ -53,7 +53,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a missing Header" in {
       postRequestWithoutHeader(
         authorisationUrl,
-        Json.toJson(ApiCheckerRequest(localNow.toString, eoris = eoriRq_1_valid))
+        Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_1_valid))
       ).status mustBe Status.FORBIDDEN
     }
 
