@@ -22,7 +22,10 @@ class EoriResultBuilder {
 
   def makeResults(eoris: Seq[String]): Seq[EoriResults] =
     eoris.map { anEori =>
-      EoriResults(anEori, Constants.authorisedEoris.contains(anEori), 1)
+      val isValidEori: Boolean = Constants.authorisedEoris.contains(anEori)
+      val code:        Int     = if isValidEori then 0 else 1
+
+      EoriResults(anEori, isValidEori, code)
     }
 
 }
