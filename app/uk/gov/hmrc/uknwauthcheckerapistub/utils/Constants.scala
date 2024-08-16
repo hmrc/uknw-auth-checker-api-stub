@@ -19,6 +19,7 @@ package uk.gov.hmrc.uknwauthcheckerapistub.utils
 object Constants {
   val path        = "/cau/validatecustomsauth/v1"
   val bearerToken = "Bearer PFZBTElEX1RPS0VOPg=="
+  val eoriPattern: String = "^(GB|XI)[0-9]{12}|(GB|XI)[0-9]{15}$"
 
   val authorisedEoris: Set[String] = Set(
     "GB837826880909874",
