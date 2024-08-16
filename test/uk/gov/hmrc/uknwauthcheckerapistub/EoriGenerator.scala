@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.utils
+package uk.gov.hmrc.uknwauthcheckerapistub
 
 import org.scalacheck.Gen
-import wolfendale.scalacheck.regexp.RegexpGen
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.authorisedEoris
+import wolfendale.scalacheck.regexp.RegexpGen
 
 trait EoriGenerator {
 
