@@ -21,45 +21,62 @@ import play.api.http.Status
 import play.api.libs.json.Json
 import play.api.test.Helpers
 import play.api.test.Helpers.*
+import uk.gov.hmrc.uknwauthcheckerapistub.EoriGenerator
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
 
-class EisStubControllerSpec extends BaseSpec {
+class EisStubControllerSpec extends BaseSpec with EoriGenerator {
 
-  private val zonedNow:   ZonedDateTime     = ZonedDateTime.of(LocalDate.now.atTime(LocalTime.MIDNIGHT), ZoneId.of("UTC"))
-  private val localNow:   LocalDate         = LocalDate.now()
-  private val controller: EisStubController = injected[EisStubController]
+  private val zonedNow:      ZonedDateTime     = ZonedDateTime.of(LocalDate.now.atTime(LocalTime.MIDNIGHT), ZoneId.of("UTC"))
+  private val localNow:      LocalDate         = LocalDate.now()
+  private val controller:    EisStubController = injected[EisStubController]
+  private val myEoriBuilder: EoriResultBuilder = new EoriResultBuilder
 
   "POST /cau/validatecustomsauth/v1" should {
     "return 200 on a single Eori" in {
-      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_1_valid)))
+      val eoris: Seq[String] = useEoriGenerator(1, Some(1))
+      val expectedEoris = myEoriBuilder.makeResults(eoris)
+
+      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationsResponse(zonedNow, results = eoriResult_1_valid)
+      val expected = EisAuthorisationsResponse(zonedNow, results = expectedEoris)
+
       status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe Json.toJson(expected)
     }
 
     "return 200 on a multiple Eoris" in {
-      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_2_valid)))
+      val eoris: Seq[String] = useEoriGenerator(2, Some(1))
+      val expectedEoris = myEoriBuilder.makeResults(eoris)
+
+      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationsResponse(zonedNow, results = eoriResult_2_valid)
+      val expected = EisAuthorisationsResponse(zonedNow, results = expectedEoris)
+
       status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe Json.toJson(expected)
     }
 
-    "return 403 on a missing authorization Header" in { // invalidHeaders1
-      val request = createRequest(headers = invalidHeaders1, body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_2_valid)))
+    "return 403 on a missing authorization Header" in {
+      val eoris: Seq[String] = useEoriGenerator(1, Some(1))
+
+      val request = createRequest(headers = invalidHeaders1, body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result  = controller.authorisations()(request)
       status(result) shouldBe Status.FORBIDDEN
     }
 
     "return 403 on a wrong Header" in {
+      val eoris: Seq[String] = useEoriGenerator(1, Some(1))
+
       val request = createRequest(headers = invalidHeaders2, body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_2_valid)))
       val result  = controller.authorisations()(request)
       status(result) shouldBe Status.FORBIDDEN
     }
 
     "return 403 on a missing Header" in {
+      val eoris: Seq[String] = useEoriGenerator(1, Some(1))
+
       val request = createRequest(headers = Nil, body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_2_valid)))
       val result  = controller.authorisations()(request)
       status(result) shouldBe Status.FORBIDDEN
