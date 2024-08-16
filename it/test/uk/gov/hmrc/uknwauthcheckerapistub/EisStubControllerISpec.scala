@@ -16,58 +16,21 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub
 
-import play.api.http.Status
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
+import java.time.LocalDate
 
-class EisStubControllerISpec extends BaseISpec {
+import play.api.http.Status
+import play.api.libs.json.Json
+import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
+
+class EisStubControllerISpec extends BaseISpec with EoriGenerator {
+  private val localNow: LocalDate = LocalDate.now()
+  val eoris: Seq[String] = useEoriGenerator(1, Some(1))
 
   "POST /cau/validatecustomsauth/v1" should {
     "return 200 on a single Eori" in {
       postRequestWithHeader(
         authorisationUrl,
-        getRequestJson(req200_single),
-        validHeaders
-      ).status mustBe Status.OK
-    }
-
-    // Performance testing
-    "return 200 on single Eori" in {
-      postRequestWithHeader(
-        authorisationUrl,
-        getRequestJson(perfTest_1Eori),
-        validHeaders
-      ).status mustBe Status.OK
-    }
-
-    "return 200 on 100 Eori" in {
-      postRequestWithHeader(
-        authorisationUrl,
-        getRequestJson(perfTest_100Eori),
-        validHeaders
-      ).status mustBe Status.OK
-    }
-
-    "return 200 on 500 Eori" in {
-      postRequestWithHeader(
-        authorisationUrl,
-        getRequestJson(perfTest_500Eori),
-        validHeaders
-      ).status mustBe Status.OK
-    }
-
-    "return 200 on 1000 Eori" in {
-      postRequestWithHeader(
-        authorisationUrl,
-        getRequestJson(perfTest_1000Eori),
-        validHeaders
-      ).status mustBe Status.OK
-    }
-
-    "return 200 on 3000 Eori" in {
-      postRequestWithHeader(
-        authorisationUrl,
-        getRequestJson(perfTest_3000Eori),
+        Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)),
         validHeaders
       ).status mustBe Status.OK
     }
@@ -75,7 +38,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a missing authorization in the Header" in {
       postRequestWithHeader(
         authorisationUrl,
-        getRequestJson(req200_single),
+        Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)),
         invalidHeaders1
       ).status mustBe Status.FORBIDDEN
     }
@@ -83,7 +46,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a invalid authorization in the Header" in {
       postRequestWithHeader(
         authorisationUrl,
-        getRequestJson(req200_single),
+        Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)),
         invalidHeaders2
       ).status mustBe Status.FORBIDDEN
     }
@@ -91,7 +54,7 @@ class EisStubControllerISpec extends BaseISpec {
     "return 403 on a missing Header" in {
       postRequestWithoutHeader(
         authorisationUrl,
-        getRequestJson(req200_single)
+        Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris))
       ).status mustBe Status.FORBIDDEN
     }
 
@@ -101,11 +64,6 @@ class EisStubControllerISpec extends BaseISpec {
         invalidBody,
         validHeaders
       ).status mustBe Status.INTERNAL_SERVER_ERROR
-    }
-  }
-  "GET /cau/validatecustomsauth/v1" should {
-    "return 405 on a GET request" in {
-      getRequestWithHeader(authorisationUrl, validHeaders).status mustBe Status.METHOD_NOT_ALLOWED
     }
   }
 }

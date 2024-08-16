@@ -17,25 +17,22 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import javax.inject.{Inject, Singleton}
+import scala.concurrent.{ExecutionContext, Future}
 
-import play.api.mvc.{Action, AnyContent, ControllerComponents, Request}
-import uk.gov.hmrc.http.HttpVerbs.POST
+import play.api.libs.json.JsValue
+import play.api.mvc.{Action, ControllerComponents, Request}
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 import uk.gov.hmrc.uknwauthcheckerapistub.services.StubDataService
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.HeaderValidator
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.validators.HeaderValidator
 
 @Singleton()
-class EisStubController @Inject() (stubDataService: StubDataService, cc: ControllerComponents) extends BackendController(cc) with HeaderValidator {
+class EisStubController @Inject() (stubDataService: StubDataService, cc: ControllerComponents)(implicit ec: ExecutionContext)
+    extends BackendController(cc)
+    with HeaderValidator {
 
-  def authorisations: Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+  def authorisations: Action[JsValue] = Action.async(parse.json) { implicit request: Request[JsValue] =>
     val isValidToken: Boolean = hasValidBearerToken(request)
-    val isPost:       Boolean = request.method == POST
 
-    (isValidToken, isPost) match {
-      case (true, true) => stubDataService.stubbing(request)
-      case (false, _)   => Forbidden
-      case (_, false)   => MethodNotAllowed
-      case _            => InternalServerError
-    }
+    if isValidToken then Future(stubDataService.stubbing(request)) else Future(Forbidden)
   }
 }

@@ -16,33 +16,25 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.services
 
+import play.api.libs.json.{JsSuccess, JsValue, Json}
+import play.api.mvc.Results.*
+import play.api.mvc.{Request, Result}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
+
 import javax.inject.Inject
 
-import play.api.libs.json.{JsValue, Json}
-import play.api.mvc.Results._
-import play.api.mvc.{AnyContent, Request, Result}
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.PerformanceRequests._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.Requests200._
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.ErrorResponses._
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.JsonGetter
+class StubDataService @Inject() (myEoriResultBuilder: EoriResultBuilder, zonedDateService: ZonedDateTimeService) {
 
-class StubDataService @Inject() (implicit localDateService: LocalDateService) extends JsonGetter {
+  def stubbing(req: Request[JsValue]): Result =
+    req.body.validate[EisAuthorisationRequest] match {
+      case JsSuccess(checkerReq: EisAuthorisationRequest, _) =>
+        val res = EisAuthorisationsResponse(zonedDateService.now(), results = myEoriResultBuilder.makeResults(checkerReq.eoris))
+        Ok(Json.toJson(res))
 
-  private val defaultCase: Result = InternalServerError(Json.parse(expectedRes500))
-
-  def stubbing(req: Request[AnyContent]): Result = {
-    val rawEori: Option[JsValue] = req.body.asJson
-
-    val responseMapping: Map[JsValue, Result] = Map(
-      getRequestJson(req200_single)     -> Ok(getResponseJson(req200_single)),
-      getRequestJson(req200_multiple)   -> Ok(getResponseJson(req200_multiple)),
-      getRequestJson(perfTest_1Eori)    -> Ok(getResponseJson(perfTest_1Eori)),
-      getRequestJson(perfTest_100Eori)  -> Ok(getResponseJson(perfTest_100Eori)),
-      getRequestJson(perfTest_500Eori)  -> Ok(getResponseJson(perfTest_500Eori)),
-      getRequestJson(perfTest_1000Eori) -> Ok(getResponseJson(perfTest_1000Eori)),
-      getRequestJson(perfTest_3000Eori) -> Ok(getResponseJson(perfTest_3000Eori))
-    )
-
-    rawEori.flatMap(responseMapping.get).getOrElse(defaultCase)
-  }
+      case _ =>
+        val res = EisAuthorisationResponseError(ErrorDetails(zonedDateService.now().toString, 500, "An internal error has occurred"))
+        InternalServerError(Json.toJson(res))
+    }
 }

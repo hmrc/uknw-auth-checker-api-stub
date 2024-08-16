@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.utils
+package uk.gov.hmrc.uknwauthcheckerapistub.models.responses
 
-import play.api.mvc.{AnyContent, Request}
+import play.api.libs.json.{Json, OFormat, Writes}
 
-trait HeaderValidator {
+case class ErrorDetails(timestamp: String, errorCode: Int, errorMessage: String, sourcePDSFaultDetails: String = "/pds/cnit/validatecustomsauth/v1")
+object ErrorDetails {
+  implicit val format: OFormat[ErrorDetails] = Json.format[ErrorDetails]
+}
 
-  private def validateBearerToken(token: Seq[String]): Boolean =
-    token.contains(Constants.bearerToken)
-
-  def hasValidBearerToken(request: Request[AnyContent]): Boolean = {
-    val valid = request.headers.headers.filter(_._1.toLowerCase.contains("authorization"))
-
-    if (valid.nonEmpty && validateBearerToken(valid.map(_._2))) { true }
-    else { false }
-  }
-
+case class EisAuthorisationResponseError(errorDetails: ErrorDetails)
+object EisAuthorisationResponseError {
+  implicit val format: OFormat[EisAuthorisationResponseError] = Json.format[EisAuthorisationResponseError]
 }

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.models.requests
+package uk.gov.hmrc.uknwauthcheckerapistub.services
 
-object Requests200 {
-  val req200_single: Seq[String] = Seq("GB000000000200")
+import java.time.{LocalDate, LocalTime, ZoneId, ZonedDateTime}
 
-  val req200_multiple: Seq[String] = Seq("GB000000000200", "XI000000000200")
+class ZonedDateTimeService {
+  def now(): ZonedDateTime = ZonedDateTime.of(LocalDate.now.atTime(LocalTime.MIDNIGHT), ZoneId.of("UTC"))
 
 }

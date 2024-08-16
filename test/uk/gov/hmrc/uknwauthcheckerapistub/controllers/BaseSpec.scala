@@ -16,25 +16,24 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
-import java.time.LocalDate
-
-import org.mockito.Mockito.when
+import scala.reflect.ClassTag
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import org.scalatestplus.mockito.MockitoSugar.mock
-
+import org.scalatestplus.play.guice.GuiceOneAppPerSuite
+import play.api.http.HeaderNames
+import play.api.libs.json.JsValue
 import play.api.mvc.AnyContentAsEmpty
-import play.api.test.FakeRequest
-import play.api.test.Helpers.{GET, POST}
-import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
+import play.api.test.Helpers.POST
+import play.api.test.{FakeHeaders, FakeRequest}
 
-class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
+class BaseSpec extends AnyWordSpec with Matchers with TestData with GuiceOneAppPerSuite with HeaderNames {
 
-  protected implicit val mockLocalDateService: LocalDateService = mock[LocalDateService]
-
-  when(mockLocalDateService.now()).thenReturn(LocalDate.now)
+  protected def injected[T](implicit evidence: ClassTag[T]): T = app.injector.instanceOf[T]
 
   val endPointUrl = "/cau/validatecustomsauth/v1"
+
+  def createRequest(method: String = "POST", headers: Seq[(String, String)] = validHeaders, body: JsValue): FakeRequest[JsValue] =
+    FakeRequest(method, endPointUrl, FakeHeaders(headers), body)
 
   val fakePostReq: FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(POST, endPointUrl).withHeaders(validHeaders*)
@@ -44,19 +43,5 @@ class BaseSpec extends AnyWordSpec with Matchers with TestDataUtils {
 
   val fake404PostReq: FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(POST, "/xyz").withHeaders(validHeaders*)
-
-  val fakePostReqForbiddenHeader1: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, endPointUrl).withHeaders(invalidHeaders1*)
-
-  val fakePostReqForbiddenHeader2: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, endPointUrl).withHeaders(invalidHeaders2*)
-
-  val fakeHeadlessPostReq: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, endPointUrl)
-
-  val fakeNoBodyPostReq: FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(POST, endPointUrl).withHeaders(validHeaders*)
-
-  val fakeGetRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest(GET, endPointUrl).withHeaders(validHeaders*)
 
 }

@@ -32,10 +32,10 @@ import play.api.libs.json.{JsValue, Json}
 import play.api.libs.ws.WSBodyWritables.writeableOf_JsValue
 import play.api.libs.ws.{WSClient, WSResponse}
 import play.api.test.Helpers.{await, defaultAwaitTimeout}
-import uk.gov.hmrc.uknwauthcheckerapistub.controllers.TestDataUtils
+import uk.gov.hmrc.uknwauthcheckerapistub.controllers.TestData
 import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
 
-class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with BeforeAndAfterAll with TestDataUtils {
+class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with BeforeAndAfterAll with TestData {
 
   lazy val authorisationUrl:                    String           = s"http://localhost:$port/cau/validatecustomsauth/v1"
   protected implicit lazy val localDateService: LocalDateService = injected[LocalDateService]

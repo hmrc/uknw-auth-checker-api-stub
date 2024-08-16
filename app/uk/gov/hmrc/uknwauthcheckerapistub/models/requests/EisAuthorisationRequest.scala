@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.models.responses
+package uk.gov.hmrc.uknwauthcheckerapistub.models.requests
 
-object ErrorResponses {
-  val expectedRes500: String =
-    """
-      |{
-      |  "errorDetail": {
-      |    "errorCode": 500,
-      |    "errorMessage": "An internal error has occurred"
-      |  }
-      |}
-    """.stripMargin
+import play.api.libs.json.{Json, OFormat}
+
+case class EisAuthorisationRequest(validityDate: String, authType: String = "UKNW", eoris: Seq[String])
+
+object EisAuthorisationRequest {
+  implicit val format: OFormat[EisAuthorisationRequest] = Json.format[EisAuthorisationRequest]
 }
