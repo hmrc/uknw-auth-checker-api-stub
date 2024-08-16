@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub
 
-import org.scalacheck.Gen
 import uk.gov.hmrc.uknwauthcheckerapistub.controllers.BaseSpec
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{authorisedEoris, eoriPattern}
 

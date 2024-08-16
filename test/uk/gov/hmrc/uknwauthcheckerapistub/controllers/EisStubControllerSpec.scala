@@ -69,7 +69,7 @@ class EisStubControllerSpec extends BaseSpec with EoriGenerator {
     "return 403 on a wrong Header" in {
       val eoris: Seq[String] = useEoriGenerator(1, Some(1))
 
-      val request = createRequest(headers = invalidHeaders2, body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_2_valid)))
+      val request = createRequest(headers = invalidHeaders2, body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result  = controller.authorisations()(request)
       status(result) shouldBe Status.FORBIDDEN
     }
@@ -77,7 +77,7 @@ class EisStubControllerSpec extends BaseSpec with EoriGenerator {
     "return 403 on a missing Header" in {
       val eoris: Seq[String] = useEoriGenerator(1, Some(1))
 
-      val request = createRequest(headers = Nil, body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoriRq_2_valid)))
+      val request = createRequest(headers = Nil, body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result  = controller.authorisations()(request)
       status(result) shouldBe Status.FORBIDDEN
     }

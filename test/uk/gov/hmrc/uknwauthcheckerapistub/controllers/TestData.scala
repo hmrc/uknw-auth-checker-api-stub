@@ -17,7 +17,6 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import play.api.libs.json.{JsValue, Json}
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.EoriResults
 
 trait TestData {
 
@@ -26,10 +25,4 @@ trait TestData {
   val invalidHeaders2: Seq[(String, String)] = Seq("authorization" -> "Bearer <FORBIDDEN>", "Content-Type" -> "application/json")
   val invalidBody:     JsValue               = Json.parse("""{"invalid": "invalid"}""".mkString)
 
-  // Request Data
-  val eoriRq_1_valid: Seq[String] = Seq("GB837826880909874")
-  val eoriRq_2_valid: Seq[String] = Seq("GB837826880909874", "GB000000000200")
-  // Expected Data
-  val eoriResult_1_valid: Seq[EoriResults] = Seq(EoriResults("GB837826880909874", true, 1))
-  val eoriResult_2_valid: Seq[EoriResults] = Seq(EoriResults("GB837826880909874", true, 1), EoriResults("GB000000000200", false, 1))
 }
