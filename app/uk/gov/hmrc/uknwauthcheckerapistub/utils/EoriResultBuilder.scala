@@ -21,7 +21,7 @@ import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.EoriResults
 class EoriResultBuilder {
 
   def makeResults(eoris: Seq[String]): Seq[EoriResults] =
-    eoris.map { anEori =>
+    eoris.distinct.map { anEori =>
       val isValidEori: Boolean = Constants.authorisedEoris.contains(anEori)
       val code:        Int     = if isValidEori then 0 else 1
 

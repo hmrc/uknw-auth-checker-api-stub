@@ -67,6 +67,7 @@ Any `processingDate` body parameter in responses should be replaced with the `{{
 
 Also remember to check `app/uk/gov/hmrc/uknwauthcheckerapistub/utils/Constants.scala` for the list of valid Eoris, any Eori that is not on that list will return `valid: false` and `code: 1`, while the listed Eoris will return `valid: true` and `code: 0` 
 
+Any duplicate eori numbers in the body of the request will be flattened and the response will only contain one instance of the eori.
 ### License
 
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").

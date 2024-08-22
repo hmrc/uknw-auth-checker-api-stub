@@ -23,6 +23,8 @@ import wolfendale.scalacheck.regexp.RegexpGen
 import scala.collection.immutable.Seq
 
 trait EoriGenerator {
+  private val maxStringSize = 24
+  
   protected def fetchRandomNumber(min: Int, max: Int): Int = Gen.choose(min, max).sample.get
 
   private val eoriGen: Gen[String] = RegexpGen.from(eoriPattern)
@@ -59,5 +61,15 @@ trait EoriGenerator {
 
   protected def useEoriGenerator(numberOfEoris: Int, numberOfAuthorisedEoris: Option[Int] = None): Seq[String] =
     eoriGenerator(numberOfEoris, numberOfAuthorisedEoris).sample.get
+  
+  private def specificSizeAlphaNumStrGen(maxStringSize: Int): Gen[String] = for {
+    length <- Gen.choose(1, maxStringSize)
+    str <- Gen.listOfN(length, Gen.alphaNumChar).map(_.mkString)
+  } yield str
+  
+  protected def garbageGenerator(i: Int, maxSizeOfStrings: Int): Gen[Seq[String]] =
+    Gen.listOfN(i, specificSizeAlphaNumStrGen(maxSizeOfStrings))
 
+  protected def useGarbageGenerator(amountOfValues: Int, maxSizeOfStrings: Int = maxStringSize): Seq[String] =
+    garbageGenerator(amountOfValues, maxSizeOfStrings).sample.get
 }
