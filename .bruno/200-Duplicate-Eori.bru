@@ -1,0 +1,31 @@
+meta {
+  name: 200-Duplicate-Eori
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:9071/cau/validatecustomsauth/v1
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{bearerToken}}
+}
+
+body:json {
+  {
+    "validityDate": "{{date}}",
+    "authType": "UKNW",
+    "eoris" : ["GB837826880909874","GB837826880909874"]
+  }
+}
+
+tests {
+  test("should have only one EORI result", function() {
+    const data = res.getBody();
+    expect(res.getStatus()).to.equal(200);
+    expect(data.results).to.be.an('array').that.has.lengthOf(1);
+  });
+}
