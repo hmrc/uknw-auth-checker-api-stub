@@ -42,7 +42,7 @@ class EoriResultBuilderSpec extends BaseSpec with EoriGenerator {
 
       results.size shouldBe 1
     }
-    
+
     "produce a list of EoriResults with valid set to true if the eori is in the authorisedEoris list" in {
       val eori = authorisedEoris.head
 
@@ -50,7 +50,7 @@ class EoriResultBuilderSpec extends BaseSpec with EoriGenerator {
 
       results.head.valid shouldBe true
     }
-    
+
     "produce a list of EoriResults with valid set to false if the eori is not in the authorisedEoris list" in {
       val eori = useGarbageGenerator(1).head
 
@@ -58,6 +58,6 @@ class EoriResultBuilderSpec extends BaseSpec with EoriGenerator {
 
       results.head.valid shouldBe false
     }
-    
+
   }
 }

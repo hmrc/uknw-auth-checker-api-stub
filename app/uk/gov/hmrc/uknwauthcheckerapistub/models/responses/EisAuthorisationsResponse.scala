@@ -17,6 +17,7 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.models.responses
 
 import java.time.ZonedDateTime
+
 import play.api.libs.json.{Json, OFormat, Writes}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.Iso8601DateTimeWrites
 

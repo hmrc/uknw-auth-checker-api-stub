@@ -17,9 +17,11 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import scala.reflect.ClassTag
+
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
+
 import play.api.http.HeaderNames
 import play.api.libs.json.JsValue
 import play.api.mvc.AnyContentAsEmpty

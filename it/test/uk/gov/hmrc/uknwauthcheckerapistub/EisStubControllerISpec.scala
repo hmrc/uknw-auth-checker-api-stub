@@ -23,8 +23,8 @@ import play.api.libs.json.Json
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
 
 class EisStubControllerISpec extends BaseISpec with EoriGenerator {
-  private val localNow: LocalDate = LocalDate.now()
-  val eoris: Seq[String] = useEoriGenerator(1, Some(1))
+  private val localNow: LocalDate   = LocalDate.now()
+  val eoris:            Seq[String] = useEoriGenerator(1, Some(1))
 
   "POST /cau/validatecustomsauth/v1" should {
     "return 200 on a single Eori" in {
