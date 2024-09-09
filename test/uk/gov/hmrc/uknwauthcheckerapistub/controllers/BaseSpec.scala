@@ -28,7 +28,7 @@ import play.api.mvc.AnyContentAsEmpty
 import play.api.test.Helpers.POST
 import play.api.test.{FakeHeaders, FakeRequest}
 
-class BaseSpec extends AnyWordSpec with Matchers with TestData with GuiceOneAppPerSuite with HeaderNames {
+class BaseSpec extends AnyWordSpec, Matchers, TestData, GuiceOneAppPerSuite, HeaderNames {
 
   protected def injected[T](implicit evidence: ClassTag[T]): T = app.injector.instanceOf[T]
 
