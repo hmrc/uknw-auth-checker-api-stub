@@ -35,7 +35,7 @@ import play.api.test.Helpers.{await, defaultAwaitTimeout}
 import uk.gov.hmrc.uknwauthcheckerapistub.controllers.TestData
 import uk.gov.hmrc.uknwauthcheckerapistub.services.LocalDateService
 
-class BaseISpec extends PlaySpec with GuiceOneServerPerSuite with BeforeAndAfterAll with TestData {
+class BaseISpec extends PlaySpec, GuiceOneServerPerSuite, BeforeAndAfterAll, TestData {
 
   lazy val authorisationUrl:                    String           = s"http://localhost:$port/cau/validatecustomsauth/v1"
   protected implicit lazy val localDateService: LocalDateService = injected[LocalDateService]

@@ -19,7 +19,7 @@ package uk.gov.hmrc.uknwauthcheckerapistub
 import uk.gov.hmrc.uknwauthcheckerapistub.controllers.BaseSpec
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{authorisedEoris, eoriPattern}
 
-class EoriGeneratorSpec extends BaseSpec with EoriGenerator {
+class EoriGeneratorSpec extends BaseSpec, EoriGenerator {
   "eoriGenerator" should {
 
     "generate a chosen sized list of authorised eoris" in {

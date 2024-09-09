@@ -20,7 +20,7 @@ import uk.gov.hmrc.uknwauthcheckerapistub.EoriGenerator
 import uk.gov.hmrc.uknwauthcheckerapistub.controllers.BaseSpec
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.authorisedEoris
 
-class EoriResultBuilderSpec extends BaseSpec with EoriGenerator {
+class EoriResultBuilderSpec extends BaseSpec, EoriGenerator {
 
   private val eoriResultBuilder: EoriResultBuilder = new EoriResultBuilder()
 

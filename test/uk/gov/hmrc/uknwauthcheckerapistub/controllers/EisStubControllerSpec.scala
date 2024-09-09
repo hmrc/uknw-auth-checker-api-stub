@@ -27,7 +27,7 @@ import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationReques
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
 
-class EisStubControllerSpec extends BaseSpec with EoriGenerator {
+class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
   private val zonedNow:      ZonedDateTime     = ZonedDateTime.of(LocalDate.now.atTime(LocalTime.MIDNIGHT), ZoneId.of("UTC"))
   private val localNow:      LocalDate         = LocalDate.now()

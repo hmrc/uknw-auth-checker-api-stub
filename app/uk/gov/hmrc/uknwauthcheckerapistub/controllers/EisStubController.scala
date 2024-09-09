@@ -27,8 +27,8 @@ import uk.gov.hmrc.uknwauthcheckerapistub.utils.validators.HeaderValidator
 
 @Singleton()
 class EisStubController @Inject() (stubDataService: StubDataService, cc: ControllerComponents)(implicit ec: ExecutionContext)
-    extends BackendController(cc)
-    with HeaderValidator {
+    extends BackendController(cc),
+      HeaderValidator {
 
   def authorisations: Action[JsValue] = Action.async(parse.json) { implicit request: Request[JsValue] =>
     val isValidToken: Boolean = hasValidBearerToken(request)

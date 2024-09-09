@@ -29,7 +29,7 @@ import uk.gov.hmrc.http.{JsValidationException, NotFoundException}
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants
 
 @Singleton
-class ApiErrorHandler @Inject() extends HttpErrorHandler with Logging {
+class ApiErrorHandler @Inject() extends HttpErrorHandler, Logging {
 
   override def onClientError(request: RequestHeader, statusCode: Int, message: String): Future[Result] = {
     logger.warn(
