@@ -43,11 +43,9 @@ class StubDataService @Inject() (myEoriResultBuilder: EoriResultBuilder, zonedDa
       case x if x.contains(mock403Eori) => Forbidden
       case x if x.contains(mock500Eori) => InternalServerError(Json.toJson(res500))
       case x if x.contains(mock503Eori) => ServiceUnavailable(body503)
-      case x =>
+      case _ =>
         val res = EisAuthorisationsResponse(zonedDateService.now(), results = myEoriResultBuilder.makeResults(eoris))
         Ok(Json.toJson(res))
-
-      case null => InternalServerError(Json.toJson(res500))
     }
 
 }

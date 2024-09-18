@@ -17,11 +17,9 @@
 package uk.gov.hmrc.uknwauthcheckerapistub
 
 import scala.collection.immutable.Seq
-
 import org.scalacheck.Gen
 import wolfendale.scalacheck.regexp.RegexpGen
-
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{authorisedEoris, eoriPattern}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{authorisedEoris, eoriPattern, mock403Eori, mock500Eori, mock503Eori}
 
 trait EoriGenerator {
   private val maxStringSize = 24
@@ -61,7 +59,8 @@ trait EoriGenerator {
   }
 
   protected def useEoriGenerator(numberOfEoris: Int, numberOfAuthorisedEoris: Option[Int] = None): Seq[String] =
-    eoriGenerator(numberOfEoris, numberOfAuthorisedEoris).sample.get
+    val eoris = eoriGenerator(numberOfEoris, numberOfAuthorisedEoris).sample.get
+    removeMockData(eoris)
 
   private def specificSizeAlphaNumStrGen(maxStringSize: Int): Gen[String] = for {
     length <- Gen.choose(1, maxStringSize)
@@ -73,4 +72,12 @@ trait EoriGenerator {
 
   protected def useGarbageGenerator(amountOfValues: Int, maxSizeOfStrings: Int = maxStringSize): Seq[String] =
     garbageGenerator(amountOfValues, maxSizeOfStrings).sample.get
+
+  def removeMockData(eoris: Seq[String]): Seq[String] =
+    val mockData: Seq[String] = Seq(mock403Eori, mock500Eori, mock503Eori)
+    val replacement = "GB999999999999999"
+    eoris.map { anEori =>
+      if mockData.contains(anEori) then replacement else anEori
+    }
+
 }
