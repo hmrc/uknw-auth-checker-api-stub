@@ -17,9 +17,13 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
 object Constants {
-  val path        = "/cau/validatecustomsauth/v1"
-  val bearerToken = "Bearer PFZBTElEX1RPS0VOPg=="
+  val path:        String = "/cau/validatecustomsauth/v1"
+  val bearerToken: String = "Bearer PFZBTElEX1RPS0VOPg=="
   val eoriPattern: String = "^(GB|XI)[0-9]{12}|(GB|XI)[0-9]{15}$"
+
+  val mock403Eori: String = "GB999999999999403"
+  val mock500Eori: String = "GB999999999999500"
+  val mock503Eori: String = "GB999999999999503"
 
   val authorisedEoris: Set[String] = Set(
     "GB837826880909874",
@@ -3023,4 +3027,17 @@ object Constants {
     "GB843625004921645",
     "GB618696708714294"
   )
+
+  val body503: String = """<html>
+                          |   <head>
+                          |      <title>503 Service Temporarily Unavailable</title>
+                          |   </head>
+                          |   <body>
+                          |      <center>
+                          |         <h1>503 Service Temporarily Unavailable</h1>
+                          |      </center>
+                          |      <hr>
+                          |      <center>nginx/1.19.2</center>
+                          |   </body>
+                          |</html>""".stripMargin.mkString
 }

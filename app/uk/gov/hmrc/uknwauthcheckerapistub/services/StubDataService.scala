@@ -23,18 +23,31 @@ import play.api.mvc.Results._
 import play.api.mvc.{Request, Result}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{body503, mock403Eori, mock500Eori, mock503Eori}
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
 
 class StubDataService @Inject() (myEoriResultBuilder: EoriResultBuilder, zonedDateService: ZonedDateTimeService) {
 
+  private lazy val res500 = EisAuthorisationResponseError(ErrorDetails(zonedDateService.now().toString, 500, "An internal error has occurred"))
+
   def stubbing(req: Request[JsValue]): Result =
     req.body.validate[EisAuthorisationRequest] match {
       case JsSuccess(checkerReq: EisAuthorisationRequest, _) =>
-        val res = EisAuthorisationsResponse(zonedDateService.now(), results = myEoriResultBuilder.makeResults(checkerReq.eoris))
+        checkIfMockData(checkerReq.eoris)
+
+      case _ => InternalServerError(Json.toJson(res500))
+    }
+
+  private def checkIfMockData(eoris: Seq[String]): Result =
+    eoris match {
+      case x if x.contains(mock403Eori) => Forbidden
+      case x if x.contains(mock500Eori) => InternalServerError(Json.toJson(res500))
+      case x if x.contains(mock503Eori) => ServiceUnavailable(body503)
+      case x =>
+        val res = EisAuthorisationsResponse(zonedDateService.now(), results = myEoriResultBuilder.makeResults(eoris))
         Ok(Json.toJson(res))
 
-      case _ =>
-        val res = EisAuthorisationResponseError(ErrorDetails(zonedDateService.now().toString, 500, "An internal error has occurred"))
-        InternalServerError(Json.toJson(res))
+      case null => InternalServerError(Json.toJson(res500))
     }
+
 }
