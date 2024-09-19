@@ -91,6 +91,9 @@ in `.bruno/environments/Local`.
 | Performance-500-Eori.bru  | Valid request with 500 authorised EORIs         |
 | Performance-1000-Eori.bru | Valid request with 1000 authorised EORIs        |
 | Performance-3000-Eori.bru | Valid request with 3000 authorised EORIs        |
+| 403-Single-Eori.bru       | Invalid request that will trigger a 403 error   |
+| 500-Single-Eori.bru       | Invalid request that will trigger a 500 error   |
+| 503-Single-Eori.bru       | Invalid request that will trigger a 503 error   |
 
 ## License
 
