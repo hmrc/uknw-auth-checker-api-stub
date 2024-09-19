@@ -16,15 +16,13 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
-import play.api.libs.json.{JsSuccess, JsValue, Json}
-import play.api.mvc.Results.*
-import play.api.mvc.{Request, Result}
+import play.api.libs.json.Json
+import play.api.mvc.Result
+import play.api.mvc.Results._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.ReservedEoris
-import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, ErrorDetails}
 import uk.gov.hmrc.uknwauthcheckerapistub.services.ZonedDateTimeService
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{body503, mock403Eori, mock500Eori, mock503Eori}
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.body503
 
 trait StubDataServiceHelper(zonedDateService: ZonedDateTimeService) extends ReservedEoris {
 

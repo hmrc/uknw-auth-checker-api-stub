@@ -16,15 +16,14 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.services
 
+import javax.inject.Inject
+
 import play.api.libs.json.{JsSuccess, JsValue, Json}
-import play.api.mvc.Results.*
+import play.api.mvc.Results._
 import play.api.mvc.{Request, Result}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{body503, mock403Eori, mock500Eori, mock503Eori}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse}
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.{EoriResultBuilder, StubDataServiceHelper}
-
-import javax.inject.Inject
 
 class StubDataService @Inject() (
   myEoriResultBuilder: EoriResultBuilder,

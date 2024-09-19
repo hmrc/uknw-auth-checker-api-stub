@@ -17,15 +17,16 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
 import java.time.{LocalDate, LocalTime, ZoneId, ZonedDateTime}
+
 import play.api.http.Status
 import play.api.libs.json.Json
 import play.api.test.Helpers
-import play.api.test.Helpers.*
+import play.api.test.Helpers._
 import uk.gov.hmrc.uknwauthcheckerapistub.EoriGenerator
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants._
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.*
 
 class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
