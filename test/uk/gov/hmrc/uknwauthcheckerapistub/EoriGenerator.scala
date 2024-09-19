@@ -17,19 +17,21 @@
 package uk.gov.hmrc.uknwauthcheckerapistub
 
 import scala.collection.immutable.Seq
+
 import org.scalacheck.Gen
 import wolfendale.scalacheck.regexp.RegexpGen
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{authorisedEoris, eoriPattern, mock403Eori, mock500Eori, mock503Eori}
 
-trait EoriGenerator {
+import uk.gov.hmrc.uknwauthcheckerapistub.models.ReservedEoris
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{authorisedEoris, eoriPattern}
+
+trait EoriGenerator extends ReservedEoris {
   private val maxStringSize = 24
 
   protected def fetchRandomNumber(min: Int, max: Int): Int = Gen.choose(min, max).sample.get
 
   extension (gen: Gen[String]) {
     def excludeReserved: Gen[String] =
-      val mockData: Seq[String] = Seq(mock403Eori, mock500Eori, mock503Eori)
-      gen.suchThat(eori => !mockData.contains(eori))
+      gen.suchThat(eori => !mockedEoris.contains(eori))
   }
 
   private val eoriGen: Gen[String] = RegexpGen.from(eoriPattern).excludeReserved
