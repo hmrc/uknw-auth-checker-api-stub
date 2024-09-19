@@ -14,38 +14,28 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.services
+package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
 import play.api.libs.json.{JsSuccess, JsValue, Json}
 import play.api.mvc.Results.*
 import play.api.mvc.{Request, Result}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.ReservedEoris
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
+import uk.gov.hmrc.uknwauthcheckerapistub.services.ZonedDateTimeService
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{body503, mock403Eori, mock500Eori, mock503Eori}
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.{EoriResultBuilder, StubDataServiceHelper}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
 
-import javax.inject.Inject
+trait StubDataServiceHelper(zonedDateService: ZonedDateTimeService) extends ReservedEoris {
 
-class StubDataService @Inject() (
-  myEoriResultBuilder: EoriResultBuilder,
-  zonedDateService:    ZonedDateTimeService
-) extends StubDataServiceHelper(zonedDateService) {
+  protected lazy val res500: EisAuthorisationResponseError = EisAuthorisationResponseError(
+    ErrorDetails(zonedDateService.now().toString, 500, "An internal error has occurred")
+  )
 
-  def stubbing(req: Request[JsValue]): Result =
-    req.body.validate[EisAuthorisationRequest] match {
-      case JsSuccess(checkerReq: EisAuthorisationRequest, _) =>
-        checkIfMockData(checkerReq.eoris)
-      case _ => InternalServerError(Json.toJson(res500))
-    }
+  protected val mockedEoriResponses: Map[String, Result] = Map(
+    mock403Eori -> Forbidden,
+    mock500Eori -> InternalServerError(Json.toJson(res500)),
+    mock503Eori -> ServiceUnavailable(body503)
+  )
 
-  private def checkIfMockData(eoris: Seq[String]): Result =
-    mockedEoriResponses
-      .collectFirst { case (mockEori, result) if eoris.contains(mockEori) => result }
-      .getOrElse {
-        val res = EisAuthorisationsResponse(
-          zonedDateService.now(),
-          results = myEoriResultBuilder.makeResults(eoris)
-        )
-        Ok(Json.toJson(res))
-      }
 }

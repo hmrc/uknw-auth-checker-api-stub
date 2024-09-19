@@ -21,10 +21,6 @@ object Constants {
   val bearerToken: String = "Bearer PFZBTElEX1RPS0VOPg=="
   val eoriPattern: String = "^(GB|XI)[0-9]{12}|(GB|XI)[0-9]{15}$"
 
-  val mock403Eori: String = "GB999999999999403"
-  val mock500Eori: String = "GB999999999999500"
-  val mock503Eori: String = "GB999999999999503"
-
   val authorisedEoris: Set[String] = Set(
     "GB837826880909874",
     "XI968840631629",
