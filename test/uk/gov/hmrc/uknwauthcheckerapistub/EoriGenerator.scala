@@ -26,7 +26,13 @@ trait EoriGenerator {
 
   protected def fetchRandomNumber(min: Int, max: Int): Int = Gen.choose(min, max).sample.get
 
-  private val eoriGen: Gen[String] = RegexpGen.from(eoriPattern)
+  extension (gen: Gen[String]) {
+    def excludeReserved: Gen[String] =
+      val mockData: Seq[String] = Seq(mock403Eori, mock500Eori, mock503Eori)
+      gen.suchThat(eori => !mockData.contains(eori))
+  }
+
+  private val eoriGen: Gen[String] = RegexpGen.from(eoriPattern).excludeReserved
 
   private def authorisedEoriGen(numberOfAuthorisedEoris: Int): Gen[Seq[String]] =
     Gen.pick(numberOfAuthorisedEoris, authorisedEoris).map(_.toSeq)
@@ -59,8 +65,7 @@ trait EoriGenerator {
   }
 
   protected def useEoriGenerator(numberOfEoris: Int, numberOfAuthorisedEoris: Option[Int] = None): Seq[String] =
-    val eoris = eoriGenerator(numberOfEoris, numberOfAuthorisedEoris).sample.get
-    removeMockData(eoris)
+    eoriGenerator(numberOfEoris, numberOfAuthorisedEoris).sample.get
 
   private def specificSizeAlphaNumStrGen(maxStringSize: Int): Gen[String] = for {
     length <- Gen.choose(1, maxStringSize)
@@ -72,12 +77,4 @@ trait EoriGenerator {
 
   protected def useGarbageGenerator(amountOfValues: Int, maxSizeOfStrings: Int = maxStringSize): Seq[String] =
     garbageGenerator(amountOfValues, maxSizeOfStrings).sample.get
-
-  def removeMockData(eoris: Seq[String]): Seq[String] =
-    val mockData: Seq[String] = Seq(mock403Eori, mock500Eori, mock503Eori)
-    val replacement = "GB999999999999999"
-    eoris.map { anEori =>
-      if mockData.contains(anEori) then replacement else anEori
-    }
-
 }
