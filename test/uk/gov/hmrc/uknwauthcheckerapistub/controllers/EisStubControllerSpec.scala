@@ -25,6 +25,7 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.uknwauthcheckerapistub.EoriGenerator
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants._
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
 
 class EisStubControllerSpec extends BaseSpec, EoriGenerator {
@@ -83,12 +84,40 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
       status(result) shouldBe Status.FORBIDDEN
     }
 
+    "return 403 to trigger a 403 error in the Checker API" in {
+      val eoris: Seq[String] = Seq(mock403Eori)
+
+      val request = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result  = controller.authorisations()(request)
+      status(result) shouldBe Status.FORBIDDEN
+    }
+
     "return 500 on a body-less POST Request" in {
       val request  = createRequest(body = Json.toJson("{}"))
       val result   = controller.authorisations()(request)
       val expected = EisAuthorisationResponseError(ErrorDetails(zonedNow.toString, 500, "An internal error has occurred"))
       status(result)        shouldBe Status.INTERNAL_SERVER_ERROR
       contentAsJson(result) shouldBe Json.toJson(expected)
+    }
+
+    "return 500 to trigger a 500 error in the Checker API" in {
+      val eoris: Seq[String] = Seq(mock500Eori)
+
+      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result   = controller.authorisations()(request)
+      val expected = EisAuthorisationResponseError(ErrorDetails(zonedNow.toString, 500, "An internal error has occurred"))
+      status(result)        shouldBe Status.INTERNAL_SERVER_ERROR
+      contentAsJson(result) shouldBe Json.toJson(expected)
+    }
+
+    "return 503 to emulate EIS being down" in {
+      val eoris: Seq[String] = Seq(mock503Eori)
+
+      val request = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result  = controller.authorisations()(request)
+
+      status(result)          shouldBe Status.SERVICE_UNAVAILABLE
+      contentAsString(result) shouldBe body503
     }
 
   }

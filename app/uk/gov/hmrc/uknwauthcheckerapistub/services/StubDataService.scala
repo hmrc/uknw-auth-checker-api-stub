@@ -22,19 +22,29 @@ import play.api.libs.json.{JsSuccess, JsValue, Json}
 import play.api.mvc.Results._
 import play.api.mvc.{Request, Result}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse}
+import uk.gov.hmrc.uknwauthcheckerapistub.utils.{EoriResultBuilder, StubDataServiceHelper}
 
-class StubDataService @Inject() (myEoriResultBuilder: EoriResultBuilder, zonedDateService: ZonedDateTimeService) {
+class StubDataService @Inject() (
+  myEoriResultBuilder: EoriResultBuilder,
+  zonedDateService:    ZonedDateTimeService
+) extends StubDataServiceHelper(zonedDateService) {
 
   def stubbing(req: Request[JsValue]): Result =
     req.body.validate[EisAuthorisationRequest] match {
       case JsSuccess(checkerReq: EisAuthorisationRequest, _) =>
-        val res = EisAuthorisationsResponse(zonedDateService.now(), results = myEoriResultBuilder.makeResults(checkerReq.eoris))
-        Ok(Json.toJson(res))
-
-      case _ =>
-        val res = EisAuthorisationResponseError(ErrorDetails(zonedDateService.now().toString, 500, "An internal error has occurred"))
-        InternalServerError(Json.toJson(res))
+        checkIfMockData(checkerReq.eoris)
+      case _ => InternalServerError(Json.toJson(res500))
     }
+
+  private def checkIfMockData(eoris: Seq[String]): Result =
+    mockedEoriResponses
+      .collectFirst { case (mockEori, result) if eoris.contains(mockEori) => result }
+      .getOrElse {
+        val res = EisAuthorisationsResponse(
+          zonedDateService.now(),
+          results = myEoriResultBuilder.makeResults(eoris)
+        )
+        Ok(Json.toJson(res))
+      }
 }
