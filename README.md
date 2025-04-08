@@ -58,15 +58,25 @@ linter/reformatter in the app, tests, and integration tests
 
 > `sbt fixAll`
 
-## Request and responses
+## Requesting data from the stub using Bruno
 
-Any `validityDate` body parameter in requests should be replaced with the `{{date}}` token. It will be replaced on load
-with today's date formatted as `YYYY-MM-DD` (ISO_LOCAL_DATE).
+To request data from the stub using Bruno, use the `.bru` files that
+can be found in the `.bruno` folder.
 
-Any `processingDate` body parameter in responses should be replaced with the `{{dateTime}}` token. it will be replaced
-on load with today's date formatted as `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'` (ISO 8601 UTC).
+Any `validityDate` body parameter in requests should be replaced with the `{{date}}` token.
+This date value needs to be edited in Bruno via the Collection Environments > Configure option. 
+It should be today's date formatted as `YYYY-MM-DD` (ISO_LOCAL_DATE).
 
-Also remember to check `app/uk/gov/hmrc/uknwauthcheckerapistub/utils/Constants.scala` for the list of valid Eoris, any
+Furthermore, for requests on developer machines, the `Local` environment in bruno should be used, as it enables a pre-script
+in the [collection](https://github.com/hmrc/uknw-auth-checker-api-stub/blob/main/.bruno/collection.bru)
+to run which automatically stores the entered date in
+the `date` environment variable, which is used by each authenticated request, without the need to add the date manually each time.
+
+## Responses
+
+Any `processingDate` body parameter in responses would be today's date formatted as `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'` (ISO 8601 UTC).
+
+Also remember to check [valid Eoris list](https://github.com/hmrc/uknw-auth-checker-api-stub/blob/main/app/uk/gov/hmrc/uknwauthcheckerapistub/utils/Constants.scala) for the list of valid Eoris, any
 Eori that is not on that list will return `valid: false` and `code: 1`, while the listed Eoris will return `valid: true`
 and `code: 0`
 
