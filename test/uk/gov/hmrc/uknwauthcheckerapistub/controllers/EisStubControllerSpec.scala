@@ -42,7 +42,7 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
       val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationsResponse(zonedNow, results = expectedEoris)
+      val expected = EisAuthorisationsResponse(Some(zonedNow), Some("UKNW"), results = Some(expectedEoris))
 
       status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe Json.toJson(expected)
@@ -54,7 +54,7 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
       val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationsResponse(zonedNow, results = expectedEoris)
+      val expected = EisAuthorisationsResponse(Some(zonedNow), Some("UKNW"), results = Some(expectedEoris))
 
       status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe Json.toJson(expected)
@@ -118,6 +118,17 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
       status(result)          shouldBe Status.SERVICE_UNAVAILABLE
       contentAsString(result) shouldBe body503
+    }
+
+    "return 200 on an Empty Response from EIS" in {
+      val eoris: Seq[String] = Seq(mockEmptyResponseEori)
+
+      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result   = controller.authorisations()(request)
+      val expected = EisAuthorisationsResponse(None, None, results = None)
+
+      status(result)        shouldBe Status.OK
+      contentAsJson(result) shouldBe Json.toJson(expected)
     }
 
   }

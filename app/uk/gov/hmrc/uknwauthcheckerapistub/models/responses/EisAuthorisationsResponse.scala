@@ -26,7 +26,7 @@ object EoriResults {
   implicit val format: OFormat[EoriResults] = Json.format[EoriResults]
 }
 
-case class EisAuthorisationsResponse(processingDate: ZonedDateTime, authType: String = "UKNW", results: Seq[EoriResults])
+case class EisAuthorisationsResponse(processingDate: Option[ZonedDateTime], authType: Option[String], results: Option[Seq[EoriResults]])
 object EisAuthorisationsResponse {
   implicit val zonedDateTimeWrites: Writes[ZonedDateTime] = Iso8601DateTimeWrites.iso8601DateTimeWrites
 

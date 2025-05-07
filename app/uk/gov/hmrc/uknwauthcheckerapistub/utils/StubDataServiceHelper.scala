@@ -20,7 +20,7 @@ import play.api.libs.json.Json
 import play.api.mvc.Result
 import play.api.mvc.Results._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.ReservedEoris
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, ErrorDetails}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
 import uk.gov.hmrc.uknwauthcheckerapistub.services.ZonedDateTimeService
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.body503
 
@@ -31,9 +31,10 @@ trait StubDataServiceHelper(zonedDateService: ZonedDateTimeService) extends Rese
   )
 
   protected val mockedEoriResponses: Map[String, Result] = Map(
-    mock403Eori -> Forbidden,
-    mock500Eori -> InternalServerError(Json.toJson(res500)),
-    mock503Eori -> ServiceUnavailable(body503)
+    mock403Eori           -> Forbidden,
+    mock500Eori           -> InternalServerError(Json.toJson(res500)),
+    mock503Eori           -> ServiceUnavailable(body503),
+    mockEmptyResponseEori -> Ok(Json.toJson(EisAuthorisationsResponse(None, None, None)))
   )
 
 }

@@ -17,9 +17,10 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.models
 
 trait ReservedEoris {
-  val mock403Eori: String = "GB999999999999403"
-  val mock500Eori: String = "GB999999999999500"
-  val mock503Eori: String = "GB999999999999503"
+  val mock403Eori:           String = "GB999999999999403"
+  val mock500Eori:           String = "GB999999999999500"
+  val mock503Eori:           String = "GB999999999999503"
+  val mockEmptyResponseEori: String = "GB999999999999204"
 
-  val mockedEoris: Seq[String] = Seq(mock403Eori, mock500Eori, mock503Eori)
+  val mockedEoris: Seq[String] = Seq(mock403Eori, mock500Eori, mock503Eori, mockEmptyResponseEori)
 }

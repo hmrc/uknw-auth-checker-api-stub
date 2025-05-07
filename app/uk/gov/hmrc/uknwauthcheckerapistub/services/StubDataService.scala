@@ -42,8 +42,9 @@ class StubDataService @Inject() (
       .collectFirst { case (mockEori, result) if eoris.contains(mockEori) => result }
       .getOrElse {
         val res = EisAuthorisationsResponse(
-          zonedDateService.now(),
-          results = myEoriResultBuilder.makeResults(eoris)
+          Some(zonedDateService.now()),
+          Some("UKNW"),
+          results = Some(myEoriResultBuilder.makeResults(eoris))
         )
         Ok(Json.toJson(res))
       }
