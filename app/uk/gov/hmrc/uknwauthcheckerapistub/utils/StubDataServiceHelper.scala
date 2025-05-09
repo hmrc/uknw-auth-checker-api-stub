@@ -18,23 +18,40 @@ package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
 import play.api.libs.json.Json
 import play.api.mvc.Result
-import play.api.mvc.Results._
+import play.api.mvc.Results.*
 import uk.gov.hmrc.uknwauthcheckerapistub.models.ReservedEoris
-import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, EoriResults, ErrorDetails}
 import uk.gov.hmrc.uknwauthcheckerapistub.services.ZonedDateTimeService
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.body503
 
-trait StubDataServiceHelper(zonedDateService: ZonedDateTimeService) extends ReservedEoris {
+import java.time.ZonedDateTime
+
+trait StubDataServiceHelper(zonedDateService: ZonedDateTimeService, myEoriResultBuilder: EoriResultBuilder) extends ReservedEoris {
 
   protected lazy val res500: EisAuthorisationResponseError = EisAuthorisationResponseError(
     ErrorDetails(zonedDateService.now().toString, 500, "An internal error has occurred")
   )
+  val authType       = Some("UKNW")
+  val processingDate = Some(zonedDateService.now())
 
-  protected val mockedEoriResponses: Map[String, Result] = Map(
-    mock403Eori           -> Forbidden,
-    mock500Eori           -> InternalServerError(Json.toJson(res500)),
-    mock503Eori           -> ServiceUnavailable(body503),
-    mockEmptyResponseEori -> Ok(Json.toJson(EisAuthorisationsResponse(None, None, None)))
-  )
+  def checkForMockedEoriResponses(eoris: Seq[String]): Map[String, Result] = {
+    val results = Some(myEoriResultBuilder.makeResults(eoris))
+    Map(
+      mock403Eori                     -> Forbidden,
+      mock500Eori                     -> InternalServerError(Json.toJson(res500)),
+      mock503Eori                     -> ServiceUnavailable(body503),
+      mockEmptyResponseEori           -> Ok(generateEisResponse(processingDate = None, authType = None, results = None)),
+      mockEmptyDateEori               -> Ok(generateEisResponse(processingDate = None, authType = authType, results = results)),
+      mockEmptyAuthTypeEori           -> Ok(generateEisResponse(processingDate = processingDate, authType = None, results = results)),
+      mockEmptyResultsEori            -> Ok(generateEisResponse(processingDate = processingDate, authType = authType, results = None)),
+      mockEmptyResultsAndDateEori     -> Ok(generateEisResponse(processingDate = None, authType = authType, results = None)),
+      mockEmptyResultsAndAuthTypeEori -> Ok(generateEisResponse(processingDate = processingDate, authType = None, results = None)),
+      mockEmptyDateAndAuthTypeEori    -> Ok(generateEisResponse(processingDate = None, authType = None, results = results))
+    )
+  }
 
+  private def generateEisResponse(processingDate: Option[ZonedDateTime], authType: Option[String], results: Option[Seq[EoriResults]]) =
+    Json.toJson(
+      EisAuthorisationsResponse(processingDate = processingDate, authType = authType, results = results)
+    )
 }

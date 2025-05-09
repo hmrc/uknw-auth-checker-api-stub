@@ -17,10 +17,27 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.models
 
 trait ReservedEoris {
-  val mock403Eori:           String = "GB999999999999403"
-  val mock500Eori:           String = "GB999999999999500"
-  val mock503Eori:           String = "GB999999999999503"
-  val mockEmptyResponseEori: String = "GB999999999999204"
+  val mock403Eori:                     String = "GB999999999999403"
+  val mock500Eori:                     String = "GB999999999999500"
+  val mock503Eori:                     String = "GB999999999999503"
+  val mockEmptyResponseEori:           String = "GB999999999999601"
+  val mockEmptyDateEori:               String = "GB999999999999602"
+  val mockEmptyAuthTypeEori:           String = "GB999999999999603"
+  val mockEmptyResultsEori:            String = "GB999999999999604"
+  val mockEmptyResultsAndDateEori:     String = "GB999999999999605"
+  val mockEmptyResultsAndAuthTypeEori: String = "GB999999999999606"
+  val mockEmptyDateAndAuthTypeEori:    String = "GB999999999999607"
 
-  val mockedEoris: Seq[String] = Seq(mock403Eori, mock500Eori, mock503Eori, mockEmptyResponseEori)
+  val mockedEoris: Seq[String] = Seq(
+    mock403Eori,
+    mock500Eori,
+    mock503Eori,
+    mockEmptyResponseEori,
+    mockEmptyDateEori,
+    mockEmptyAuthTypeEori,
+    mockEmptyResultsEori,
+    mockEmptyResultsAndDateEori,
+    mockEmptyResultsAndAuthTypeEori,
+    mockEmptyDateAndAuthTypeEori
+  )
 }

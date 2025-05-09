@@ -34,6 +34,7 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
   private val localNow:      LocalDate         = LocalDate.now()
   private val controller:    EisStubController = injected[EisStubController]
   private val myEoriBuilder: EoriResultBuilder = new EoriResultBuilder
+  private val authType:      Option[String]    = Some("UKNW")
 
   "POST /cau/validatecustomsauth/v1" should {
     "return 200 on a single Eori" in {
@@ -42,7 +43,7 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
       val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationsResponse(Some(zonedNow), Some("UKNW"), results = Some(expectedEoris))
+      val expected = EisAuthorisationsResponse(Some(zonedNow), authType, Some(expectedEoris))
 
       status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe Json.toJson(expected)
@@ -54,7 +55,7 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
       val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationsResponse(Some(zonedNow), Some("UKNW"), results = Some(expectedEoris))
+      val expected = EisAuthorisationsResponse(Some(zonedNow), authType, Some(expectedEoris))
 
       status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe Json.toJson(expected)
@@ -120,12 +121,81 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
       contentAsString(result) shouldBe body503
     }
 
-    "return 200 on an Empty Response from EIS" in {
+    "return 200 on an empty response from EIS" in {
       val eoris: Seq[String] = Seq(mockEmptyResponseEori)
 
       val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationsResponse(None, None, results = None)
+      val expected = EisAuthorisationsResponse(None, None, None)
+
+      status(result)        shouldBe Status.OK
+      contentAsJson(result) shouldBe Json.toJson(expected)
+    }
+
+    "return 200 on an empty processing date response from EIS" in {
+      val eoris: Seq[String] = Seq(mockEmptyDateEori)
+      val expectedEoris = Some(myEoriBuilder.makeResults(eoris))
+
+      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result   = controller.authorisations()(request)
+      val expected = EisAuthorisationsResponse(None, authType, expectedEoris)
+
+      status(result)        shouldBe Status.OK
+      contentAsJson(result) shouldBe Json.toJson(expected)
+    }
+
+    "return 200 on an empty auth type response from EIS" in {
+      val eoris: Seq[String] = Seq(mockEmptyAuthTypeEori)
+      val expectedEoris = Some(myEoriBuilder.makeResults(eoris))
+
+      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result   = controller.authorisations()(request)
+      val expected = EisAuthorisationsResponse(Some(zonedNow), None, expectedEoris)
+
+      status(result)        shouldBe Status.OK
+      contentAsJson(result) shouldBe Json.toJson(expected)
+    }
+
+    "return 200 on an empty results response from EIS" in {
+      val eoris: Seq[String] = Seq(mockEmptyResultsEori)
+
+      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result   = controller.authorisations()(request)
+      val expected = EisAuthorisationsResponse(Some(zonedNow), authType, None)
+
+      status(result)        shouldBe Status.OK
+      contentAsJson(result) shouldBe Json.toJson(expected)
+    }
+
+    "return 200 on an empty results and processing date response from EIS" in {
+      val eoris: Seq[String] = Seq(mockEmptyResultsAndDateEori)
+
+      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result   = controller.authorisations()(request)
+      val expected = EisAuthorisationsResponse(None, authType, None)
+
+      status(result)        shouldBe Status.OK
+      contentAsJson(result) shouldBe Json.toJson(expected)
+    }
+
+    "return 200 on an empty results and auth type response from EIS" in {
+      val eoris: Seq[String] = Seq(mockEmptyResultsAndAuthTypeEori)
+
+      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result   = controller.authorisations()(request)
+      val expected = EisAuthorisationsResponse(Some(zonedNow), None, None)
+
+      status(result)        shouldBe Status.OK
+      contentAsJson(result) shouldBe Json.toJson(expected)
+    }
+
+    "return 200 on an empty date and auth type response from EIS" in {
+      val eoris: Seq[String] = Seq(mockEmptyDateAndAuthTypeEori)
+      val expectedEoris = Some(myEoriBuilder.makeResults(eoris))
+
+      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result   = controller.authorisations()(request)
+      val expected = EisAuthorisationsResponse(None, None, expectedEoris)
 
       status(result)        shouldBe Status.OK
       contentAsJson(result) shouldBe Json.toJson(expected)

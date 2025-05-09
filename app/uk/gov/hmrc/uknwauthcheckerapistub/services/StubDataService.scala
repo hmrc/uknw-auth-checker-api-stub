@@ -28,7 +28,7 @@ import uk.gov.hmrc.uknwauthcheckerapistub.utils.{EoriResultBuilder, StubDataServ
 class StubDataService @Inject() (
   myEoriResultBuilder: EoriResultBuilder,
   zonedDateService:    ZonedDateTimeService
-) extends StubDataServiceHelper(zonedDateService) {
+) extends StubDataServiceHelper(zonedDateService, myEoriResultBuilder) {
 
   def stubbing(req: Request[JsValue]): Result =
     req.body.validate[EisAuthorisationRequest] match {
@@ -38,7 +38,7 @@ class StubDataService @Inject() (
     }
 
   private def checkIfMockData(eoris: Seq[String]): Result =
-    mockedEoriResponses
+    checkForMockedEoriResponses(eoris)
       .collectFirst { case (mockEori, result) if eoris.contains(mockEori) => result }
       .getOrElse {
         val res = EisAuthorisationsResponse(
