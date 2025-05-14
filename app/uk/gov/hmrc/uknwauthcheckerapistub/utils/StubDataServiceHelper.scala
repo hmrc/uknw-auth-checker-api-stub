@@ -26,7 +26,7 @@ import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResp
 import uk.gov.hmrc.uknwauthcheckerapistub.models.{Constants, ReservedEoris}
 import uk.gov.hmrc.uknwauthcheckerapistub.services.ZonedDateTimeService
 
-trait StubDataServiceHelper(zonedDateService: ZonedDateTimeService, myEoriResultBuilder: EoriResultBuilder) extends ReservedEoris {
+trait StubDataServiceHelper(zonedDateService: ZonedDateTimeService, eoriResultBuilder: EoriResultBuilder) extends ReservedEoris {
 
   protected lazy val res500: EisAuthorisationResponseError = EisAuthorisationResponseError(
     ErrorDetails(zonedDateService.now().toString, 500, "An internal error has occurred")
@@ -36,7 +36,7 @@ trait StubDataServiceHelper(zonedDateService: ZonedDateTimeService, myEoriResult
   private val processingDate: Some[ZonedDateTime] = Some(zonedDateService.now())
 
   def buildMockedResponses(eoris: Seq[String]): Map[String, Result] = {
-    val eoriResults = Some(myEoriResultBuilder.build(eoris))
+    val eoriResults = Some(eoriResultBuilder.build(eoris))
     Map(
       mock403Eori                     -> Forbidden,
       mock500Eori                     -> InternalServerError(Json.toJson(res500)),
