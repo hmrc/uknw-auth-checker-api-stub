@@ -18,7 +18,7 @@ package uk.gov.hmrc.uknwauthcheckerapistub.utils.validators
 
 import play.api.libs.json.JsValue
 import play.api.mvc.Request
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Constants
 
 trait HeaderValidator {
 

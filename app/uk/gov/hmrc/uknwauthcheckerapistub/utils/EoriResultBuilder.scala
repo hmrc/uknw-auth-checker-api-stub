@@ -16,16 +16,17 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Constants
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.EoriResults
 
 class EoriResultBuilder {
 
-  def makeResults(eoris: Seq[String]): Seq[EoriResults] =
-    eoris.distinct.map { anEori =>
-      val isValidEori: Boolean = Constants.authorisedEoris.contains(anEori)
+  def build(eoris: Seq[String]): Seq[EoriResults] =
+    eoris.distinct.map { eori =>
+      val isValidEori: Boolean = Constants.authorisedEoris.contains(eori)
       val code:        Int     = if isValidEori then 0 else 1
 
-      EoriResults(anEori, isValidEori, code)
+      EoriResults(eori, isValidEori, code)
     }
 
 }

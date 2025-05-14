@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.uknwauthcheckerapistub.utils
+package uk.gov.hmrc.uknwauthcheckerapistub.models
 
 object Constants {
-  val path:        String = "/cau/validatecustomsauth/v1"
   val bearerToken: String = "Bearer PFZBTElEX1RPS0VOPg=="
   val eoriPattern: String = "^(GB|XI)[0-9]{12}|(GB|XI)[0-9]{15}$"
+  val nopAuthType: String = "UKNW"
+  val path:        String = "/cau/validatecustomsauth/v1"
 
   val authorisedEoris: Set[String] = Set(
     "GB837826880909874",

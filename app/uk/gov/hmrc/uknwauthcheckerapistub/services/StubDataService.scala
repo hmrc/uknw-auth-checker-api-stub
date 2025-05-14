@@ -21,31 +21,32 @@ import javax.inject.Inject
 import play.api.libs.json.{JsSuccess, JsValue, Json}
 import play.api.mvc.Results._
 import play.api.mvc.{Request, Result}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Constants
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse}
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.{EoriResultBuilder, StubDataServiceHelper}
 
 class StubDataService @Inject() (
-  myEoriResultBuilder: EoriResultBuilder,
-  zonedDateService:    ZonedDateTimeService
-) extends StubDataServiceHelper(zonedDateService, myEoriResultBuilder) {
+  eoriResultBuilder: EoriResultBuilder,
+  zonedDateService:  ZonedDateTimeService
+) extends StubDataServiceHelper(zonedDateService, eoriResultBuilder) {
 
   def stubbing(req: Request[JsValue]): Result =
     req.body.validate[EisAuthorisationRequest] match {
-      case JsSuccess(checkerReq: EisAuthorisationRequest, _) =>
-        checkIfMockData(checkerReq.eoris)
+      case JsSuccess(request: EisAuthorisationRequest, _) =>
+        buildResponse(request.eoris)
       case _ => InternalServerError(Json.toJson(res500))
     }
 
-  private def checkIfMockData(eoris: Seq[String]): Result =
-    checkForMockedEoriResponses(eoris)
-      .collectFirst { case (mockEori, result) if eoris.contains(mockEori) => result }
+  private def buildResponse(eoris: Seq[String]): Result =
+    buildMockedResponses(eoris)
+      .collectFirst { case (eori, result) if eoris.contains(eori) => result }
       .getOrElse {
-        val res = EisAuthorisationsResponse(
+        val response = EisAuthorisationsResponse(
           Some(zonedDateService.now()),
-          Some("UKNW"),
-          results = Some(myEoriResultBuilder.makeResults(eoris))
+          Some(Constants.nopAuthType),
+          results = Some(eoriResultBuilder.build(eoris))
         )
-        Ok(Json.toJson(res))
+        Ok(Json.toJson(response))
       }
 }

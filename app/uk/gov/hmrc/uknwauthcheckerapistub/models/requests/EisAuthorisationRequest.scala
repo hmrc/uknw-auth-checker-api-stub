@@ -17,8 +17,9 @@
 package uk.gov.hmrc.uknwauthcheckerapistub.models.requests
 
 import play.api.libs.json.{Json, OFormat}
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Constants
 
-case class EisAuthorisationRequest(validityDate: String, authType: String = "UKNW", eoris: Seq[String])
+case class EisAuthorisationRequest(validityDate: String, authType: String = Constants.nopAuthType, eoris: Seq[String])
 
 object EisAuthorisationRequest {
   implicit val format: OFormat[EisAuthorisationRequest] = Json.format[EisAuthorisationRequest]

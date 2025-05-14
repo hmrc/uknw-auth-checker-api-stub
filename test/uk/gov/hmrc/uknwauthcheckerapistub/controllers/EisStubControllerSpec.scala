@@ -23,9 +23,10 @@ import play.api.libs.json.Json
 import play.api.test.Helpers
 import play.api.test.Helpers._
 import uk.gov.hmrc.uknwauthcheckerapistub.EoriGenerator
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Constants
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Constants._
 import uk.gov.hmrc.uknwauthcheckerapistub.models.requests.EisAuthorisationRequest
 import uk.gov.hmrc.uknwauthcheckerapistub.models.responses.{EisAuthorisationResponseError, EisAuthorisationsResponse, ErrorDetails}
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants._
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
 
 class EisStubControllerSpec extends BaseSpec, EoriGenerator {
@@ -34,12 +35,12 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
   private val localNow:      LocalDate         = LocalDate.now()
   private val controller:    EisStubController = injected[EisStubController]
   private val myEoriBuilder: EoriResultBuilder = new EoriResultBuilder
-  private val authType:      Option[String]    = Some("UKNW")
+  private val authType:      Option[String]    = Some(Constants.nopAuthType)
 
   "POST /cau/validatecustomsauth/v1" should {
     "return 200 on a single Eori" in {
       val eoris: Seq[String] = useEoriGenerator(1, Some(1))
-      val expectedEoris = myEoriBuilder.makeResults(eoris)
+      val expectedEoris = myEoriBuilder.build(eoris)
 
       val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
@@ -51,7 +52,7 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
     "return 200 on a multiple Eoris" in {
       val eoris: Seq[String] = useEoriGenerator(2, Some(1))
-      val expectedEoris = myEoriBuilder.makeResults(eoris)
+      val expectedEoris = myEoriBuilder.build(eoris)
 
       val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
@@ -134,7 +135,7 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
     "return 200 on an empty processing date response from EIS" in {
       val eoris: Seq[String] = Seq(mockEmptyDateEori)
-      val expectedEoris = Some(myEoriBuilder.makeResults(eoris))
+      val expectedEoris = Some(myEoriBuilder.build(eoris))
 
       val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
@@ -146,7 +147,7 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
     "return 200 on an empty auth type response from EIS" in {
       val eoris: Seq[String] = Seq(mockEmptyAuthTypeEori)
-      val expectedEoris = Some(myEoriBuilder.makeResults(eoris))
+      val expectedEoris = Some(myEoriBuilder.build(eoris))
 
       val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)
@@ -191,7 +192,7 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
     "return 200 on an empty date and auth type response from EIS" in {
       val eoris: Seq[String] = Seq(mockEmptyDateAndAuthTypeEori)
-      val expectedEoris = Some(myEoriBuilder.makeResults(eoris))
+      val expectedEoris = Some(myEoriBuilder.build(eoris))
 
       val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
       val result   = controller.authorisations()(request)

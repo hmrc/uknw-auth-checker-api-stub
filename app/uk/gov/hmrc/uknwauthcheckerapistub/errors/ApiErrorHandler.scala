@@ -26,7 +26,7 @@ import play.api.mvc.Results.Status
 import play.api.mvc.{RequestHeader, Result}
 import uk.gov.hmrc.auth.core.AuthorisationException
 import uk.gov.hmrc.http.{JsValidationException, NotFoundException}
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Constants
 
 @Singleton
 class ApiErrorHandler @Inject() extends HttpErrorHandler, Logging {

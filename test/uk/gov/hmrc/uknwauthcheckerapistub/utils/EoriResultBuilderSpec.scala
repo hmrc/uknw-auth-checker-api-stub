@@ -18,7 +18,7 @@ package uk.gov.hmrc.uknwauthcheckerapistub.utils
 
 import uk.gov.hmrc.uknwauthcheckerapistub.EoriGenerator
 import uk.gov.hmrc.uknwauthcheckerapistub.controllers.BaseSpec
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.authorisedEoris
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Constants.authorisedEoris
 
 class EoriResultBuilderSpec extends BaseSpec, EoriGenerator {
 
@@ -29,7 +29,7 @@ class EoriResultBuilderSpec extends BaseSpec, EoriGenerator {
       val randomNumber = fetchRandomNumber(1, authorisedEoris.size)
       val eoris        = useEoriGenerator(randomNumber)
 
-      val results = eoriResultBuilder.makeResults(eoris)
+      val results = eoriResultBuilder.build(eoris)
 
       results.size shouldBe randomNumber
     }
@@ -38,7 +38,7 @@ class EoriResultBuilderSpec extends BaseSpec, EoriGenerator {
       val eori  = useEoriGenerator(1).head
       val eoris = Seq(eori, eori)
 
-      val results = eoriResultBuilder.makeResults(eoris)
+      val results = eoriResultBuilder.build(eoris)
 
       results.size shouldBe 1
     }
@@ -46,7 +46,7 @@ class EoriResultBuilderSpec extends BaseSpec, EoriGenerator {
     "produce a list of EoriResults with valid set to true if the eori is in the authorisedEoris list" in {
       val eori = authorisedEoris.head
 
-      val results = eoriResultBuilder.makeResults(Seq(eori))
+      val results = eoriResultBuilder.build(Seq(eori))
 
       results.head.valid shouldBe true
     }
@@ -54,7 +54,7 @@ class EoriResultBuilderSpec extends BaseSpec, EoriGenerator {
     "produce a list of EoriResults with valid set to false if the eori is not in the authorisedEoris list" in {
       val eori = useGarbageGenerator(1).head
 
-      val results = eoriResultBuilder.makeResults(Seq(eori))
+      val results = eoriResultBuilder.build(Seq(eori))
 
       results.head.valid shouldBe false
     }

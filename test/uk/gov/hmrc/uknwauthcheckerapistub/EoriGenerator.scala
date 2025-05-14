@@ -21,8 +21,8 @@ import scala.collection.immutable.Seq
 import org.scalacheck.Gen
 import wolfendale.scalacheck.regexp.RegexpGen
 
+import uk.gov.hmrc.uknwauthcheckerapistub.models.Constants.{authorisedEoris, eoriPattern}
 import uk.gov.hmrc.uknwauthcheckerapistub.models.ReservedEoris
-import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants.{authorisedEoris, eoriPattern}
 
 trait EoriGenerator extends ReservedEoris {
   private val maxStringSize = 24
