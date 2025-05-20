@@ -15,7 +15,6 @@ lazy val microservice = Project("uknw-auth-checker-api-stub", file("."))
     scalacOptions += "-Wconf:msg=lint-eta-sam:s,src=routes/.*:s,msg=Flag.*repeatedly:s",
     PlayKeys.devSettings := Seq("play.server.http.port" -> "9071")
   )
-  .settings(resolvers += Resolver.jcenterRepo)
   .settings(CodeCoverageSettings.settings*)
 
 Test / javaOptions += "-Dlogger.resource=logback-test.xml"
