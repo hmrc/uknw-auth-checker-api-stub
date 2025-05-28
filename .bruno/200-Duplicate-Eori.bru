@@ -1,7 +1,7 @@
 meta {
   name: 200-Duplicate-Eori
   type: http
-  seq: 3
+  seq: 2
 }
 
 post {
@@ -22,10 +22,28 @@ body:json {
   }
 }
 
+assert {
+  res.status: eq 200
+  res.body.authType: eq "UKNW"
+  res.body.results[0].eori: eq "GB837826880909874"
+  res.body.results[0].valid: isTruthy
+  res.body.results[0].code: eq 0
+}
+
 tests {
   test("should have only one EORI result", function() {
     const data = res.getBody();
     expect(res.getStatus()).to.equal(200);
     expect(data.results).to.be.an('array').that.has.lengthOf(1);
+  });
+  
+  test("confirm Date Format", function() {
+     var currentDate = new Date();
+      currentDate
+      .setUTCHours(0,0,0,0);
+     var timestamp = 
+  currentDate.toISOString().replace(".000", '.00');
+    const data = res.getBody();
+  expect(res.body.processingDate).to.equal(timestamp);
   });
 }
