@@ -1022,3 +1022,15 @@ body:json {
     ]
   }
 }
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("should have 1000 EORI result", function() {
+    const data = res.getBody();
+    expect(data.results).to.be.an('array').that.has.lengthOf(1000);
+  });
+  
+}

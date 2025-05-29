@@ -1,7 +1,7 @@
 meta {
   name: Performance-100-Eori
   type: http
-  seq: 8
+  seq: 9
 }
 
 post {
@@ -121,4 +121,16 @@ body:json {
       "XI891274727291439"
     ]
   }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("should have 100 EORI result", function() {
+    const data = res.getBody();
+    expect(data.results).to.be.an('array').that.has.lengthOf(100);
+  });
+  
 }

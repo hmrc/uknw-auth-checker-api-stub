@@ -1,7 +1,7 @@
 meta {
   name: 403-Single-Eori
   type: http
-  seq: 10
+  seq: 4
 }
 
 post {
@@ -20,4 +20,10 @@ body:json {
     "authType": "UKNW",
     "eoris" : ["GB999999999999403"]
   }
+}
+
+assert {
+  res.status: eq 403
+  res.body: isEmpty
+  res.headers: isNotEmpty
 }

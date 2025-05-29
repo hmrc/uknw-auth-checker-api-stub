@@ -1,7 +1,7 @@
 meta {
   name: 503-Single-Eori
   type: http
-  seq: 12
+  seq: 6
 }
 
 post {
@@ -20,4 +20,20 @@ body:json {
     "authType": "UKNW",
     "eoris" : ["GB999999999999503"]
   }
+}
+
+assert {
+  res.status: eq 503
+  res.body: contains "<html>
+     <head>
+        <title>503 Service Temporarily Unavailable</title>
+     </head>
+     <body>
+        <center>
+           <h1>503 Service Temporarily Unavailable</h1>
+        </center>
+        <hr>
+        <center>nginx/1.19.2</center>
+     </body>
+  </html>"
 }

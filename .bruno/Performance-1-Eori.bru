@@ -21,3 +21,16 @@ body:json {
     "eoris" : ["GB000000000200"]
   }
 }
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("should have only one EORI result", function() {
+    const data = res.getBody();
+    expect(res.getStatus()).to.equal(200);
+    expect(data.results).to.be.an('array').that.has.lengthOf(1);
+  });
+  
+}
