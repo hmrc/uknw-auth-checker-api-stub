@@ -1,7 +1,7 @@
 meta {
   name: 200-Single-Eori
   type: http
-  seq: 2
+  seq: 1
 }
 
 post {
@@ -20,4 +20,24 @@ body:json {
     "authType": "UKNW",
     "eoris" : ["GB000000000200"]
   }
+}
+
+assert {
+  res.status: eq 200
+  res.body.authType: eq "UKNW"
+  res.body.results[0].eori: eq "GB000000000200"
+  res.body.results[0].valid: isFalsy
+  res.body.results[0].code: eq 1
+}
+
+tests {
+  test("confirm Date Format", function() {
+     var currentDate = new Date();
+      currentDate
+      .setUTCHours(0,0,0,0);
+     var timestamp = 
+  currentDate.toISOString().replace(".000", '.00');
+    const data = res.getBody();
+  expect(res.body.processingDate).to.equal(timestamp);
+  });
 }

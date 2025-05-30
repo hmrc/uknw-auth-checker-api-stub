@@ -21,3 +21,31 @@ body:json {
     "eoris" : ["GB000000000200","XI000000000200"]
   }
 }
+
+assert {
+  res.status: eq 200
+  res.body.authType: eq UKNW
+  res.body.results[0].eori: eq "GB000000000200"
+  res.body.results[1].eori: eq "XI000000000200"
+  res.body.results[0].valid: isFalsy
+  res.body.results[1].valid: isFalsy
+  res.body.results[0].code: eq 1
+  res.body.results[1].code: eq 1
+}
+
+tests {
+  test("should have two EORI result", function() {
+    const data = res.getBody();
+    expect(data.results).to.be.an('array').that.has.lengthOf(2);
+  });
+  
+  test("confirm Date Format", function() {
+     var currentDate = new Date();
+      currentDate
+      .setUTCHours(0,0,0,0);
+     var timestamp = 
+  currentDate.toISOString().replace(".000", '.00');
+    const data = res.getBody();
+  expect(res.body.processingDate).to.equal(timestamp);
+  });
+}

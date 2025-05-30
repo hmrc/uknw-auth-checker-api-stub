@@ -1,7 +1,7 @@
 meta {
   name: 500-Single-Eori
   type: http
-  seq: 11
+  seq: 5
 }
 
 post {
@@ -20,4 +20,24 @@ body:json {
     "authType": "UKNW",
     "eoris" : ["GB999999999999500"]
   }
+}
+
+assert {
+  res.status: eq 500
+  res.body.errorDetails.errorCode: eq 500
+  res.body.errorDetails.errorMessage: eq "An internal error has occurred"
+  res.body.errorDetails.sourcePDSFaultDetails: eq "/pds/cnit/validatecustomsauth/v1"
+}
+
+tests {
+  test("confirm Date Format", function() {
+     var currentDate = new Date();
+      currentDate
+      .setUTCHours(0,0,0,0);
+     var timestamp = 
+  currentDate.toISOString().replace(":00.000", '');
+    timestamp = timestamp + '[UTC]'
+    const data = res.getBody();
+  expect(res.body.errorDetails.timestamp).to.equal(timestamp);
+  });
 }

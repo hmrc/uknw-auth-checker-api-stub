@@ -1,7 +1,7 @@
 import uk.gov.hmrc.DefaultBuildSettings
 
 ThisBuild / majorVersion := 0
-ThisBuild / scalaVersion := "3.5.1"
+ThisBuild / scalaVersion := "3.7.0"
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 
@@ -15,10 +15,10 @@ lazy val microservice = Project("uknw-auth-checker-api-stub", file("."))
     scalacOptions += "-Wconf:msg=lint-eta-sam:s,src=routes/.*:s,msg=Flag.*repeatedly:s",
     PlayKeys.devSettings := Seq("play.server.http.port" -> "9071")
   )
-  .settings(resolvers += Resolver.jcenterRepo)
   .settings(CodeCoverageSettings.settings*)
 
 Test / javaOptions += "-Dlogger.resource=logback-test.xml"
+Test / fork := true
 
 lazy val it = project
   .enablePlugins(PlayScala)
