@@ -1,0 +1,32 @@
+meta {
+  name: 200-Empty-Eis-AuthType-Date-Eori
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:9071/cau/validatecustomsauth/v1
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{bearerToken}}
+}
+
+body:json {
+  {
+    "validityDate": "{{date}}",
+    "authType": "UKNW",
+    "eoris" : ["GB992692280526"]
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body.authType: notIn
+  res.body.results[0].eori: eq "GB992692280526"
+  res.body.results[0].valid: isTruthy
+  res.body.results[0].code: eq 0
+  res.body.processingDate: notIn
+}

@@ -1,7 +1,7 @@
 meta {
-  name: 403-Single-Eori
+  name: 200-Empty-Eis-Response-Eori
   type: http
-  seq: 11
+  seq: 10
 }
 
 post {
@@ -18,12 +18,11 @@ body:json {
   {
     "validityDate": "{{date}}",
     "authType": "UKNW",
-    "eoris" : ["GB999999999999403"]
+    "eoris" : ["GB999999999999601"]
   }
 }
 
 assert {
-  res.status: eq 403
+  res.status: eq 200
   res.body: isEmpty
-  res.headers: isNotEmpty
 }
