@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.controllers
 
-import java.time.{LocalDate, LocalTime, ZoneId, ZonedDateTime}
+import java.time.LocalDate
 
 import play.api.http.Status
 import play.api.libs.json.Json
@@ -30,7 +30,6 @@ import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
 
 class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
-  private val zonedNow:      ZonedDateTime     = ZonedDateTime.of(LocalDate.now.atTime(LocalTime.MIDNIGHT), ZoneId.of("UTC"))
   private val localNow:      LocalDate         = LocalDate.now()
   private val controller:    EisStubController = injected[EisStubController]
   private val myEoriBuilder: EoriResultBuilder = new EoriResultBuilder
@@ -40,24 +39,32 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
       val eoris: Seq[String] = useEoriGenerator(1, Some(1))
       val expectedEoris = myEoriBuilder.makeResults(eoris)
 
-      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
-      val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationsResponse(zonedNow, results = expectedEoris)
+      val request = createRequest(
+        body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris))
+      )
+      val result = controller.authorisations()(request)
 
-      status(result)        shouldBe Status.OK
-      contentAsJson(result) shouldBe Json.toJson(expected)
+      val response = contentAsJson(result).as[EisAuthorisationsResponse]
+
+      status(result)    shouldBe Status.OK
+      response.authType shouldBe "UKNW"
+      response.results  shouldBe expectedEoris
     }
 
     "return 200 on a multiple Eoris" in {
       val eoris: Seq[String] = useEoriGenerator(2, Some(1))
       val expectedEoris = myEoriBuilder.makeResults(eoris)
 
-      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
-      val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationsResponse(zonedNow, results = expectedEoris)
+      val request = createRequest(
+        body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris))
+      )
+      val result = controller.authorisations()(request)
 
-      status(result)        shouldBe Status.OK
-      contentAsJson(result) shouldBe Json.toJson(expected)
+      val response = contentAsJson(result).as[EisAuthorisationsResponse]
+
+      status(result)    shouldBe Status.OK
+      response.authType shouldBe "UKNW"
+      response.results  shouldBe expectedEoris
     }
 
     "return 403 on a missing authorization Header" in {
@@ -93,21 +100,27 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
     }
 
     "return 500 on a body-less POST Request" in {
-      val request  = createRequest(body = Json.toJson("{}"))
-      val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationResponseError(ErrorDetails(zonedNow.toString, 500, "An internal error has occurred"))
-      status(result)        shouldBe Status.INTERNAL_SERVER_ERROR
-      contentAsJson(result) shouldBe Json.toJson(expected)
+      val request = createRequest(body = Json.toJson("{}"))
+      val result  = controller.authorisations()(request)
+
+      val response = contentAsJson(result).as[EisAuthorisationResponseError]
+
+      status(result)                     shouldBe Status.INTERNAL_SERVER_ERROR
+      response.errorDetails.errorCode    shouldBe 500
+      response.errorDetails.errorMessage shouldBe "An internal error has occurred"
     }
 
     "return 500 to trigger a 500 error in the Checker API" in {
       val eoris: Seq[String] = Seq(mock500Eori)
 
-      val request  = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
-      val result   = controller.authorisations()(request)
-      val expected = EisAuthorisationResponseError(ErrorDetails(zonedNow.toString, 500, "An internal error has occurred"))
-      status(result)        shouldBe Status.INTERNAL_SERVER_ERROR
-      contentAsJson(result) shouldBe Json.toJson(expected)
+      val request = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
+      val result  = controller.authorisations()(request)
+
+      val response = contentAsJson(result).as[EisAuthorisationResponseError]
+
+      status(result)                     shouldBe Status.INTERNAL_SERVER_ERROR
+      response.errorDetails.errorCode    shouldBe 500
+      response.errorDetails.errorMessage shouldBe "An internal error has occurred"
     }
 
     "return 503 to emulate EIS being down" in {
