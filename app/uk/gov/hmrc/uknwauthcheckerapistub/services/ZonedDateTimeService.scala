@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.uknwauthcheckerapistub.services
 
-import java.time.{LocalDate, LocalTime, ZoneId, ZonedDateTime}
+import java.time.{ZoneId, ZonedDateTime}
 
 class ZonedDateTimeService {
-  def now(): ZonedDateTime = ZonedDateTime.of(LocalDate.now.atTime(LocalTime.MIDNIGHT), ZoneId.of("UTC"))
-
+  def now(): ZonedDateTime =
+    ZonedDateTime.now(ZoneId.of("UTC"))
 }
