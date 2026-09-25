@@ -29,7 +29,7 @@ import uk.gov.hmrc.uknwauthcheckerapistub.utils.Constants._
 import uk.gov.hmrc.uknwauthcheckerapistub.utils.EoriResultBuilder
 
 class EisStubControllerSpec extends BaseSpec, EoriGenerator {
-  
+
   private val localNow:      LocalDate         = LocalDate.now()
   private val controller:    EisStubController = injected[EisStubController]
   private val myEoriBuilder: EoriResultBuilder = new EoriResultBuilder
@@ -46,9 +46,9 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
       val response = contentAsJson(result).as[EisAuthorisationsResponse]
 
-      status(result) shouldBe Status.OK
+      status(result)    shouldBe Status.OK
       response.authType shouldBe "UKNW"
-      response.results shouldBe expectedEoris
+      response.results  shouldBe expectedEoris
     }
 
     "return 200 on a multiple Eoris" in {
@@ -62,9 +62,9 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
       val response = contentAsJson(result).as[EisAuthorisationsResponse]
 
-      status(result) shouldBe Status.OK
+      status(result)    shouldBe Status.OK
       response.authType shouldBe "UKNW"
-      response.results shouldBe expectedEoris
+      response.results  shouldBe expectedEoris
     }
 
     "return 403 on a missing authorization Header" in {
@@ -101,12 +101,12 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
 
     "return 500 on a body-less POST Request" in {
       val request = createRequest(body = Json.toJson("{}"))
-      val result = controller.authorisations()(request)
+      val result  = controller.authorisations()(request)
 
       val response = contentAsJson(result).as[EisAuthorisationResponseError]
 
-      status(result) shouldBe Status.INTERNAL_SERVER_ERROR
-      response.errorDetails.errorCode shouldBe 500
+      status(result)                     shouldBe Status.INTERNAL_SERVER_ERROR
+      response.errorDetails.errorCode    shouldBe 500
       response.errorDetails.errorMessage shouldBe "An internal error has occurred"
     }
 
@@ -114,12 +114,12 @@ class EisStubControllerSpec extends BaseSpec, EoriGenerator {
       val eoris: Seq[String] = Seq(mock500Eori)
 
       val request = createRequest(body = Json.toJson(EisAuthorisationRequest(localNow.toString, eoris = eoris)))
-      val result = controller.authorisations()(request)
+      val result  = controller.authorisations()(request)
 
       val response = contentAsJson(result).as[EisAuthorisationResponseError]
 
-      status(result) shouldBe Status.INTERNAL_SERVER_ERROR
-      response.errorDetails.errorCode shouldBe 500
+      status(result)                     shouldBe Status.INTERNAL_SERVER_ERROR
+      response.errorDetails.errorCode    shouldBe 500
       response.errorDetails.errorMessage shouldBe "An internal error has occurred"
     }
 
